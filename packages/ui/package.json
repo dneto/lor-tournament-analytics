@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@lor-tournament-analytics/lor-decks-analytics": "1.0.0",
     "@lor-tournament-analytics/lor-decks-data": "1.0.0",
