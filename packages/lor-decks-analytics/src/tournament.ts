@@ -1,7 +1,6 @@
-import { Card, Deck } from "@lor-tournament-analytics/lor-decks-data";
+import { Deck } from "@lor-tournament-analytics/lor-decks-data";
 import { parse } from "csv-parse/sync";
 import _ from "lodash";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 export type Lineup = [Deck, Deck, Deck];
 
 export class Tournament {
