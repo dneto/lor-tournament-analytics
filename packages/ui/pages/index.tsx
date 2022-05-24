@@ -24,16 +24,19 @@ const Home: NextPage = () => {
   }
 
   const darkTheme = createTheme({
-    // palette: {
-    //   mode: "dark",
-    // },
     palette: {
-      background: {
-        default: "#000000",
-      },
+      mode: "dark",
     },
     typography: {
       fontFamily: `"Open Sans", sans-serif`,
+      h1: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
+      h6: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
     },
   });
   return (
@@ -59,7 +62,7 @@ const Home: NextPage = () => {
         </ul>
         <Typography>
           All you need is a CSV file containing the <b>deck codes</b> (URL from
-          other sites are not supported by now)
+          other sites are not supported by now).
         </Typography>
         <FileUploader onFileSelect={onFileSelect} />
         <Box>

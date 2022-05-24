@@ -1,5 +1,12 @@
-import { GridOn, Photo } from "@mui/icons-material";
 import {
+  BorderAllRounded as GridOnIcon,
+  PhotoRounded as PhotoIcon,
+  ZoomOutMapRounded as ZoomOutIcon,
+  ArrowLeftRounded as BackIcon,
+} from "@mui/icons-material";
+import {
+  Container,
+  Fade,
   IconButton,
   Modal,
   Paper,
@@ -16,7 +23,8 @@ import * as React from "react";
 
 import path from "path";
 interface ToolbarProps {
-  onDoubleClick?: React.MouseEventHandler<HTMLDivElement>;
+  onZoomOut?: React.MouseEventHandler<HTMLAnchorElement>;
+  onBack?: React.MouseEventHandler<HTMLAnchorElement>;
   title: string;
   csvData: string[][];
   csvFilename: string;
@@ -40,8 +48,14 @@ class PagedTableHeader extends React.Component<ToolbarProps> {
     return (
       <>
         <Toolbar sx={{ paddingRight: 0 }}>
+          {this.props.onBack && (
+            <Tooltip title="Back">
+              <IconButton href="#" onClick={this.props.onBack}>
+                <BackIcon sx={{ color: "black" }} />
+              </IconButton>
+            </Tooltip>
+          )}
           <Typography
-            onDoubleClick={this.props.onDoubleClick}
             variant="h6"
             component="div"
             sx={{ flex: "1 1 100%", userSelect: "none" }}
@@ -63,7 +77,7 @@ class PagedTableHeader extends React.Component<ToolbarProps> {
                 );
               }}
             >
-              <Photo fontSize="small" />
+              <PhotoIcon sx={{ color: "black" }} fontSize="small" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Download as CSV">
@@ -74,10 +88,17 @@ class PagedTableHeader extends React.Component<ToolbarProps> {
               download={this.props.csvFilename}
             >
               <IconButton>
-                <GridOn fontSize="small" />
+                <GridOnIcon sx={{ color: "black" }} fontSize="small" />
               </IconButton>
             </a>
           </Tooltip>
+          {this.props.onZoomOut && (
+            <Tooltip title="Open modal">
+              <IconButton href="#" onClick={this.props.onZoomOut}>
+                <ZoomOutIcon sx={{ color: "black" }} fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          )}
         </Toolbar>
       </>
     );
@@ -100,15 +121,7 @@ type TableState = {
 };
 
 class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
-  modalStyle = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "50%",
-    height: "700px",
-    border: "0px",
-  };
+  modalStyle = {};
 
   ref = React.createRef<typeof Paper>();
   modalRef = React.createRef<typeof Paper>();
@@ -145,7 +158,7 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
         <Paper component={Box}>
           <PagedTableHeader
             title={this.props.title}
-            onDoubleClick={this.openModal}
+            onZoomOut={this.openModal}
             csvData={this.props.rows.map(this.props.csvParser)}
             csvFilename={this.props.csvFilename}
             imgRef={this.ref}
@@ -177,30 +190,31 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
           disableEnforceFocus
           open={this.state.modalOpen}
           onClose={this.handleModalClose}
+          component={Box}
+          overflow="scroll"
         >
           <Box style={{ border: "0px" }} sx={{ ...this.modalStyle }}>
-            <Paper sx={{ border: "0px" }} component={Box}>
-              <PagedTableHeader
-                title={this.props.title}
-                onDoubleClick={this.openModal}
-                csvData={this.props.rows.map(this.props.csvParser)}
-                csvFilename={this.props.csvFilename}
-                imgRef={this.modalRef}
-              />
-              <TableContainer
-                component={Box}
-                style={{ height: this.modalStyle.height }}
-              >
-                <Table size="small" ref={this.modalRef} component={Box}>
-                  <TableBody>
-                    <>
-                      {this.props.rows.map((r) => {
-                        return this.props.render(r);
-                      })}
-                    </>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+            <Paper sx={{ border: "0px" }}>
+              <Container>
+                <PagedTableHeader
+                  title={this.props.title}
+                  csvData={this.props.rows.map(this.props.csvParser)}
+                  csvFilename={this.props.csvFilename}
+                  imgRef={this.modalRef}
+                  onBack={this.handleModalClose}
+                />
+                <TableContainer>
+                  <Table size="small" ref={this.modalRef} component={Box}>
+                    <TableBody>
+                      <>
+                        {this.props.rows.map((r) => {
+                          return this.props.render(r);
+                        })}
+                      </>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Container>
             </Paper>
           </Box>
         </Modal>

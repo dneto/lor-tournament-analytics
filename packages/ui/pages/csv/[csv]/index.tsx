@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         setShow(
           <Box>
             <Grid container>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <Box paddingTop={0} padding={1}>
                   <ArchetypesGrid
                     records={tournament}
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <Box paddingTop={0} padding={1}>
                   <ChampionsGrid
                     records={tournament}
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <Box paddingTop={0} padding={1}>
                   <RegionsGrid
                     records={tournament}
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <Box paddingTop={0} padding={1}>
                   <UniqueRegionGrid
                     records={tournament}
@@ -107,6 +107,10 @@ const Home: NextPage = () => {
     },
     typography: {
       fontFamily: `"Open Sans", sans-serif`,
+      h6: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
     },
   });
   return (
@@ -221,7 +225,7 @@ const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
             <QtSlider value={r.percent} max={maxPercent} />
           </TableCell>
           <TableCell align="right" width={"10"}>
-            {r.qtd}
+            <b>{r.qtd}</b>
           </TableCell>
         </TableRow>
       )}
@@ -270,7 +274,7 @@ const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
             <QtSlider value={r.percent} max={maxPercent} />
           </TableCell>
           <TableCell align="right" width={"10"}>
-            {r.qtd}
+            <b>{r.qtd}</b>
           </TableCell>
         </TableRow>
       )}
@@ -329,7 +333,7 @@ const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
             <QtSlider value={reg.percent} max={maxPercent} />
           </TableCell>
           <TableCell align="right" width={"10"}>
-            {reg.qtd}
+            <b>{reg.qtd}</b>
           </TableCell>
         </TableRow>
       )}
@@ -396,7 +400,7 @@ const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
             <QtSlider value={r.percent} max={maxPercent} />
           </TableCell>
           <TableCell align="right" width={"10"}>
-            {r.qtd}
+            <b>{r.qtd}</b>
           </TableCell>
         </TableRow>
       )}
