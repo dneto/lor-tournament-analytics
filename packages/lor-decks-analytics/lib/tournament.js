@@ -12,8 +12,9 @@ var Tournament = /** @class */ (function () {
         this.lineups = lineups;
     }
     Tournament.fromCSV = function (csvData) {
-        var records = (0, sync_1.parse)(csvData, { relax_column_count: true });
-        var lineup = records.map(function (r) {
+        var records = (0, sync_1.parse)(csvData);
+        var lineup = records
+            .map(function (r) {
             return r
                 .map(function (code) {
                 try {
@@ -24,7 +25,8 @@ var Tournament = /** @class */ (function () {
                 }
             })
                 .filter(Boolean);
-        });
+        })
+            .filter(function (l) { return l.length > 0; });
         return new Tournament(lineup);
     };
     Tournament.prototype.countBy = function (fn, flatDepth) {

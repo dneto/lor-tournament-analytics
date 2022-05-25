@@ -11,19 +11,22 @@ export class Tournament {
   }
 
   static fromCSV(csvData: string | Buffer): Tournament {
-    const records = parse(csvData, { relax_column_count: true });
-    const lineup = records.map(
-      (r) =>
-        r
-          .map((code) => {
-            try {
-              return new Deck(code);
-            } catch (e) {
-              return undefined;
-            }
-          })
-          .filter(Boolean) as Lineup
-    ) as Lineup[];
+    const records = parse(csvData);
+
+    const lineup = records
+      .map(
+        (r: string[]) =>
+          r
+            .map((code: string) => {
+              try {
+                return new Deck(code);
+              } catch (e) {
+                return undefined;
+              }
+            })
+            .filter(Boolean) as Lineup
+      )
+      .filter((l) => l.length > 0) as Lineup[];
     return new Tournament(lineup);
   }
 

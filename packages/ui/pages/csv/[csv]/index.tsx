@@ -1,12 +1,6 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import {
-  Container,
-  Typography,
-  Grid,
-  TableCell,
-  TableRow,
-} from "@mui/material";
+import { Container, Typography, Grid } from "@mui/material";
 import { Box, textAlign } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -22,7 +16,6 @@ import {
 
 import { ChampionIcon, RegionIcon } from "../../../components/icons/Icons";
 import QtSlider from "../../../components/QtSlider";
-import Image from "next/image";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import lzString from "lz-string";
@@ -31,16 +24,9 @@ import PagedTable from "../../../components/PagedTable";
 import path from "path";
 import useSWR from "swr";
 
-const useLzStringCSV = (uuid: string): string => {
-  const { data } = useSWR(`/api/csv/${uuid}`, (url) =>
-    fetch(url, { method: "GET" }).then((resp) => resp.text())
-  );
-
-  return String(data);
-};
-
 const Home: NextPage = () => {
   const [show, setShow] = React.useState<React.ReactElement>(<></>);
+  const [tournaments, setTournament] = React.useState<Tournament>();
 
   const router = useRouter();
   const query = router.query;
@@ -54,6 +40,7 @@ const Home: NextPage = () => {
       const result = reader.result!.toString();
       if (typeof result == "string") {
         const tournament = Tournament.fromCSV(result);
+        setTournament(tournament);
         setShow(
           <Box>
             <Grid container>
@@ -105,18 +92,22 @@ const Home: NextPage = () => {
     reader.readAsText(file);
   }
 
-  const lzStringCSV = useLzStringCSV(query.csv as string);
-  const csv = lzString.decompressFromEncodedURIComponent(lzStringCSV);
-  if (csv != null) {
-    const blob = new Blob([csv], { type: "text/csv" });
-    const name = (query.filename as string) || "tournament.csv";
-    loadCSV(new File([blob], name, { type: "text/csv" }));
-  }
+  React.useEffect(() => {
+    if (!tournaments && query.csv) {
+      fetch(`/api/csv/${query.csv}`, { method: "GET" }).then((resp) => {
+        resp.text().then((lzStringCSV) => {
+          const csv = lzString.decompressFromEncodedURIComponent(lzStringCSV);
+          if (csv != null) {
+            const blob = new Blob([csv], { type: "text/csv" });
+            const name = (query.filename as string) || "tournament.csv";
+            loadCSV(new File([blob], name, { type: "text/csv" }));
+          }
+        });
+      });
+    }
+  });
 
   const darkTheme = createTheme({
-    // palette: {
-    //   mode: "dark",
-    // },
     palette: {
       background: {
         default: "",
@@ -421,27 +412,30 @@ const LineupsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       }}
       render={(r) => (
         <>
-          <Grid item xs={12} marginBottom="3px">
+          <Grid item xs={12} marginBottom="-10px">
             <Box sx={{ width: "100%" }}>
               {r.lineup.map((deck) => (
-                <Box
-                  component="span"
-                  sx={{
-                    height: "32px",
-                    marginRight: "30px",
-                    display: "inline-block",
-                  }}
-                >
-                  {deck.champions.map((c) => (
-                    <ChampionIcon
-                      championCard={cardFromCode(c.cardCode)}
-                      style={{ ...imgStyle }}
-                    />
-                  ))}
-                  {deck.regions.map((r) => (
-                    <RegionIcon region={r} style={{ ...imgStyle }} />
-                  ))}
-                </Box>
+                <>
+                  <Box
+                    component="div"
+                    sx={{
+                      height: "42px",
+                      marginRight: "30px",
+                      display: "inline-block",
+                      borderBottom: "5px solid rgba(0,0,0,0.08)",
+                    }}
+                  >
+                    {deck.champions.map((c) => (
+                      <ChampionIcon
+                        championCard={cardFromCode(c.cardCode)}
+                        style={{ ...imgStyle }}
+                      />
+                    ))}
+                    {deck.regions.map((r) => (
+                      <RegionIcon region={r} style={{ ...imgStyle }} />
+                    ))}
+                  </Box>
+                </>
               ))}
             </Box>
           </Grid>
