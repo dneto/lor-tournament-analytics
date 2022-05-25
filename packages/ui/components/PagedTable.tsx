@@ -18,6 +18,7 @@ import {
   Tooltip,
   Typography,
   Box,
+  Grid,
 } from "@mui/material";
 import * as React from "react";
 
@@ -163,19 +164,23 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
             csvFilename={this.props.csvFilename}
             imgRef={this.ref}
           />
-          <TableContainer ref={this.ref} component={Box}>
-            <Table size="small">
-              <TableBody>
-                <>
-                  {this.props.rows
-                    .slice(this.state.page * 5, this.state.page * 5 + 5)
-                    .map((r) => {
-                      return this.props.render(r);
-                    })}
-                </>
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Box sx={{ flexGrow: 1, paddingLeft: "24px", paddingRight: "24px" }}>
+            <Grid
+              container
+              ref={this.ref}
+              component={Box}
+              spacing={0}
+              style={{ width: "100%" }}
+            >
+              <>
+                {this.props.rows
+                  .slice(this.state.page * 5, this.state.page * 5 + 5)
+                  .map((r) => {
+                    return this.props.render(r);
+                  })}
+              </>
+            </Grid>
+          </Box>
           <TablePagination
             rowsPerPageOptions={[5]}
             rowsPerPage={5}
@@ -203,17 +208,23 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
                   imgRef={this.modalRef}
                   onBack={this.handleModalClose}
                 />
-                <TableContainer>
-                  <Table size="small" ref={this.modalRef} component={Box}>
-                    <TableBody>
-                      <>
-                        {this.props.rows.map((r) => {
-                          return this.props.render(r);
-                        })}
-                      </>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                <Grid
+                  container
+                  ref={this.ref}
+                  component={Box}
+                  spacing={0}
+                  style={{
+                    width: "100%",
+                    paddingRight: "24px",
+                    paddingLeft: "24px",
+                  }}
+                >
+                  <>
+                    {this.props.rows.map((r) => {
+                      return this.props.render(r);
+                    })}
+                  </>
+                </Grid>
               </Container>
             </Paper>
           </Box>

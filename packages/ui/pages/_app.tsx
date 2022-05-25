@@ -3,18 +3,15 @@ import type { AppProps } from "next/app";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { CssBaseline } from "@material-ui/core";
 import NextNProgress from "nextjs-progressbar";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const darkTheme = createTheme({
-  // palette: {
-  //   mode: "dark",
-  // },
   palette: {
     background: {
       default: "#000000",
     },
-  },
-  typography: {
-    fontFamily: ["Nunito", "sans-serif"].join(","),
   },
 });
 function MyApp({ Component, pageProps }: AppProps) {

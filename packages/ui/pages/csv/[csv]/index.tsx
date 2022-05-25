@@ -7,7 +7,7 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, textAlign } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import {
@@ -20,7 +20,7 @@ import {
   cardFromCode,
 } from "@lor-tournament-analytics/lor-decks-data/lib";
 
-import ChampionIcon from "../../../components/ChampionIcon";
+import { ChampionIcon, RegionIcon } from "../../../components/icons/Icons";
 import QtSlider from "../../../components/QtSlider";
 import Image from "next/image";
 import _ from "lodash";
@@ -29,6 +29,16 @@ import lzString from "lz-string";
 import Header from "../../../components/Header";
 import PagedTable from "../../../components/PagedTable";
 import path from "path";
+import useSWR from "swr";
+
+const useLzStringCSV = (uuid: string): string => {
+  const { data } = useSWR(`/api/csv/${uuid}`, (url) =>
+    fetch(url, { method: "GET" }).then((resp) => resp.text())
+  );
+
+  return String(data);
+};
+
 const Home: NextPage = () => {
   const [show, setShow] = React.useState<React.ReactElement>(<></>);
 
@@ -87,27 +97,34 @@ const Home: NextPage = () => {
     reader.readAsText(file);
   }
 
-  if (query.csv) {
-    const base64CSV = String(query.csv);
-    const csv = lzString.decompressFromEncodedURIComponent(base64CSV);
-    if (csv != null) {
-      const blob = new Blob([csv], { type: "text/csv" });
-      const name = (query.filename as string) || "tournament.csv";
-      loadCSV(new File([blob], name, { type: "text/csv" }));
-    }
+  const lzStringCSV = useLzStringCSV(query.csv as string);
+  const csv = lzString.decompressFromEncodedURIComponent(lzStringCSV);
+  if (csv != null) {
+    const blob = new Blob([csv], { type: "text/csv" });
+    const name = (query.filename as string) || "tournament.csv";
+    loadCSV(new File([blob], name, { type: "text/csv" }));
   }
+
   const darkTheme = createTheme({
     // palette: {
     //   mode: "dark",
     // },
     palette: {
       background: {
-        default: "#000000",
+        default: "",
       },
     },
     typography: {
       fontFamily: `"Open Sans", sans-serif`,
       h6: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
+      h5: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
+      h4: {
         fontFamily: `"Montserrat" ,sans-serif`,
         textTransform: "uppercase",
       },
@@ -188,46 +205,31 @@ const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
         return [r.key, String(r.qtd)];
       }}
       render={(r) => (
-        <TableRow key={r.key}>
-          <TableCell
-            width={160}
-            sx={{ padding: "6px 0 0 24px", verticalAlign: "middle" }}
-          >
+        <>
+          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
             {r.champions.map((c) => (
               <ChampionIcon
                 key={`${c.cardCode}`}
                 championCard={c}
-                style={{ marginRight: 1, marginLeft: 1 }}
+                style={{ margin: "2px" }}
               />
             ))}
             {r.regions.map((reg) => (
-              <div
-                key={`${r.key}-${reg.code}-div`}
-                style={{
-                  position: "relative",
-                  width: 24,
-                  height: 24,
-                  float: "left",
-                }}
-              >
-                <Image
-                  key={`${r.key}-${reg.code}-img`}
-                  alt={reg.ref}
-                  layout="fill"
-                  objectFit="contain"
-                  src={`/assets/imgs/regions/${reg?.code}.svg`}
-                  style={{ paddingTop: "6px" }}
-                />
-              </div>
+              <RegionIcon region={reg} style={{ margin: "2px" }} />
             ))}
-          </TableCell>
-          <TableCell>
-            <QtSlider value={r.percent} max={maxPercent} />
-          </TableCell>
-          <TableCell align="right" width={"10"}>
-            <b>{r.qtd}</b>
-          </TableCell>
-        </TableRow>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            style={{
+              width: "100%",
+              display: "grid",
+              alignItems: "center",
+            }}
+          >
+            <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
       )}
     />
   );
@@ -266,17 +268,25 @@ const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
         return [r.key, String(r.qtd)];
       }}
       render={(r) => (
-        <TableRow key={r.key}>
-          <TableCell width={64}>
-            <ChampionIcon championCard={cardFromCode(r.champion.cardCode)} />
-          </TableCell>
-          <TableCell>
-            <QtSlider value={r.percent} max={maxPercent} />
-          </TableCell>
-          <TableCell align="right" width={"10"}>
-            <b>{r.qtd}</b>
-          </TableCell>
-        </TableRow>
+        <>
+          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+            <ChampionIcon
+              championCard={cardFromCode(r.champion.cardCode)}
+              style={{ margin: "2px" }}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            style={{
+              width: "100%",
+              display: "grid",
+              alignItems: "center",
+            }}
+          >
+            <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
       )}
     />
   );
@@ -309,33 +319,23 @@ const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       csvParser={(r) => {
         return [r.key, String(r.qtd)];
       }}
-      render={(reg) => (
-        <TableRow key={reg.key}>
-          <TableCell width={80}>
-            <div
-              style={{
-                position: "relative",
-                width: 24,
-                height: 24,
-                float: "left",
-              }}
-            >
-              <Image
-                alt={reg.region.ref}
-                layout="fill"
-                objectFit="contain"
-                src={`/assets/imgs/regions/${reg?.region?.code}.svg`}
-                style={{ paddingTop: "6px" }}
-              />
-            </div>
-          </TableCell>
-          <TableCell>
-            <QtSlider value={reg.percent} max={maxPercent} />
-          </TableCell>
-          <TableCell align="right" width={"10"}>
-            <b>{reg.qtd}</b>
-          </TableCell>
-        </TableRow>
+      render={(r) => (
+        <>
+          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+            <RegionIcon region={r.region} style={{ margin: "2px" }} />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            style={{
+              width: "100%",
+              display: "grid",
+              alignItems: "center",
+            }}
+          >
+            <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
       )}
     />
   );
@@ -374,35 +374,27 @@ const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
         return [r.key, String(r.qtd)];
       }}
       render={(r) => (
-        <TableRow key={r.key}>
-          <TableCell width={80}>
-            {r.regions.map((reg) => (
-              <div
-                key={`${r.key}-${reg.shortName}-div`}
-                style={{
-                  position: "relative",
-                  width: 24,
-                  height: 24,
-                  float: "left",
-                }}
-              >
-                <Image
-                  alt={reg.ref}
-                  layout="fill"
-                  objectFit="contain"
-                  src={`/assets/imgs/regions/${reg?.code}.svg`}
-                  style={{ paddingTop: "6px" }}
-                />
-              </div>
+        <>
+          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+            {r.regions.map((region) => (
+              <RegionIcon
+                region={region}
+                style={{ float: "left", margin: "2px" }}
+              />
             ))}
-          </TableCell>
-          <TableCell>
-            <QtSlider value={r.percent} max={maxPercent} />
-          </TableCell>
-          <TableCell align="right" width={"10"}>
-            <b>{r.qtd}</b>
-          </TableCell>
-        </TableRow>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            style={{
+              width: "100%",
+              display: "grid",
+              alignItems: "center",
+            }}
+          >
+            <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
       )}
     />
   );

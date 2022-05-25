@@ -40,6 +40,9 @@ var Deck = /** @class */ (function () {
                     .sort(function (a, b) { return b[1] - a[1]; })
                     .slice(0, MAX_REGIONS - runeterraChampionsCount)
                     .map(function (r) { return r[0]; });
+                if (runeterraChampionsCount > 0) {
+                    this._regions.push(region_1.regions["Runeterra"]);
+                }
             }
             return this._regions.sort(function (a, b) { return a.ref.localeCompare(b.ref); });
         },

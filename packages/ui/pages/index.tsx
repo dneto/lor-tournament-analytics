@@ -17,8 +17,11 @@ const Home: NextPage = () => {
     reader.onloadend = () => {
       const result = reader.result!.toString();
       const lzstring = lzString.compressToEncodedURIComponent(result);
-
-      router.push(`/csv/${lzstring}?filename=${fileFrom.name}`);
+      fetch("/api/csv/create", { method: "POST", body: lzstring }).then(
+        (result) => {
+          result.text().then((uuid) => router.push(`/csv/${uuid}`));
+        }
+      );
     };
     reader.readAsText(fileFrom);
   }
@@ -33,7 +36,15 @@ const Home: NextPage = () => {
         fontFamily: `"Montserrat" ,sans-serif`,
         textTransform: "uppercase",
       },
+      h5: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
       h6: {
+        fontFamily: `"Montserrat" ,sans-serif`,
+        textTransform: "uppercase",
+      },
+      h4: {
         fontFamily: `"Montserrat" ,sans-serif`,
         textTransform: "uppercase",
       },

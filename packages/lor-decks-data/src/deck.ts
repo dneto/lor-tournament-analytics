@@ -51,6 +51,10 @@ class Deck {
         .sort((a, b) => b[1] - a[1])
         .slice(0, MAX_REGIONS - runeterraChampionsCount)
         .map((r) => r[0]);
+
+      if (runeterraChampionsCount > 0) {
+        this._regions.push(regions["Runeterra"]);
+      }
     }
 
     return this._regions.sort((a, b) => a.ref.localeCompare(b.ref));
