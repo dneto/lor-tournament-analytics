@@ -17,7 +17,7 @@ class ChampionIcon extends React.Component<ChampionIconProps> {
           width: 32,
           height: 32,
           float: "left",
-          display: "inline-block",
+          display: "block",
 
           ...this.props.style,
         }}

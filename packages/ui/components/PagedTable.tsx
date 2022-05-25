@@ -19,6 +19,7 @@ import {
   Typography,
   Box,
   Grid,
+  NoSsr,
 } from "@mui/material";
 import * as React from "react";
 
@@ -190,45 +191,47 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
             count={this.props.count}
           />
         </Paper>
-        <Modal
-          disableAutoFocus
-          disableEnforceFocus
-          open={this.state.modalOpen}
-          onClose={this.handleModalClose}
-          component={Box}
-          overflow="scroll"
-        >
-          <Box style={{ border: "0px" }} sx={{ ...this.modalStyle }}>
-            <Paper sx={{ border: "0px" }}>
-              <Container>
-                <PagedTableHeader
-                  title={this.props.title}
-                  csvData={this.props.rows.map(this.props.csvParser)}
-                  csvFilename={this.props.csvFilename}
-                  imgRef={this.modalRef}
-                  onBack={this.handleModalClose}
-                />
-                <Grid
-                  container
-                  ref={this.ref}
-                  component={Box}
-                  spacing={0}
-                  style={{
-                    width: "100%",
-                    paddingRight: "24px",
-                    paddingLeft: "24px",
-                  }}
-                >
-                  <>
-                    {this.props.rows.map((r) => {
-                      return this.props.render(r);
-                    })}
-                  </>
-                </Grid>
-              </Container>
-            </Paper>
-          </Box>
-        </Modal>
+        <NoSsr>
+          <Modal
+            disableAutoFocus
+            disableEnforceFocus
+            open={this.state.modalOpen}
+            onClose={this.handleModalClose}
+            component={Box}
+            overflow="scroll"
+          >
+            <Box style={{ border: "0px" }} sx={{ ...this.modalStyle }}>
+              <Paper sx={{ border: "0px" }}>
+                <Container>
+                  <PagedTableHeader
+                    title={this.props.title}
+                    csvData={this.props.rows.map(this.props.csvParser)}
+                    csvFilename={this.props.csvFilename}
+                    imgRef={this.modalRef}
+                    onBack={this.handleModalClose}
+                  />
+                  <Grid
+                    container
+                    ref={this.modalRef}
+                    component={Box}
+                    spacing={0}
+                    style={{
+                      width: "100%",
+                      paddingRight: "24px",
+                      paddingLeft: "24px",
+                    }}
+                  >
+                    <>
+                      {this.props.rows.map((r) => {
+                        return this.props.render(r);
+                      })}
+                    </>
+                  </Grid>
+                </Container>
+              </Paper>
+            </Box>
+          </Modal>
+        </NoSsr>
       </>
     );
   }

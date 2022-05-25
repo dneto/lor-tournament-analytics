@@ -89,6 +89,14 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
+              <Grid item xs={12} md={8}>
+                <Box paddingTop={0} padding={1}>
+                  <LineupsGrid
+                    records={tournament}
+                    fileName={`${file.name}_unique_regions.csv`}
+                  />
+                </Box>
+              </Grid>
             </Grid>
           </Box>
         );
@@ -206,27 +214,19 @@ const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       }}
       render={(r) => (
         <>
-          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+          <Grid item xs={12} sx={{ marginBottom: "-5px" }}>
             {r.champions.map((c) => (
               <ChampionIcon
                 key={`${c.cardCode}`}
                 championCard={c}
-                style={{ margin: "2px" }}
+                style={{ ...imgStyle }}
               />
             ))}
             {r.regions.map((reg) => (
-              <RegionIcon region={reg} style={{ margin: "2px" }} />
+              <RegionIcon region={reg} style={{ ...imgStyle }} />
             ))}
           </Grid>
-          <Grid
-            item
-            xs={12}
-            style={{
-              width: "100%",
-              display: "grid",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={12} sx={{ marginBottom: "5px" }}>
             <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
           </Grid>
         </>
@@ -269,27 +269,24 @@ const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       }}
       render={(r) => (
         <>
-          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+          <Grid item xs={12} sx={{ marginBottom: "-5px" }}>
             <ChampionIcon
               championCard={cardFromCode(r.champion.cardCode)}
-              style={{ margin: "2px" }}
+              style={{ ...imgStyle }}
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            style={{
-              width: "100%",
-              display: "grid",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={12} sx={{ marginTop: "5px" }}>
             <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
           </Grid>
         </>
       )}
     />
   );
+};
+
+const imgStyle: React.CSSProperties = {
+  marginLeft: "2px",
+  marginRight: "2px",
 };
 
 const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
@@ -321,18 +318,10 @@ const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       }}
       render={(r) => (
         <>
-          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
-            <RegionIcon region={r.region} style={{ margin: "2px" }} />
+          <Grid item xs={12} sx={{ marginBottom: "-5px" }}>
+            <RegionIcon region={r.region} style={{ ...imgStyle }} />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            style={{
-              width: "100%",
-              display: "grid",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={12} sx={{ marginBottom: "5px" }}>
             <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
           </Grid>
         </>
@@ -375,23 +364,88 @@ const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
       }}
       render={(r) => (
         <>
-          <Grid item xs={12} sx={{ whiteSpace: "no-wrap" }}>
+          <Grid item xs={12} sx={{ marginBottom: "-5px" }}>
             {r.regions.map((region) => (
-              <RegionIcon
-                region={region}
-                style={{ float: "left", margin: "2px" }}
-              />
+              <RegionIcon region={region} style={{ ...imgStyle }} />
             ))}
           </Grid>
-          <Grid
-            item
-            xs={12}
-            style={{
-              width: "100%",
-              display: "grid",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={12} sx={{ marginBottom: "5px" }}>
+            <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
+      )}
+    />
+  );
+};
+
+const LineupsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+  const data = records.lineups;
+  const dataGroup = _.groupBy(data, (lineup) => {
+    return lineup
+      .map((d) => {
+        const key = `${d.champions
+          .map((c) => c.name)
+          .sort()
+          .join("/")}[${d.regions
+          .map((r) => r.shortName)
+          .sort()
+          .join("/")}]`;
+        return key;
+      })
+      .sort()
+      .join(";");
+  });
+
+  const count = Object.entries(dataGroup).map((e) => {
+    const [key, group] = e;
+
+    return {
+      key: key,
+      lineup: group[0],
+      qtd: group.length,
+      percent: (group.length / data.length) * 100,
+    };
+  });
+  const maxPercent = Math.max(...count.map((c) => c.percent));
+
+  const rows = _.sortBy(count, (c) => c.qtd).reverse();
+  return (
+    <PagedTable<typeof rows[0]>
+      title="Lineups"
+      count={rows.length}
+      rows={rows}
+      maxPercent={maxPercent}
+      csvFilename={fileName}
+      csvParser={(r) => {
+        return [r.key, String(r.qtd)];
+      }}
+      render={(r) => (
+        <>
+          <Grid item xs={12} marginBottom="3px">
+            <Box sx={{ width: "100%" }}>
+              {r.lineup.map((deck) => (
+                <Box
+                  component="span"
+                  sx={{
+                    height: "32px",
+                    marginRight: "30px",
+                    display: "inline-block",
+                  }}
+                >
+                  {deck.champions.map((c) => (
+                    <ChampionIcon
+                      championCard={cardFromCode(c.cardCode)}
+                      style={{ ...imgStyle }}
+                    />
+                  ))}
+                  {deck.regions.map((r) => (
+                    <RegionIcon region={r} style={{ ...imgStyle }} />
+                  ))}
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={12} sx={{ marginBottom: "5px" }}>
             <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
           </Grid>
         </>
