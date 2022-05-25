@@ -134,7 +134,7 @@ const Home: NextPage = () => {
                 <Box paddingTop={0} padding={1}>
                   <LineupsGrid
                     records={tournament}
-                    fileName={`${basename}_archetypes.csv`}
+                    fileName={`${basename}_lineups.csv`}
                   />
                 </Box>
               </Grid>
