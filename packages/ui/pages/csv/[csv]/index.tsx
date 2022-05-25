@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import { Container, Typography, Grid } from "@mui/material";
+import { Container, Typography, Grid, Skeleton, Paper } from "@mui/material";
 import { Box, textAlign } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -26,74 +26,30 @@ import useSWR from "swr";
 
 const Home: NextPage = () => {
   const [show, setShow] = React.useState<React.ReactElement>(<></>);
-  const [tournaments, setTournament] = React.useState<Tournament>();
+  const [tournament, setTournament] = React.useState<Tournament>();
 
   const router = useRouter();
   const query = router.query;
-
+  let basename = "";
   let reader: FileReader;
+  let fileName: string;
 
   function loadCSV(file: File) {
-    const basename = path.parse(file.name).name;
+    fileName = file.name;
+    basename = path.parse(fileName).name;
     reader = new FileReader();
     reader.onloadend = () => {
       const result = reader.result!.toString();
       if (typeof result == "string") {
         const tournament = Tournament.fromCSV(result);
         setTournament(tournament);
-        setShow(
-          <Box>
-            <Grid container>
-              <Grid item xs={12} md={4}>
-                <Box paddingTop={0} padding={1}>
-                  <ArchetypesGrid
-                    records={tournament}
-                    fileName={`${basename}_archetypes.csv`}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box paddingTop={0} padding={1}>
-                  <ChampionsGrid
-                    records={tournament}
-                    fileName={`${basename}_champions.csv`}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box paddingTop={0} padding={1}>
-                  <RegionsGrid
-                    records={tournament}
-                    fileName={`${basename}_regions.csv`}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box paddingTop={0} padding={1}>
-                  <UniqueRegionGrid
-                    records={tournament}
-                    fileName={`${file.name}_unique_regions.csv`}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={8}>
-                <Box paddingTop={0} padding={1}>
-                  <LineupsGrid
-                    records={tournament}
-                    fileName={`${file.name}_unique_regions.csv`}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-        );
       }
     };
     reader.readAsText(file);
   }
 
   React.useEffect(() => {
-    if (!tournaments && query.csv) {
+    if (!tournament && query.csv) {
       fetch(`/api/csv/${query.csv}`, { method: "GET" }).then((resp) => {
         resp.text().then((lzStringCSV) => {
           const csv = lzString.decompressFromEncodedURIComponent(lzStringCSV);
@@ -139,7 +95,82 @@ const Home: NextPage = () => {
         }}
       >
         <Header />
-        {show}
+        {tournament ? (
+          <Box>
+            <Grid container>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <ArchetypesGrid
+                    records={tournament}
+                    fileName={`${basename}_archetypes.csv`}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <ChampionsGrid
+                    records={tournament}
+                    fileName={`${basename}_champions.csv`}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <RegionsGrid
+                    records={tournament}
+                    fileName={`${basename}_regions.csv`}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <UniqueRegionGrid
+                    records={tournament}
+                    fileName={`${basename}_unique_regions.csv`}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Box paddingTop={0} padding={1}>
+                  <LineupsGrid
+                    records={tournament}
+                    fileName={`${basename}_archetypes.csv`}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        ) : (
+          <Box>
+            <Grid container>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <Skeleton variant="rectangular" width="100%" height="400px" />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <Skeleton variant="rectangular" width="100%" height="400px" />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <Skeleton variant="rectangular" width="100%" height="400px" />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box paddingTop={0} padding={1}>
+                  <Skeleton variant="rectangular" width="100%" height="400px" />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Box paddingTop={0} padding={1}>
+                  <Skeleton variant="rectangular" width="100%" height="400px" />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
         <Box>
           <Typography sx={{ marginTop: "10px", fontSize: "0.7rem" }}>
             {`LoR Analytics isn't endorsed by Riot Games and doesn't reflect the
