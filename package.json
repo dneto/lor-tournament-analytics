@@ -1,11 +1,23 @@
 {
-  "private": true,
   "name": "lor-tournament-analytics",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {},
+  "private": true,
   "workspaces": [
+    "apps/*",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "g:build": "yarn workspaces foreach -p --topological-dev -v run build",
+    "g:typecheck": "yarn workspaces foreach -ptv run typecheck"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.2"
+  },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0",
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
+  "packageManager": "yarn@3.2.1"
 }
