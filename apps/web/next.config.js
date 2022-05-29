@@ -10,6 +10,9 @@ const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
   swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
   experimental: {
     reactRoot: true,
     runtime: "undefined",

@@ -6,7 +6,7 @@ export const theme: Theme = createTheme({
     primary: pink,
   },
   typography: {
-    fontFamily: `"Open Sans", sans-serif`,
+    fontFamily: ['"Open Sans"', "sans-serif"].join(","),
     htmlFontSize: 15,
     h1: {
       fontFamily: `"Montserrat" ,sans-serif`,

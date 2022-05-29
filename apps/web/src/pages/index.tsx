@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { GetStaticProps, NextPage } from "next";
 import {
   Container,
@@ -15,19 +14,34 @@ import {
 } from "@mui/material";
 import FileUploader from "@/components/FileUploader";
 import { ThemeProvider } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { theme } from "@/styles/theme";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import lzString from "lz-string";
 import Header from "../components/Header";
 import { getRecentTournaments, Tournament } from "lib/google_sheets";
-import Link from "next/link";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import locales, { ILocale } from "@/locales";
 import htmlParse from "html-react-parser";
+
+const useStyles = makeStyles({
+  tr: {
+    "&:hover": {
+      background: theme.palette.primary.main,
+      color: "#fff",
+    },
+    cursor: "pointer",
+  },
+  td: {
+    color: "inherit",
+    border: "0",
+    padding: "12px 8px",
+  },
+});
 
 type Props = {
   tournaments: Tournament[];
@@ -36,6 +50,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = (props: Props) => {
+  const classes = useStyles();
   let reader: FileReader;
   const router = useRouter();
   const localizedCalendar = (n: number): string => {
@@ -75,19 +90,24 @@ const Home: NextPage<Props> = (props: Props) => {
           <Grid item xs>
             <Paper sx={{ padding: "15px 0px", height: "100%" }}>
               <Container>
-                <Typography variant="h6" color={"primary"}>
+                <Typography variant="h5" color={"primary"}>
                   {props.locale.latestTournaments}
                 </Typography>
                 {props.tournaments.map((t: Tournament) => (
                   <Table key={t.title}>
                     <TableBody>
-                      <TableRow>
-                        <TableCell>
-                          <Link href={t.url}>{t.title}</Link>
+                      <TableRow
+                        className={classes.tr}
+                        onClick={() => router.push(t.url)}
+                      >
+                        <TableCell className={classes.td}>
+                          <Typography>{t.title}</Typography>
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell className={classes.td} align="right">
                           <NoSsr>
-                            <span>{localizedCalendar(t.timestamp)}</span>
+                            <Typography>
+                              {localizedCalendar(t.timestamp)}
+                            </Typography>
                           </NoSsr>
                         </TableCell>
                       </TableRow>
@@ -104,13 +124,21 @@ const Home: NextPage<Props> = (props: Props) => {
             <Paper sx={{ padding: "15px 0px", height: "100%" }}>
               <Container>
                 <Grid item>
-                  <Typography variant="h6" color={"primary"}>
+                  <Typography variant="h5" color={"primary"}>
                     {props.locale.upload}
                   </Typography>
-                  <p>{htmlParse(props.locale.csvMustHave)}</p>
-                  <p>{props.locale.nonCodeWillBeDiscarded}</p>
-                  {htmlParse(props.locale.fileContentShouldBe)}
-                  <Box width="100%">
+                  <Box padding="12px 5px">
+                    <Typography padding="5px 0">
+                      {htmlParse(props.locale.csvMustHave)}
+                    </Typography>
+                    <Typography padding="5px 0">
+                      {props.locale.nonCodeWillBeDiscarded}
+                    </Typography>
+                    <Typography padding="5px 0">
+                      {htmlParse(props.locale.fileContentShouldBe)}
+                    </Typography>
+                  </Box>
+                  <Box>
                     <SyntaxHighlighter style={materialLight} language="csv">
                       {[
                         [
