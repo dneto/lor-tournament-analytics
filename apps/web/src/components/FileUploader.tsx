@@ -36,7 +36,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelect }) => {
       />
       <label htmlFor="upload-file">
         <form>
-          <Button color="secondary" component="span" variant="contained">
+          <Button color="primary" component="span" variant="contained">
             <UploadFileIcon /> Upload CSV
           </Button>
         </form>

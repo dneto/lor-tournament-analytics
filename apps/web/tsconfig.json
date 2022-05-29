@@ -10,6 +10,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/components/*": ["./components/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/styles/*": ["./styles/*"],
       "@lor-analytics/deck-utils/*": ["../../../packages/deck-utils/src/*"],
       "@lor-analytics/deck-utils": ["../../../packages/deck-utils/src/index"],
       "@lor-analytics/data-extractor/*": [

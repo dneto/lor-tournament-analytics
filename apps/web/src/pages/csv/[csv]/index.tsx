@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { Container, Typography, Grid, Skeleton, Paper } from "@mui/material";
 import { Box, textAlign } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/styles/theme";
 
 import { Deck, cardFromCode, Card, Region } from "@lor-analytics/deck-utils";
 import { Lineup, Tournament } from "@lor-analytics/data-extractor";
@@ -55,30 +56,8 @@ const Home: NextPage = () => {
     }
   });
 
-  const darkTheme = createTheme({
-    palette: {
-      background: {
-        default: "",
-      },
-    },
-    typography: {
-      fontFamily: `"Open Sans", sans-serif`,
-      h6: {
-        fontFamily: `"Montserrat" ,sans-serif`,
-        textTransform: "uppercase",
-      },
-      h5: {
-        fontFamily: `"Montserrat" ,sans-serif`,
-        textTransform: "uppercase",
-      },
-      h4: {
-        fontFamily: `"Montserrat" ,sans-serif`,
-        textTransform: "uppercase",
-      },
-    },
-  });
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <Container
         maxWidth="lg"
         sx={{
