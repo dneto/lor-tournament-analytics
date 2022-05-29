@@ -81,12 +81,6 @@ const Home: NextPage<Props> = (props: Props) => {
         }}
       >
         <Header />
-        <Box>
-          <Typography variant="h1">{props.locale.welcome} </Typography>
-          <Typography variant="h1" color={"primary"}>
-            LoR Analytics
-          </Typography>
-        </Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Paper sx={{ padding: "15px 0px" }}>
