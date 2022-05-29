@@ -1,4 +1,3 @@
-import React from "react";
 import { DataGrid, GridToolbarExport } from "@mui/x-data-grid";
 const ExportableCSVGrid = ({ columns, rows, fileName }) => {
   return (

@@ -27,6 +27,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import locales, { ILocale } from "@/locales";
 import htmlParse from "html-react-parser";
+import ShardPill from "@/components/ShardPill";
 
 const useStyles = makeStyles({
   tr: {
@@ -86,9 +87,9 @@ const Home: NextPage<Props> = (props: Props) => {
             LoR Analytics
           </Typography>
         </Box>
-        <Grid container>
-          <Grid item xs>
-            <Paper sx={{ padding: "15px 0px", height: "100%" }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Paper sx={{ padding: "15px 0px" }}>
               <Container>
                 <Typography variant="h5" color={"primary"}>
                   {props.locale.latestTournaments}
@@ -101,7 +102,12 @@ const Home: NextPage<Props> = (props: Props) => {
                         onClick={() => router.push(t.url)}
                       >
                         <TableCell className={classes.td}>
-                          <Typography>{t.title}</Typography>
+                          <Typography component="span">{t.title} </Typography>
+                          {t.region ? (
+                            <ShardPill shard={t.region} color="black" />
+                          ) : (
+                            <></>
+                          )}
                         </TableCell>
                         <TableCell className={classes.td} align="right">
                           <NoSsr>
@@ -117,11 +123,8 @@ const Home: NextPage<Props> = (props: Props) => {
               </Container>
             </Paper>
           </Grid>
-          <Divider orientation="vertical" flexItem>
-            {props.locale.or}
-          </Divider>
-          <Grid item xs={6}>
-            <Paper sx={{ padding: "15px 0px", height: "100%" }}>
+          <Grid item xs={12}>
+            <Paper sx={{ padding: "15px 0px" }}>
               <Container>
                 <Grid item>
                   <Typography variant="h5" color={"primary"}>
