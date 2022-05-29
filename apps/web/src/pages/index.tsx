@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import {
   Container,
   Typography,
@@ -23,15 +23,24 @@ import Header from "../components/Header";
 import { getRecentTournaments, Tournament } from "lib/google_sheets";
 import Link from "next/link";
 import moment from "moment";
+import "moment/locale/pt-br";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import locales, { ILocale } from "@/locales";
+import htmlParse from "html-react-parser";
+
 type Props = {
   tournaments: Tournament[];
+  locale: ILocale;
+  localeLang: string;
 };
 
 const Home: NextPage<Props> = (props: Props) => {
   let reader: FileReader;
   const router = useRouter();
+  const localizedCalendar = (n: number): string => {
+    return moment(n).locale(props.localeLang).calendar();
+  };
   function onFileSelect(fileFrom: File) {
     reader = new FileReader();
     reader.onloadend = () => {
@@ -57,7 +66,7 @@ const Home: NextPage<Props> = (props: Props) => {
       >
         <Header />
         <Box>
-          <Typography variant="h1">Welcome to </Typography>
+          <Typography variant="h1">{props.locale.welcome} </Typography>
           <Typography variant="h1" color={"primary"}>
             LoR Analytics
           </Typography>
@@ -67,7 +76,7 @@ const Home: NextPage<Props> = (props: Props) => {
             <Paper sx={{ padding: "15px 0px", height: "100%" }}>
               <Container>
                 <Typography variant="h6" color={"primary"}>
-                  latest tournaments
+                  {props.locale.latestTournaments}
                 </Typography>
                 {props.tournaments.map((t: Tournament) => (
                   <Table key={t.title}>
@@ -77,7 +86,9 @@ const Home: NextPage<Props> = (props: Props) => {
                           <Link href={t.url}>{t.title}</Link>
                         </TableCell>
                         <TableCell align="right">
-                          <span>{moment(t.timestamp).calendar()}</span>
+                          <NoSsr>
+                            <span>{localizedCalendar(t.timestamp)}</span>
+                          </NoSsr>
                         </TableCell>
                       </TableRow>
                     </TableBody>
@@ -87,23 +98,18 @@ const Home: NextPage<Props> = (props: Props) => {
             </Paper>
           </Grid>
           <Divider orientation="vertical" flexItem>
-            OR
+            {props.locale.or}
           </Divider>
           <Grid item xs={6}>
             <Paper sx={{ padding: "15px 0px", height: "100%" }}>
               <Container>
                 <Grid item>
                   <Typography variant="h6" color={"primary"}>
-                    Upload a new one
+                    {props.locale.upload}
                   </Typography>
-                  <p>
-                    The CSV file must have <b>deck codes</b>.
-                  </p>
-                  <p>
-                    Any other information will be discarded (including other
-                    sites URL).
-                  </p>
-                  The file content <b>should be</b> something like:
+                  <p>{htmlParse(props.locale.csvMustHave)}</p>
+                  <p>{props.locale.nonCodeWillBeDiscarded}</p>
+                  {htmlParse(props.locale.fileContentShouldBe)}
                   <Box width="100%">
                     <SyntaxHighlighter style={materialLight} language="csv">
                       {[
@@ -137,7 +143,10 @@ const Home: NextPage<Props> = (props: Props) => {
                   </Box>
                 </Grid>
                 <Grid item textAlign="right">
-                  <FileUploader onFileSelect={onFileSelect} />
+                  <FileUploader
+                    onFileSelect={onFileSelect}
+                    locale={props.locale}
+                  />
                 </Grid>
               </Container>
             </Paper>
@@ -159,13 +168,16 @@ const Home: NextPage<Props> = (props: Props) => {
 
 export default Home;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const locale: string = context.locale!;
   let tournaments: Tournament[] | undefined = await getRecentTournaments();
   tournaments = tournaments?.sort((a, b) => b.timestamp - a.timestamp);
   return {
     props: {
       tournaments: tournaments,
+      locale: locales[locale],
+      localeLang: locale,
     },
     revalidate: 1,
   };
-}
+};

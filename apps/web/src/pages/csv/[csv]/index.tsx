@@ -17,11 +17,13 @@ import lzString from "lz-string";
 import Header from "@/components/Header";
 import PagedTable from "@/components/PagedTable";
 import path from "path";
+import locales, { ILocale } from "@/locales";
 
 const Home: NextPage = () => {
   const [tournament, setTournament] = React.useState<Tournament>();
 
   const router = useRouter();
+  const locale = locales[router.locale || "en-US"];
   const query = router.query;
   let basename = "";
   let reader: FileReader;
@@ -74,6 +76,7 @@ const Home: NextPage = () => {
                   <ArchetypesGrid
                     records={tournament}
                     fileName={`${basename}_archetypes.csv`}
+                    locale={locale}
                   />
                 </Box>
               </Grid>
@@ -82,6 +85,7 @@ const Home: NextPage = () => {
                   <ChampionsGrid
                     records={tournament}
                     fileName={`${basename}_champions.csv`}
+                    locale={locale}
                   />
                 </Box>
               </Grid>
@@ -90,6 +94,7 @@ const Home: NextPage = () => {
                   <RegionsGrid
                     records={tournament}
                     fileName={`${basename}_regions.csv`}
+                    locale={locale}
                   />
                 </Box>
               </Grid>
@@ -98,6 +103,7 @@ const Home: NextPage = () => {
                   <UniqueRegionGrid
                     records={tournament}
                     fileName={`${basename}_unique_regions.csv`}
+                    locale={locale}
                   />
                 </Box>
               </Grid>
@@ -106,6 +112,7 @@ const Home: NextPage = () => {
                   <LineupsGrid
                     records={tournament}
                     fileName={`${basename}_lineups.csv`}
+                    locale={locale}
                   />
                 </Box>
               </Grid>
@@ -159,9 +166,10 @@ const Home: NextPage = () => {
 interface IGridComp {
   records: Tournament;
   fileName: string;
+  locale: ILocale;
 }
 
-const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
   type dataType = { champions: Card[]; regions: Region[] };
   const data: dataType[] = records.lineups
     .map((lineup: Lineup) =>
@@ -198,7 +206,7 @@ const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   const rows = _.sortBy(count, (r) => r.qtd).reverse();
   return (
     <PagedTable<typeof rows[0]>
-      title="Archetypes"
+      title={locale.archetype}
       count={rows.length}
       rows={rows}
       maxPercent={maxPercent}
@@ -239,7 +247,7 @@ const ArchetypesGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   );
 };
 
-const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
   const data = records.lineups
     .map((l: Lineup) => l.map((d: Deck) => d.champions))
     .flat(2);
@@ -263,7 +271,7 @@ const ChampionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
 
   return (
     <PagedTable<typeof rows[0]>
-      title="Champions"
+      title={locale.champions}
       maxPercent={maxPercent}
       count={rows.length}
       rows={rows}
@@ -293,7 +301,11 @@ const imgStyle: React.CSSProperties = {
   marginRight: "2px",
 };
 
-const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+const UniqueRegionGrid: React.FC<IGridComp> = ({
+  records,
+  fileName,
+  locale,
+}) => {
   const data = records.lineups
     .map((l: Lineup) => l.map((d: Deck) => d.regions))
     .flat(999);
@@ -314,7 +326,7 @@ const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   const rows = _.sortBy(count, (c) => c.qtd).reverse();
   return (
     <PagedTable<typeof rows[0]>
-      title="Region"
+      title={locale.region}
       count={rows.length}
       rows={rows}
       maxPercent={maxPercent}
@@ -336,7 +348,7 @@ const UniqueRegionGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   );
 };
 
-const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+const RegionsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
   const data: Region[][] = records.lineups
     .map((l: Lineup) => l.map((d: Deck) => d.regions))
     .flat(1);
@@ -363,7 +375,7 @@ const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   const rows = _.sortBy(count, (c) => c.qtd).reverse();
   return (
     <PagedTable<typeof rows[0]>
-      title="Regions"
+      title={locale.regions}
       count={rows.length}
       rows={rows}
       maxPercent={maxPercent}
@@ -387,7 +399,7 @@ const RegionsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   );
 };
 
-const LineupsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
+const LineupsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
   const data: Lineup[] = records.lineups;
   const dataGroup = _.groupBy(data, (lineup) => {
     return lineup
@@ -420,7 +432,7 @@ const LineupsGrid: React.FC<IGridComp> = ({ records, fileName }) => {
   const rows = _.sortBy(count, (c) => c.qtd).reverse();
   return (
     <PagedTable<typeof rows[0]>
-      title="Lineups"
+      title={locale.lineups}
       count={rows.length}
       rows={rows}
       maxPercent={maxPercent}

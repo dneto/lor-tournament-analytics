@@ -11,6 +11,7 @@
     "paths": {
       "@/components/*": ["./components/*"],
       "@/lib/*": ["./lib/*"],
+      "@/locales": ["./locales/index"],
       "@/styles/*": ["./styles/*"],
       "@lor-analytics/deck-utils/*": ["../../../packages/deck-utils/src/*"],
       "@lor-analytics/deck-utils": ["../../../packages/deck-utils/src/index"],

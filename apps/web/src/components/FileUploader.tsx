@@ -9,12 +9,17 @@ import {
 } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import React from "react";
+import { ILocale } from "@/locales";
 
 interface FileUploaderProps {
   onFileSelect: (file: File) => void;
+  locale: ILocale;
 }
 
-const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelect }) => {
+const FileUploader: React.FC<FileUploaderProps> = ({
+  onFileSelect,
+  locale,
+}) => {
   function onInputChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const file = evt.target.files![0];
     onFileSelect(file);
@@ -37,7 +42,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelect }) => {
       <label htmlFor="upload-file">
         <form>
           <Button color="primary" component="span" variant="contained">
-            <UploadFileIcon /> Upload CSV
+            <UploadFileIcon /> {locale.uploadCSV}
           </Button>
         </form>
       </label>
