@@ -24,8 +24,7 @@ import { getRecentTournaments, Tournament } from "lib/google_sheets";
 import Link from "next/link";
 import moment from "moment";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { maxWidth, width } from "@mui/system";
+import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 type Props = {
   tournaments: Tournament[];
 };
