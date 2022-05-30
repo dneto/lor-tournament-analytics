@@ -21,13 +21,12 @@ import { useRouter } from "next/router";
 import lzString from "lz-string";
 import Header from "../components/Header";
 import { getRecentTournaments, Tournament } from "lib/google_sheets";
-import moment from "moment";
-import "moment/locale/pt-br";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import locales, { ILocale } from "@/locales";
 import htmlParse from "html-react-parser";
 import ShardPill from "@/components/ShardPill";
+import { DateTime } from "luxon";
 
 const useStyles = makeStyles({
   tr: {
@@ -55,7 +54,9 @@ const Home: NextPage<Props> = (props: Props) => {
   let reader: FileReader;
   const router = useRouter();
   const localizedCalendar = (n: number): string => {
-    return moment(n).locale(props.localeLang).calendar();
+    return DateTime.fromMillis(n)
+      .setLocale(props.localeLang)
+      .toRelativeCalendar()!;
   };
   function onFileSelect(fileFrom: File) {
     reader = new FileReader();
@@ -104,11 +105,9 @@ const Home: NextPage<Props> = (props: Props) => {
                           )}
                         </TableCell>
                         <TableCell className={classes.td} align="right">
-                          <NoSsr>
-                            <Typography>
-                              {localizedCalendar(t.timestamp)}
-                            </Typography>
-                          </NoSsr>
+                          <Typography>
+                            {localizedCalendar(t.timestamp)}
+                          </Typography>
                         </TableCell>
                       </TableRow>
                     </TableBody>

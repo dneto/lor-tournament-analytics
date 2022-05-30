@@ -1,6 +1,5 @@
 import { google } from "googleapis";
-import moment from "moment";
-
+import { DateTime } from "luxon";
 export type Tournament = {
   timestamp: number;
   title: string;
@@ -28,9 +27,12 @@ export async function getRecentTournaments(): Promise<
 
     if (rows?.length) {
       return rows.map((row) => {
-        const date: Date = moment.utc(row[0], "DD/MM/YYYY hh:mm:ss").toDate();
+        const date: DateTime = DateTime.fromFormat(
+          row[0],
+          "dd/MM/yyyy hh:mm:ss"
+        );
         return {
-          timestamp: date.getTime(),
+          timestamp: date.toMillis(),
           title: row[1],
           url: row[2],
           region: row[3] || null,
