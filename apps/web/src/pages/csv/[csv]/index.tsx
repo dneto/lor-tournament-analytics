@@ -538,7 +538,7 @@ const CardsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
       maxPercent={0}
       csvFilename={fileName}
       csvParser={(r) => {
-        return [r.key, String(r.qtd)];
+        return [r.card.name, String(r.qtd)];
       }}
       render={(r) => (
         <>
