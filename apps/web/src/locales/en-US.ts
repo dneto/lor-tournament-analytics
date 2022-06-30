@@ -1,4 +1,5 @@
 export default {
+  locale:"en-us",
   welcome: "Welcome to",
   latestTournaments: "Latest Tournaments",
   upload: "Upload a new one",
@@ -13,4 +14,5 @@ export default {
   regions: "Regions",
   lineups: "Lineups",
   uploadCSV: "Upload CSV",
+  cards: "Cards",
 };

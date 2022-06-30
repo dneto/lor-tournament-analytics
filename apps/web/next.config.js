@@ -28,7 +28,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     disableStaticImages: false,
     minimumCacheTTL: 60,
-    domains: [],
+    domains: ["dd.b.pvp.net"],
   },
   typescript: {
     ignoreBuildErrors: NEXTJS_IGNORE_TYPECHECK,

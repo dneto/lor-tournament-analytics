@@ -2,12 +2,26 @@ import * as React from "react";
 
 import QtSlider from "@/components/QtSlider";
 import type { NextPage } from "next";
-import { Container, Typography, Grid, Skeleton, Paper } from "@mui/material";
-import { Box, textAlign } from "@mui/system";
+import {
+  Container,
+  Typography,
+  Grid,
+  Skeleton,
+  Paper,
+  Tooltip,
+} from "@mui/material";
+import { bgcolor, Box, textAlign } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/styles/theme";
 
-import { Deck, cardFromCode, Card, Region } from "@lor-analytics/deck-utils";
+import {
+  Deck,
+  cardFromCode,
+  Card,
+  Region,
+  CardEntry,
+  cardFromCodeLocale,
+} from "@lor-analytics/deck-utils";
 import { Lineup, Tournament } from "@lor-analytics/data-extractor";
 
 import { ChampionIcon, RegionIcon } from "../../../components/icons/Icons";
@@ -18,6 +32,8 @@ import Header from "@/components/Header";
 import PagedTable from "@/components/PagedTable";
 import path from "path";
 import locales, { ILocale } from "@/locales";
+import { stringify } from "querystring";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const [tournament, setTournament] = React.useState<Tournament>();
@@ -98,7 +114,7 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6}>
                 <Box paddingTop={0} padding={1}>
                   <UniqueRegionGrid
                     records={tournament}
@@ -107,7 +123,16 @@ const Home: NextPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={6}>
+                <Box paddingTop={0} padding={1}>
+                  <CardsGrid
+                    records={tournament}
+                    fileName={`${basename}_cards.csv`}
+                    locale={locale}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
                 <Box paddingTop={0} padding={1}>
                   <LineupsGrid
                     records={tournament}
@@ -471,6 +496,74 @@ const LineupsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
           </Grid>
           <Grid item xs={12} sx={{ marginBottom: "5px" }}>
             <QtSlider value={r.percent} max={maxPercent} textValue={r.qtd} />
+          </Grid>
+        </>
+      )}
+    />
+  );
+};
+
+const CardsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
+  const dataGroup = records.lineups
+    .map((lineup) => lineup.map((deck) => deck.cardEntries))
+    .reduce((prev: Record<string, number>, curr) => {
+      curr.forEach((ces) =>
+        ces.forEach((ce) => {
+          prev[ce.card.cardCode] =
+            prev[ce.card.cardCode] + ce.count || ce.count;
+        })
+      );
+      return prev;
+    }, {});
+
+  const count = Object.entries(dataGroup).map((e) => {
+    const [card, count] = e;
+
+    console.log(locale.locale)
+
+    return {
+      key: card,
+      card: cardFromCodeLocale(card, locale.locale),
+      qtd: count,
+    };
+  });
+
+  const rows = _.sortBy(count, (c) => c.qtd).reverse();
+  return (
+    <PagedTable<typeof rows[0]>
+      title={locale.cards}
+      count={rows.length}
+      rows={rows}
+      rowsPerPage={9}
+      maxPercent={0}
+      csvFilename={fileName}
+      csvParser={(r) => {
+        return [r.key, String(r.qtd)];
+      }}
+      render={(r) => (
+        <>
+          <Grid item xs={10} sx={{ marginBottom: "-5px" }}>
+            <Tooltip
+            componentsProps={{
+              tooltip:{
+                sx:{
+                  backgroundColor:"#ffffff00"
+                }
+              }
+            }}
+              title={
+                <Image
+                  src={r.card.assets[0].gameAbsolutePath}
+                  width="250px"
+                  height="376px"
+                />
+              }
+            >
+              <Typography variant="h6">{r.card.name}</Typography>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={2} sx={{ marginBottom: "5px" }}>
+            <Typography variant="h6">{r.qtd}</Typography>
           </Grid>
         </>
       )}

@@ -1,4 +1,5 @@
-import cards from "./assets/cards.json";
+import cards from "./assets/en_us/cards.json";
+import cardsPTBR from "./assets/pt_br/cards.json";
 import { regions, region } from "./region";
 
 class Card {
@@ -33,7 +34,6 @@ class Card {
   regionsShort!: string[];
 
   isChampion(): boolean {
-    console.log("rarityref", this.rarityRef);
     return this.rarityRef == "Champion";
   }
 
@@ -59,4 +59,30 @@ function cardFromCode(code: string): Card {
   throw new Error("Could not parse card code");
 }
 
-export { Card, cardFromCode };
+function cardFromCodeLocale(code: string, locale:string): Card {
+  let cardDatabase = cards
+  switch (locale) {
+    case "en-us":
+      cardDatabase = cards
+      break;
+    case "pt-br":
+      cardDatabase = cardsPTBR
+      break;
+  }
+  const cardFromDatabase = cardDatabase.find((card) => {
+    return card.cardCode == code;
+  });
+
+  if (cardFromDatabase != undefined) {
+    const card = Object.assign(new Card(), cardFromDatabase);
+    card.regionsShort = card.regionRefs.map(
+      (r) => regions[r as region].shortName
+    );
+
+    return card;
+  }
+
+  throw new Error("Could not parse card code");
+}
+
+export { Card, cardFromCode, cardFromCodeLocale };

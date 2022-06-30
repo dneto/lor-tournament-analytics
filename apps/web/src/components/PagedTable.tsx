@@ -111,6 +111,7 @@ type TableProps<T> = {
   title: string;
   count: number;
   rows: T[];
+  rowsPerPage?: number;
   maxPercent: number;
   csvFilename: string;
   render(t: T): React.ReactNode;
@@ -155,6 +156,7 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
   }
 
   render() {
+    const rowsPerPage = this.props.rowsPerPage || 5
     return (
       <>
         <Paper component={Box}>
@@ -175,7 +177,7 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
             >
               <>
                 {this.props.rows
-                  .slice(this.state.page * 5, this.state.page * 5 + 5)
+                  .slice(this.state.page * rowsPerPage, this.state.page * rowsPerPage + rowsPerPage)
                   .map((r) => {
                     return this.props.render(r);
                   })}
@@ -183,8 +185,8 @@ class PagedTable<T> extends React.Component<TableProps<T>, TableState> {
             </Grid>
           </Box>
           <TablePagination
-            rowsPerPageOptions={[5]}
-            rowsPerPage={5}
+            rowsPerPageOptions={[rowsPerPage]}
+            rowsPerPage={rowsPerPage}
             onPageChange={this.handlePageChange}
             page={this.state.page}
             component="div"

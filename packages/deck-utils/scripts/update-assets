@@ -2,36 +2,39 @@
 set -e
 
 base_url="https://dd.b.pvp.net/latest/"
-locale="en_us"
+LOCALE="en_us"
 sets="set1 set2 set3 set4 set5 set6"
 
-for arg in "$@"
-do
-    case $arg in
-        "--locale" )
-           locale=$arg;;
-   esac
+while getopts ":l:" arg; do
+  case "${arg}" in
+    "l")
+      LOCALE=${OPTARG}
+      ;;
+  esac
 done
+
+echo "Downloading for locale ${LOCALE}"
 
 tmpdir="$(pwd)/tmp"
 mkdir -p $tmpdir 
 echo "" > $tmpdir/lor-assets-urls.txt
 
 for set in $sets; do
-  echo "url = \"$base_url$set-$locale.zip\"" >> $tmpdir/lor-assets-urls.txt
-  echo "output = \"$tmpdir/$set-$locale.zip\"" >> $tmpdir/lor-assets-urls.txt
+  echo "url = \"$base_url$set-$LOCALE.zip\"" >> $tmpdir/lor-assets-urls.txt
+  echo "output = \"$tmpdir/$set-$LOCALE.zip\"" >> $tmpdir/lor-assets-urls.txt
 done
 
 
 curl -Z --parallel-max 6 --config $tmpdir/lor-assets-urls.txt
 
 for set in $sets; do
-  unzip -q -o $tmpdir/$set-$locale.zip -d $tmpdir
+  unzip -q -o $tmpdir/$set-$LOCALE.zip -d $tmpdir
 done 
 
 mkdir -p $tmpdir/sets
 find $tmpdir -name "set*.json" -exec mv -t $tmpdir/sets {} +
 
-jq -s 'add' $tmpdir/sets/*.json > src/assets/cards.json
+mkdir -p src/assets/$LOCALE
+jq -s 'add' $tmpdir/sets/*.json > src/assets/$LOCALE/cards.json
 
 rm -r $tmpdir

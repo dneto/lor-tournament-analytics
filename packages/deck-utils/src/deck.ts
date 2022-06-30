@@ -4,7 +4,7 @@ import { Region, regions, region } from "./region";
 
 const MAX_REGIONS = 2;
 
-type CardEntry = {
+export type CardEntry = {
   card: Card;
   count: number;
 };
