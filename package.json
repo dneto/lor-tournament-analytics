@@ -26,7 +26,11 @@
     "@mui/styles": "^5.8.0",
     "@types/react-syntax-highlighter": "^15.5.1",
     "googleapis": "^100.0.0",
+    "got": "latest",
     "html-react-parser": "^1.4.13",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
     "react-syntax-highlighter": "^15.5.0"
   }
 }
