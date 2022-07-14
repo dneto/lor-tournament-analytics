@@ -2619,12 +2619,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-syntax-highlighter@npm:^15.5.1":
-  version: 15.5.1
-  resolution: "@types/react-syntax-highlighter@npm:15.5.1"
+"@types/react-syntax-highlighter@npm:15.5.3":
+  version: 15.5.3
+  resolution: "@types/react-syntax-highlighter@npm:15.5.3"
   dependencies:
     "@types/react": "*"
-  checksum: e23f2e35f5d2688bc0bbe3e0b13518ff5ff9be177e92d9e303775c053b85221c63f017a72e05f7f27ba9a50e711f89fe13c8fc72af76419ea8907fc104ebce5d
+  checksum: 0aaf7af21634d6da7701e6b7381de12513cf523cc4359318049f2ece252156e10371fb2bcec2d6f532a4d2ded3c55e1cfb6ced7f4222689b53c2084dac64262a
   languageName: node
   linkType: hard
 
@@ -7120,7 +7120,7 @@ __metadata:
   resolution: "lor-tournament-analytics@workspace:."
   dependencies:
     "@mui/styles": ^5.8.0
-    "@types/react-syntax-highlighter": ^15.5.1
+    "@types/react-syntax-highlighter": 15.5.3
     cross-env: ^7.0.3
     googleapis: ^100.0.0
     got: 11.8.5

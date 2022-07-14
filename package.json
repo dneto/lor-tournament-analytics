@@ -24,7 +24,7 @@
   "packageManager": "yarn@3.2.1",
   "dependencies": {
     "@mui/styles": "^5.8.0",
-    "@types/react-syntax-highlighter": "^15.5.1",
+    "@types/react-syntax-highlighter": "15.5.3",
     "googleapis": "^100.0.0",
     "got": "11.8.5",
     "html-react-parser": "^1.4.13",
