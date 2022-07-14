@@ -5,6 +5,9 @@ import { CssBaseline } from "@material-ui/core";
 import NextNProgress from "nextjs-progressbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { useRouter } from "next/router";
+import useAckee from "use-ackee";
+import { useEffect } from "react";
 config.autoAddCss = false;
 
 const darkTheme = createTheme({
@@ -15,6 +18,14 @@ const darkTheme = createTheme({
   },
 });
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  if (process.env.ACKEE_SERVER && process.env.ACKEE_DOMAIN_ID) {
+  useAckee(router.pathname, {
+    server: process.env.ACKEE_SERVER,
+    domainId: process.env.ACKEE_DOMAIN_ID,
+  },{
+  });
+  }
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />

@@ -5,6 +5,7 @@ export type Tournament = {
   title: string;
   url: string;
   region: string | null;
+  logoURL: string | null;
 };
 
 export async function getRecentTournaments(): Promise<
@@ -36,6 +37,7 @@ export async function getRecentTournaments(): Promise<
           title: row[1],
           url: row[2],
           region: row[3] || null,
+          logoURL: row[4] || null,
         };
       });
     }

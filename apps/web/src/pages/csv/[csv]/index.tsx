@@ -2,24 +2,16 @@ import * as React from "react";
 
 import QtSlider from "@/components/QtSlider";
 import type { NextPage } from "next";
-import {
-  Container,
-  Typography,
-  Grid,
-  Skeleton,
-  Paper,
-  Tooltip,
-} from "@mui/material";
-import { bgcolor, Box, textAlign } from "@mui/system";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Container, Typography, Grid, Skeleton, Tooltip } from "@mui/material";
+import { Box } from "@mui/system";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/styles/theme";
-
+import Head from "next/head";
 import {
   Deck,
   cardFromCode,
   Card,
   Region,
-  CardEntry,
   cardFromCodeLocale,
 } from "@lor-analytics/deck-utils";
 import { Lineup, Tournament } from "@lor-analytics/data-extractor";
@@ -32,11 +24,12 @@ import Header from "@/components/Header";
 import PagedTable from "@/components/PagedTable";
 import path from "path";
 import locales, { ILocale } from "@/locales";
-import { stringify } from "querystring";
 import Image from "next/image";
-
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 const Home: NextPage = () => {
   const [tournament, setTournament] = React.useState<Tournament>();
+  const [title, setTitle] = React.useState<string>();
+  const [logo, setLogo] = React.useState<string>();
 
   const router = useRouter();
   const locale = locales[router.locale || "en-US"];
@@ -62,8 +55,10 @@ const Home: NextPage = () => {
   React.useEffect(() => {
     if (!tournament && query.csv) {
       fetch(`/api/csv/${query.csv}`, { method: "GET" }).then((resp) => {
-        resp.text().then((lzStringCSV) => {
-          const csv = lzString.decompressFromEncodedURIComponent(lzStringCSV);
+        resp.json().then((respJson) => {
+          setTitle(respJson.title);
+          setLogo(respJson.logoURL);
+          const csv = lzString.decompressFromEncodedURIComponent(respJson.data);
           if (csv != null) {
             const blob = new Blob([csv], { type: "text/csv" });
             const name = (query.filename as string) || "tournament.csv";
@@ -76,6 +71,9 @@ const Home: NextPage = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Container
         maxWidth="lg"
         sx={{
@@ -87,6 +85,56 @@ const Home: NextPage = () => {
         {tournament ? (
           <Box>
             <Grid container>
+              <Grid item>
+                <Box
+                  paddingTop={0}
+                  padding={1}
+                  sx={{ justifyContent: "center", alignContent: "center" }}
+                >
+                  {logo ? (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "5px",
+                      }}
+                      width="32px"
+                      height="32px"
+                    >
+                      <img
+                        src={logo}
+                        style={{objectFit:"cover", width:"32px", height:"32px", borderRadius:"5px"}}
+                      ></img>
+                    </Box>
+                  ) : (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "5px",
+                      }}
+                      width="32px"
+                      height="32px"
+                      bgcolor="#111213"
+                    >
+                      <EmojiEventsIcon
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          fill: "#fafafa",
+                        }}
+                      />
+                    </Box>
+                  )}
+                </Box>
+              </Grid>
+              <Grid item xs={11} md={11}>
+                <Box paddingTop={0} padding={1}>
+                  <Typography variant="h6">{title}</Typography>
+                </Box>
+              </Grid>
               <Grid item xs={12} md={4}>
                 <Box paddingTop={0} padding={1}>
                   <ArchetypesGrid
@@ -519,7 +567,7 @@ const CardsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
   const count = Object.entries(dataGroup).map((e) => {
     const [card, count] = e;
 
-    console.log(locale.locale)
+    console.log(locale.locale);
 
     return {
       key: card,
@@ -544,13 +592,13 @@ const CardsGrid: React.FC<IGridComp> = ({ records, fileName, locale }) => {
         <>
           <Grid item xs={10} sx={{ marginBottom: "-5px" }}>
             <Tooltip
-            componentsProps={{
-              tooltip:{
-                sx:{
-                  backgroundColor:"#ffffff00"
-                }
-              }
-            }}
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: "#ffffff00",
+                  },
+                },
+              }}
               title={
                 <Image
                   src={r.card.assets[0].gameAbsolutePath}

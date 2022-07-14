@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Redis from "ioredis";
+import { getRecentTournaments } from "lib/google_sheets";
 
 const redisURL: string = String(process.env.REDIS_URL);
 const redis = new Redis(redisURL);
@@ -10,7 +11,21 @@ const api = (req: NextApiRequest, res: NextApiResponse) => {
     redis
       .get(id)
       .then((result) => {
-        res.status(200).end(result);
+        getRecentTournaments().then(tournaments =>{
+          const tournament = tournaments?.find(tournament=>tournament.url == `/csv/${id}`)
+          res.status(200).json({
+            title: tournament?.title || "",
+            timestamp: tournament?.timestamp,
+            logoURL: tournament?.logoURL,
+            data: result
+          })
+        }).catch(e=>{
+          res.status(200).json({
+            title: "",
+            data: result
+          })
+        } )
+
       })
       .catch((e) => {
         res.status(500).end();
