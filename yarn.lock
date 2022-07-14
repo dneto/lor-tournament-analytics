@@ -6048,17 +6048,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:^1.4.13":
-  version: 1.4.13
-  resolution: "html-react-parser@npm:1.4.13"
+"html-react-parser@npm:1.4.14":
+  version: 1.4.14
+  resolution: "html-react-parser@npm:1.4.14"
   dependencies:
     domhandler: 4.3.1
     html-dom-parser: 1.2.0
     react-property: 2.0.0
-    style-to-js: 1.1.0
+    style-to-js: 1.1.1
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: 057b2df73f198b6884ba25c556f074c686cd1dbece9b01f57ec6eef900d9f50488324c13114ef87be53c3111795b825c7b6d60b682836171b0f72a67f0de9bed
+  checksum: 14745d2949da38c31d9812ed0f7d77bbbffcf5a6db441d3c703d57ca884ebe705fc2dbc312f47353c349f11f5e61f4735b6610ed905cb4d06da56d475ecc2892
   languageName: node
   linkType: hard
 
@@ -7166,7 +7166,7 @@ __metadata:
     cross-env: ^7.0.3
     googleapis: ^100.0.0
     got: 11.8.5
-    html-react-parser: ^1.4.13
+    html-react-parser: 1.4.14
     next: ^12.2.2
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -9751,12 +9751,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-to-js@npm:1.1.0":
-  version: 1.1.0
-  resolution: "style-to-js@npm:1.1.0"
+"style-to-js@npm:1.1.1":
+  version: 1.1.1
+  resolution: "style-to-js@npm:1.1.1"
   dependencies:
     style-to-object: 0.3.0
-  checksum: 8facf902b55271de8edf105d7b5d5017869518e34a2ee4b8e25093ea3ecf25ead9cc4b6a7fee7c17f7ac3ff95d36198d81aa4d53a46d4fee7d856903a097557d
+  checksum: 91b9742af9fc389118e5c3f39a95cbebe1a456b65530aba7595e789783d015aab4bbbf4bc3e0998c41ce7c46661f1244aeffd9e7c407ad8ac928e2ba2be37aa0
   languageName: node
   linkType: hard
 

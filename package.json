@@ -27,7 +27,7 @@
     "@types/react-syntax-highlighter": "15.5.3",
     "googleapis": "^100.0.0",
     "got": "11.8.5",
-    "html-react-parser": "^1.4.13",
+    "html-react-parser": "1.4.14",
     "next": "^12.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
