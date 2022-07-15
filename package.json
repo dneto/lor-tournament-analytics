@@ -8,12 +8,14 @@
   "scripts": {
     "g:build": "yarn workspaces foreach -p --topological-dev -v run build",
     "g:test": "yarn workspaces foreach -p --topological-dev -v run test",
-    "g:typecheck": "yarn workspaces foreach -ptv run typecheck"
+    "g:typecheck": "yarn workspaces foreach -ptv run typecheck",
+    "deps:check": "yarn dlx npm-check-updates@latest --configFileName ncurc.yml --deep --mergeConfig",
+    "deps:update": "yarn dlx npm-check-updates@latest --configFileName ncurc.yml -u --deep --mergeConfig"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "rimraf": "^3.0.2",
-    "typescript": "^4.7.2",
+    "typescript": "^4.7.4",
     "vercel": "27.1.3"
   },
   "engines": {
@@ -25,9 +27,9 @@
   "dependencies": {
     "@mui/styles": "5.9.0",
     "@types/react-syntax-highlighter": "15.5.3",
-    "googleapis": "^100.0.0",
-    "got": "11.8.5",
-    "html-react-parser": "1.4.14",
+    "googleapis": "^105.0.0",
+    "got": "12.1.0",
+    "html-react-parser": "3.0.1",
     "next": "^12.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
