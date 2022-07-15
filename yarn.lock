@@ -2787,10 +2787,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/next@npm:3.1.5":
-  version: 3.1.5
-  resolution: "@vercel/next@npm:3.1.5"
-  checksum: 97881cb517c3ec9e2f46326084bb19d6767eef39ee021a63d692278e5b40502d806c05b1ab1e90af19619f3daedb71d6ecd9657f6c40d3d3324844729c510705
+"@vercel/next@npm:3.1.6":
+  version: 3.1.6
+  resolution: "@vercel/next@npm:3.1.6"
+  checksum: 8d8b2f1c4dbd0943e8992653cb7392087c6b5d9575f9417ad138a1ac1a4eee24b4b40c72a7943bd91d3da0238fcdd5cea21a10ddec6a9b53101ac35c8d908963
   languageName: node
   linkType: hard
 
@@ -7135,7 +7135,7 @@ __metadata:
     rimraf: 3.0.2
     typescript: 4.7.4
     use-ackee: 3.0.1
-    vercel: 27.1.3
+    vercel: 27.1.4
   languageName: unknown
   linkType: soft
 
@@ -10341,14 +10341,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vercel@npm:27.1.3":
-  version: 27.1.3
-  resolution: "vercel@npm:27.1.3"
+"vercel@npm:27.1.4":
+  version: 27.1.4
+  resolution: "vercel@npm:27.1.4"
   dependencies:
     "@vercel/build-utils": 5.0.2
     "@vercel/go": 2.0.6
     "@vercel/hydrogen": 0.0.3
-    "@vercel/next": 3.1.5
+    "@vercel/next": 3.1.6
     "@vercel/node": 2.4.3
     "@vercel/python": 3.0.6
     "@vercel/redwood": 1.0.7
@@ -10359,7 +10359,7 @@ __metadata:
   bin:
     vc: dist/index.js
     vercel: dist/index.js
-  checksum: 00c4f45892c42c3e0fbcfe95d0d56208395f87aaf07cad23d6ba330089286d25c4e314c91d08d36469940f2def82ef2a6673666fdc86b00611563a14d43fecd8
+  checksum: e67c860d9c328c03d48422ee2a3dfed95c3ed9475ac0edbbb5a0acb0da3a54787956c33387cb68ce683f4b31347d8b5e985d8cd2b70005f6cf08b4f114ed6249
   languageName: node
   linkType: hard
 
