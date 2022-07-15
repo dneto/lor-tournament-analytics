@@ -20,11 +20,14 @@ const darkTheme = createTheme({
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   if (process.env.ACKEE_SERVER && process.env.ACKEE_DOMAIN_ID) {
-  useAckee(router.pathname, {
-    server: process.env.ACKEE_SERVER,
-    domainId: process.env.ACKEE_DOMAIN_ID,
-  },{
-  });
+    useAckee(
+      router.asPath,
+      {
+        server: process.env.ACKEE_SERVER,
+        domainId: process.env.ACKEE_DOMAIN_ID,
+      },
+      {}
+    );
   }
   return (
     <ThemeProvider theme={darkTheme}>
