@@ -3,23 +3,18 @@ import {
   Container,
   Typography,
   Box,
-  Divider,
   Grid,
   Table,
   TableRow,
   TableCell,
   Paper,
-  NoSsr,
   TableBody,
 } from "@mui/material";
 import FileUploader from "@/components/FileUploader";
-import { ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-import { theme } from "@/styles/theme";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import lzString from "lz-string";
-import Header from "../components/Header";
 import { getRecentTournaments, Tournament } from "lib/google_sheets";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -28,6 +23,7 @@ import htmlParse from "html-react-parser";
 import ShardPill from "@/components/ShardPill";
 import { DateTime } from "luxon";
 
+import { theme } from "@/styles/theme";
 const useStyles = makeStyles({
   tr: {
     "&:hover": {
@@ -73,120 +69,95 @@ const Home: NextPage<Props> = (props: Props) => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container
-        maxWidth="lg"
-        sx={{
-          p: 2,
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-      >
-        <Header />
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper sx={{ padding: "15px 0px" }}>
-              <Container>
-                <Typography variant="h5" color={"primary"}>
-                  {props.locale.latestTournaments}
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Paper sx={{ padding: "15px 0px" }}>
+          <Container>
+            <Typography variant="h5" color={"primary"}>
+              {props.locale.latestTournaments}
+            </Typography>
+            {props.tournaments.map((t: Tournament) => (
+              <Table key={t.title}>
+                <TableBody>
+                  <TableRow
+                    className={classes.tr}
+                    onClick={() => router.push(t.url)}
+                  >
+                    <TableCell className={classes.td}>
+                      <Typography component="span">{t.title} </Typography>
+                      {t.region ? (
+                        <ShardPill shard={t.region} color="black" />
+                      ) : (
+                        <></>
+                      )}
+                    </TableCell>
+                    <TableCell className={classes.td} align="right">
+                      <Typography>{localizedCalendar(t.timestamp)}</Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            ))}
+          </Container>
+        </Paper>
+      </Grid>
+      <Grid item xs={12}>
+        <Paper sx={{ padding: "15px 0px" }}>
+          <Container>
+            <Grid item>
+              <Typography variant="h5" color={"primary"}>
+                {props.locale.upload}
+              </Typography>
+              <Box padding="12px 5px">
+                <Typography padding="5px 0">
+                  {htmlParse(props.locale.csvMustHave)}
                 </Typography>
-                {props.tournaments.map((t: Tournament) => (
-                  <Table key={t.title}>
-                    <TableBody>
-                      <TableRow
-                        className={classes.tr}
-                        onClick={() => router.push(t.url)}
-                      >
-                        <TableCell className={classes.td}>
-                          <Typography component="span">{t.title} </Typography>
-                          {t.region ? (
-                            <ShardPill shard={t.region} color="black" />
-                          ) : (
-                            <></>
-                          )}
-                        </TableCell>
-                        <TableCell className={classes.td} align="right">
-                          <Typography>
-                            {localizedCalendar(t.timestamp)}
-                          </Typography>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                ))}
-              </Container>
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper sx={{ padding: "15px 0px" }}>
-              <Container>
-                <Grid item>
-                  <Typography variant="h5" color={"primary"}>
-                    {props.locale.upload}
-                  </Typography>
-                  <Box padding="12px 5px">
-                    <Typography padding="5px 0">
-                      {htmlParse(props.locale.csvMustHave)}
-                    </Typography>
-                    <Typography padding="5px 0">
-                      {props.locale.nonCodeWillBeDiscarded}
-                    </Typography>
-                    <Typography padding="5px 0">
-                      {htmlParse(props.locale.fileContentShouldBe)}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <SyntaxHighlighter style={materialLight} language="csv">
-                      {[
-                        [
-                          "player#tag",
-                          "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
-                          "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
-                          "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
-                        ].join(","),
-                        [
-                          "player#tag",
-                          "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
-                          "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
-                          "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
-                        ].join(","),
-                        [
-                          "player#tag",
-                          "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
-                          "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
-                          "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
-                        ].join(","),
-                        [
-                          "player#tag",
-                          "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
-                          "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
-                          "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
-                        ].join(","),
-                        "...",
-                      ].join("\n")}
-                    </SyntaxHighlighter>
-                  </Box>
-                </Grid>
-                <Grid item textAlign="right">
-                  <FileUploader
-                    onFileSelect={onFileSelect}
-                    locale={props.locale}
-                  />
-                </Grid>
-              </Container>
-            </Paper>
-          </Grid>
-        </Grid>
-        <Box>
-          <Typography sx={{ marginTop: "10px", fontSize: "0.7rem" }}>
-            {`LoR Analytics isn't endorsed by Riot Games and doesn't reflect the
-            views or opinions of Riot Games or anyone officially involved in
-            producing or managing Riot Games properties. Riot Games, and all
-            associated properties are trademarks or registered trademarks of
-            Riot Games, Inc.`}
-          </Typography>
-        </Box>
-      </Container>
-    </ThemeProvider>
+                <Typography padding="5px 0">
+                  {props.locale.nonCodeWillBeDiscarded}
+                </Typography>
+                <Typography padding="5px 0">
+                  {htmlParse(props.locale.fileContentShouldBe)}
+                </Typography>
+              </Box>
+              <Box>
+                <SyntaxHighlighter style={materialLight} language="csv">
+                  {[
+                    [
+                      "player#tag",
+                      "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
+                      "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
+                      "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
+                    ].join(","),
+                    [
+                      "player#tag",
+                      "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
+                      "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
+                      "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
+                    ].join(","),
+                    [
+                      "player#tag",
+                      "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
+                      "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
+                      "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
+                    ].join(","),
+                    [
+                      "player#tag",
+                      "CIDQCAYABYAQIAACAECQMAICAIDBMPQCAIAAMCQCAUAAUDADAEAAMCI5AEAQEAAHAIAQCABTAECQAF",
+                      "CMBQCBIEBQCAIBABAICAOBQEA4ARYJ2NJ5JQCAYEA45W3CQBAEAQIB2S",
+                      "CECQCAIDCQAQGBASAECAIEACAUBQSDIEAECCMJZNGQCACAIDAIAQCBABAEBAICABAUBQMAYBAMBQ6AIDAQBQGAIDBMXDG",
+                    ].join(","),
+                    "...",
+                  ].join("\n")}
+                </SyntaxHighlighter>
+              </Box>
+            </Grid>
+            <Grid item textAlign="right">
+              <FileUploader onFileSelect={onFileSelect} locale={props.locale} />
+            </Grid>
+          </Container>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 

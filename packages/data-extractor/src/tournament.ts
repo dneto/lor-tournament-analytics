@@ -5,6 +5,8 @@ export type Lineup = [Deck, Deck, Deck];
 
 export class Tournament {
   readonly lineups: Lineup[];
+  title: string = "";
+  logoURL: string = "";
 
   constructor(lineups: Lineup[]) {
     this.lineups = lineups;

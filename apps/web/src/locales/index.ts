@@ -1,7 +1,7 @@
 import ptBR from "./pt-BR";
 import enUS from "./en-US";
 export interface ILocale {
-  locale:string;
+  locale: string;
   welcome: string;
   latestTournaments: string;
   upload: string;
@@ -16,6 +16,7 @@ export interface ILocale {
   lineups: string;
   uploadCSV: string;
   cards: string;
+  viewFullScreen: string;
 }
 
 const locales: Record<string, ILocale> = {

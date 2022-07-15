@@ -2,13 +2,13 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import * as React from "react";
 
-type QtSliderProps = {
+type QuantityBarProps = {
   value: number;
   max: number;
   textValue: number;
 };
 
-export default class QtSlider extends React.Component<QtSliderProps> {
+export default class QuantityBar extends React.Component<QuantityBarProps> {
   render() {
     return (
       <Box component="span">

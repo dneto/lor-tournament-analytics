@@ -1,5 +1,5 @@
 export default {
-  locale:"pt-br",
+  locale: "pt-br",
   welcome: "Bem-vindo ao",
   latestTournaments: "Últimos torneios",
   upload: "Envie um novo",
@@ -16,4 +16,5 @@ export default {
   lineups: "Lineups",
   uploadCSV: "Enviar CSV",
   cards: "Cartas",
+  viewFullScreen: "Ver tudo",
 };
