@@ -1501,20 +1501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.2":
-  version: 1.0.3
-  resolution: "@emotion/serialize@npm:1.0.3"
-  dependencies:
-    "@emotion/hash": ^0.8.0
-    "@emotion/memoize": ^0.7.4
-    "@emotion/unitless": ^0.7.5
-    "@emotion/utils": ^1.0.0
-    csstype: ^3.0.2
-  checksum: 99a9053bd98c99d63af542ebee029281eeaf653e3a12e97ee79bad7330c68408104c30be6fc07a528e38bb69aba680655181744b76ec6c6f459c121cb805fac2
-  languageName: node
-  linkType: hard
-
-"@emotion/serialize@npm:^1.0.4":
+"@emotion/serialize@npm:^1.0.2, @emotion/serialize@npm:^1.0.4":
   version: 1.0.4
   resolution: "@emotion/serialize@npm:1.0.4"
   dependencies:
@@ -1748,20 +1735,20 @@ __metadata:
   resolution: "@lor-analytics/data-extractor@workspace:packages/data-extractor"
   dependencies:
     "@lor-analytics/deck-utils": "workspace:^"
-    "@types/chai": ^4.3.1
+    "@types/chai": 4.3.1
     "@types/lodash": ^4.14.182
-    "@types/mocha": ^9.1.1
-    "@types/node": ^18.0.4
-    chai: ^4.3.6
-    cross-env: ^7.0.3
+    "@types/mocha": 9.1.1
+    "@types/node": 18.0.4
+    chai: 4.3.6
+    cross-env: 7.0.3
     csv-parse: ^5.3.0
-    eslint: ^8.19.0
+    eslint: 8.19.0
     lodash: ^4.17.21
-    microbundle: ^0.15.0
-    mocha: ^10.0.0
-    rimraf: ^3.0.2
-    ts-node: ^10.9.1
-    typescript: ^4.7.4
+    microbundle: 0.15.0
+    mocha: 10.0.0
+    rimraf: 3.0.2
+    ts-node: 10.9.1
+    typescript: 4.7.4
   languageName: unknown
   linkType: soft
 
@@ -1769,12 +1756,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lor-analytics/deck-utils@workspace:packages/deck-utils"
   dependencies:
-    "@types/chai": ^4.3.1
-    "@types/mocha": ^9.1.1
-    chai: ^4.3.6
-    mocha: ^10.0.0
+    "@types/chai": 4.3.1
+    "@types/mocha": 9.1.1
+    chai: 4.3.6
+    mocha: 10.0.0
     runeterra: "https://github.com/dneto/runeterra#ignoreFormatOnDecode"
-    typescript: ^4.7.4
+    typescript: 4.7.4
   languageName: unknown
   linkType: soft
 
@@ -1797,7 +1784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/core@npm:^4.12.4":
+"@material-ui/core@npm:4.12.4":
   version: 4.12.4
   resolution: "@material-ui/core@npm:4.12.4"
   dependencies:
@@ -2095,7 +2082,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-data-grid@npm:^5.13.0":
+"@mui/x-data-grid@npm:5.13.0":
   version: 5.13.0
   resolution: "@mui/x-data-grid@npm:5.13.0"
   dependencies:
@@ -2492,7 +2479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai@npm:^4.3.1":
+"@types/chai@npm:4.3.1":
   version: 4.3.1
   resolution: "@types/chai@npm:4.3.1"
   checksum: 2ee246b76c469cd620a7a1876a73bc597074361b67d547b4bd96a0c1adb43597ede2d8589ab626192e14349d83cbb646cc11e2c179eeeb43ff11596de94d82c4
@@ -2566,35 +2553,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^2.3.2":
+"@types/luxon@npm:2.3.2":
   version: 2.3.2
   resolution: "@types/luxon@npm:2.3.2"
   checksum: b9fe79118681f4bb9f2e37696a7df992a82683ba4448e7ad1af8cc241443ffc64ef08fdeaad749de9e6259b42b0d4b6540d7e880bca39bb504e0f3863d503c98
   languageName: node
   linkType: hard
 
-"@types/lz-string@npm:^1.3.34":
+"@types/lz-string@npm:1.3.34":
   version: 1.3.34
   resolution: "@types/lz-string@npm:1.3.34"
   checksum: e5c5ec0b9b9bfb0a64ca883152ce753244f53a6f12d8d3ba1a363262bea07fed1cd04c399a33a5d600a665d15a39a58bf5fd1ad9c52a98bccf7511f7a42e82f7
   languageName: node
   linkType: hard
 
-"@types/mocha@npm:^9.1.1":
+"@types/mocha@npm:9.1.1":
   version: 9.1.1
   resolution: "@types/mocha@npm:9.1.1"
   checksum: 516077c0acd9806dc78317f88aaac0df5aaf0bdc2f63dfdadeabdf0b0137953b6ca65472e6ff7c30bc93ce4e0ae76eae70e8d46764b9a8eae4877a928b6ef49a
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 17.0.35
-  resolution: "@types/node@npm:17.0.35"
-  checksum: 7a24946ae7fd20267ed92466384f594e448bfb151081158d565cc635d406ecb29ea8fb85fcd2a1f71efccf26fb5bd3c6f509bde56077eb8b832b847a6664bc62
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:18.0.4, @types/node@npm:^18.0.4":
+"@types/node@npm:*, @types/node@npm:18.0.4":
   version: 18.0.4
   resolution: "@types/node@npm:18.0.4"
   checksum: 981284fd57941f233f0e77038087c122f56e3c2b4fc4e090dfc7f0a93abfc526d5ccdd59eb3ef551d713245cf3943e37c7b957f12ba699209341a447c39fab59
@@ -2649,16 +2629,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-transition-group@npm:^4.2.0":
-  version: 4.4.4
-  resolution: "@types/react-transition-group@npm:4.4.4"
-  dependencies:
-    "@types/react": "*"
-  checksum: 86e9ff9731798e12bc2afe0304678918769633b531dcf6397f86af81718fb7930ef8648e894eeb3718fc6eab6eb885cfb9b82a44d1d74e10951ee11ebc4643ae
-  languageName: node
-  linkType: hard
-
-"@types/react-transition-group@npm:^4.4.5":
+"@types/react-transition-group@npm:^4.2.0, @types/react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "@types/react-transition-group@npm:4.4.5"
   dependencies:
@@ -2667,18 +2638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 18.0.9
-  resolution: "@types/react@npm:18.0.9"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 162364dad716d9017ee34aabf2ea37499709ebbdef70392ae1b39225985971e1a46f121efb9c5c7da92144ee1d96d4525df806a7c1c03a5db7fd31dd034ddc7a
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.0.15":
+"@types/react@npm:*, @types/react@npm:18.0.15":
   version: 18.0.15
   resolution: "@types/react@npm:18.0.15"
   dependencies:
@@ -2721,7 +2681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/use-ackee@npm:^2.0.0":
+"@types/use-ackee@npm:2.0.0":
   version: 2.0.0
   resolution: "@types/use-ackee@npm:2.0.0"
   dependencies:
@@ -2730,7 +2690,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^8.3.4":
+"@types/uuid@npm:8.3.4":
   version: 8.3.4
   resolution: "@types/uuid@npm:8.3.4"
   checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
@@ -2960,7 +2920,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ackee-tracker@npm:^5.0.1, ackee-tracker@npm:^5.1.0":
+"ackee-tracker@npm:5.1.0, ackee-tracker@npm:^5.0.1":
   version: 5.1.0
   resolution: "ackee-tracker@npm:5.1.0"
   dependencies:
@@ -3647,7 +3607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.3.6":
+"chai@npm:4.3.6":
   version: 4.3.6
   resolution: "chai@npm:4.3.6"
   dependencies:
@@ -3791,14 +3751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.0.4":
-  version: 1.1.1
-  resolution: "clsx@npm:1.1.1"
-  checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^1.2.1":
+"clsx@npm:^1.0.4, clsx@npm:^1.2.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
@@ -4015,7 +3968,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^7.0.3":
+"cross-env@npm:7.0.3":
   version: 7.0.3
   resolution: "cross-env@npm:7.0.3"
   dependencies:
@@ -5098,7 +5051,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.19.0, eslint@npm:^8.19.0":
+"eslint@npm:8.19.0":
   version: 8.19.0
   resolution: "eslint@npm:8.19.0"
   dependencies:
@@ -5837,7 +5790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"googleapis@npm:^105.0.0":
+"googleapis@npm:105.0.0":
   version: 105.0.0
   resolution: "googleapis@npm:105.0.0"
   dependencies:
@@ -6290,7 +6243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:^5.2.0":
+"ioredis@npm:5.2.0":
   version: 5.2.0
   resolution: "ioredis@npm:5.2.0"
   dependencies:
@@ -7091,7 +7044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
+"lodash@npm:4.17.21, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -7132,36 +7085,36 @@ __metadata:
     "@fortawesome/react-fontawesome": 0.2.0
     "@lor-analytics/data-extractor": "workspace:^"
     "@lor-analytics/deck-utils": "workspace:^"
-    "@material-ui/core": ^4.12.4
+    "@material-ui/core": 4.12.4
     "@mui/icons-material": 5.8.4
     "@mui/material": 5.9.0
     "@mui/system": 5.9.0
-    "@mui/x-data-grid": ^5.13.0
-    "@types/luxon": ^2.3.2
-    "@types/lz-string": ^1.3.34
+    "@mui/x-data-grid": 5.13.0
+    "@types/luxon": 2.3.2
+    "@types/lz-string": 1.3.34
     "@types/node": 18.0.4
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
-    "@types/use-ackee": ^2.0.0
-    "@types/uuid": ^8.3.4
-    ackee-tracker: ^5.1.0
+    "@types/use-ackee": 2.0.0
+    "@types/uuid": 8.3.4
+    ackee-tracker: 5.1.0
     eslint: 8.19.0
     eslint-config-next: 12.2.2
-    ioredis: ^5.2.0
-    lodash: ^4.17.21
-    luxon: ^3.0.1
-    lz-string: ^1.4.4
-    next: ^12.2.2
-    next-transpile-modules: ^9.0.0
-    nextjs-progressbar: ^0.0.14
-    react: ^18.2.0
-    react-component-export-image: ^1.0.6
-    react-dom: ^18.2.0
-    react-fontawesome: ^1.7.1
-    swr: ^1.3.0
-    typescript: ^4.7.4
-    use-ackee: ^3.0.1
-    uuid: ^8.3.2
+    ioredis: 5.2.0
+    lodash: 4.17.21
+    luxon: 3.0.1
+    lz-string: 1.4.4
+    next: 12.2.2
+    next-transpile-modules: 9.0.0
+    nextjs-progressbar: 0.0.14
+    react: 18.2.0
+    react-component-export-image: 1.0.6
+    react-dom: 18.2.0
+    react-fontawesome: 1.7.1
+    swr: 1.3.0
+    typescript: 4.7.4
+    use-ackee: 3.0.1
+    uuid: 8.3.2
   languageName: unknown
   linkType: soft
 
@@ -7171,17 +7124,17 @@ __metadata:
   dependencies:
     "@mui/styles": 5.9.0
     "@types/react-syntax-highlighter": 15.5.3
-    cross-env: ^7.0.3
-    googleapis: ^105.0.0
+    cross-env: 7.0.3
+    googleapis: 105.0.0
     got: 12.1.0
     html-react-parser: 3.0.1
-    next: ^12.2.2
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-syntax-highlighter: ^15.5.0
-    rimraf: ^3.0.2
-    typescript: ^4.7.4
-    use-ackee: ^3.0.1
+    next: 12.2.2
+    react: 18.2.0
+    react-dom: 18.2.0
+    react-syntax-highlighter: 15.5.0
+    rimraf: 3.0.2
+    typescript: 4.7.4
+    use-ackee: 3.0.1
     vercel: 27.1.3
   languageName: unknown
   linkType: soft
@@ -7242,14 +7195,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^3.0.1":
+"luxon@npm:3.0.1":
   version: 3.0.1
   resolution: "luxon@npm:3.0.1"
   checksum: aa966eb919bf95b1bd819cda784d1f6f66e3fb65bd9ec7bf68b6a978eeb4e3e14f7e2275021b473f93b15b6b7ba2e5a30471e53add3929a7e695fcfd6dd40ec8
   languageName: node
   linkType: hard
 
-"lz-string@npm:^1.4.4":
+"lz-string@npm:1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
   bin:
@@ -7340,7 +7293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"microbundle@npm:^0.15.0":
+"microbundle@npm:0.15.0":
   version: 0.15.0
   resolution: "microbundle@npm:0.15.0"
   dependencies:
@@ -7529,7 +7482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.0.0":
+"mocha@npm:10.0.0":
   version: 10.0.0
   resolution: "mocha@npm:10.0.0"
   dependencies:
@@ -7622,7 +7575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-transpile-modules@npm:^9.0.0":
+"next-transpile-modules@npm:9.0.0":
   version: 9.0.0
   resolution: "next-transpile-modules@npm:9.0.0"
   dependencies:
@@ -7632,7 +7585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^12.2.2":
+"next@npm:12.2.2":
   version: 12.2.2
   resolution: "next@npm:12.2.2"
   dependencies:
@@ -7701,7 +7654,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextjs-progressbar@npm:^0.0.14":
+"nextjs-progressbar@npm:0.0.14":
   version: 0.0.14
   resolution: "nextjs-progressbar@npm:0.0.14"
   dependencies:
@@ -8863,7 +8816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-component-export-image@npm:^1.0.6":
+"react-component-export-image@npm:1.0.6":
   version: 1.0.6
   resolution: "react-component-export-image@npm:1.0.6"
   dependencies:
@@ -8873,7 +8826,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -8885,7 +8838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fontawesome@npm:^1.7.1":
+"react-fontawesome@npm:1.7.1":
   version: 1.7.1
   resolution: "react-fontawesome@npm:1.7.1"
   dependencies:
@@ -8924,7 +8877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-syntax-highlighter@npm:^15.5.0":
+"react-syntax-highlighter@npm:15.5.0":
   version: 15.5.0
   resolution: "react-syntax-highlighter@npm:15.5.0"
   dependencies:
@@ -8954,7 +8907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -9255,7 +9208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.2":
+"rimraf@npm:3.0.2, rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -9889,7 +9842,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:^1.3.0":
+"swr@npm:1.3.0":
   version: 1.3.0
   resolution: "swr@npm:1.3.0"
   peerDependencies:
@@ -10024,27 +9977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:8.9.1":
-  version: 8.9.1
-  resolution: "ts-node@npm:8.9.1"
-  dependencies:
-    arg: ^4.1.0
-    diff: ^4.0.1
-    make-error: ^1.1.1
-    source-map-support: ^0.5.17
-    yn: 3.1.1
-  peerDependencies:
-    typescript: ">=2.7"
-  bin:
-    ts-node: dist/bin.js
-    ts-node-script: dist/bin-script.js
-    ts-node-transpile-only: dist/bin-transpile.js
-    ts-script: dist/bin-script-deprecated.js
-  checksum: 59997e32cfb84323317f9fd33ff62d025b467ff36c296c3ad1ee54f08fd355c58fab37e096e2a63fd01fced929384b16b9d74bf324713a21844e527ddd5f6c17
-  languageName: node
-  linkType: hard
-
-"ts-node@npm:^10.9.1":
+"ts-node@npm:10.9.1":
   version: 10.9.1
   resolution: "ts-node@npm:10.9.1"
   dependencies:
@@ -10079,6 +10012,26 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
+  languageName: node
+  linkType: hard
+
+"ts-node@npm:8.9.1":
+  version: 8.9.1
+  resolution: "ts-node@npm:8.9.1"
+  dependencies:
+    arg: ^4.1.0
+    diff: ^4.0.1
+    make-error: ^1.1.1
+    source-map-support: ^0.5.17
+    yn: 3.1.1
+  peerDependencies:
+    typescript: ">=2.7"
+  bin:
+    ts-node: dist/bin.js
+    ts-node-script: dist/bin-script.js
+    ts-node-transpile-only: dist/bin-transpile.js
+    ts-script: dist/bin-script-deprecated.js
+  checksum: 59997e32cfb84323317f9fd33ff62d025b467ff36c296c3ad1ee54f08fd355c58fab37e096e2a63fd01fced929384b16b9d74bf324713a21844e527ddd5f6c17
   languageName: node
   linkType: hard
 
@@ -10175,17 +10128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.1.3":
-  version: 4.7.2
-  resolution: "typescript@npm:4.7.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 5163585e6b56410f77d5483b698d9489bbee8902c99029eb70cf6d21525a186530ce19a00951af84eefd4a131cc51d0959f5118e25e70ab61f45ac4057dbd1ef
-  languageName: node
-  linkType: hard
-
-"typescript@npm:^4.7.4":
+"typescript@npm:4.7.4, typescript@npm:^4.1.3":
   version: 4.7.4
   resolution: "typescript@npm:4.7.4"
   bin:
@@ -10205,17 +10148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.1.3#~builtin<compat/typescript>":
-  version: 4.7.2
-  resolution: "typescript@patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 7e2b9a9f4a70fb7616f1b0d986977f8e34a74f046202fa7f24fdee79589598277810fa216b3776c20c0683a9235872c73be34fdb93f67f98c1efaca40999422f
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.1.3#~builtin<compat/typescript>":
   version: 4.7.4
   resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
   bin:
@@ -10349,7 +10282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-ackee@npm:^3.0.1":
+"use-ackee@npm:3.0.1":
   version: 3.0.1
   resolution: "use-ackee@npm:3.0.1"
   dependencies:
@@ -10385,7 +10318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.0.0, uuid@npm:^8.3.2":
+"uuid@npm:8.3.2, uuid@npm:^8.0.0":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
