@@ -164,7 +164,7 @@ const Home: NextPage<Props> = (props: Props) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const locale: string = context.locale!;
+  const locale: string = context.locale || context.defaultLocale || "en-US";
   let tournaments: Tournament[] | undefined = await getRecentTournaments();
   tournaments = tournaments?.sort((a, b) => b.timestamp - a.timestamp);
   return {
