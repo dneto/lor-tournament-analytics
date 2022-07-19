@@ -9,13 +9,14 @@ import {
   TableCell,
   Paper,
   TableBody,
+  Alert,
 } from "@mui/material";
 import FileUploader from "@/components/FileUploader";
 import { makeStyles } from "@mui/styles";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import lzString from "lz-string";
-import { getRecentTournaments, Tournament } from "lib/google_sheets";
+import { getTournaments, Tournament } from "lib/google_sheets";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import locales, { ILocale } from "@/locales";
@@ -24,6 +25,7 @@ import ShardPill from "@/components/ShardPill";
 import { DateTime } from "luxon";
 
 import { theme } from "@/styles/theme";
+import Link from "next/link";
 const useStyles = makeStyles({
   tr: {
     "&:hover": {
@@ -70,6 +72,11 @@ const Home: NextPage<Props> = (props: Props) => {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Alert severity="info">
+          <Link href={"/worldwalker"}>{props.locale.checkoutWorldwalker}</Link>
+        </Alert>
+      </Grid>
       <Grid item xs={12}>
         <Paper sx={{ padding: "15px 0px" }}>
           <Container>
@@ -165,7 +172,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale: string = context.locale || context.defaultLocale || "en-US";
-  let tournaments: Tournament[] | undefined = await getRecentTournaments();
+  let tournaments: Tournament[] | undefined = await getTournaments("Latest");
   tournaments = tournaments?.sort((a, b) => b.timestamp - a.timestamp);
   return {
     props: {

@@ -8,9 +8,9 @@ export type Tournament = {
   logoURL: string | null;
 };
 
-export async function getRecentTournaments(): Promise<
-  Tournament[] | undefined
-> {
+export async function getTournaments(
+  rangeName?: string
+): Promise<Tournament[] | undefined> {
   try {
     const jwt = new google.auth.JWT({
       email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -21,7 +21,7 @@ export async function getRecentTournaments(): Promise<
     const gsheets = google.sheets({ version: "v4", auth: jwt });
     const response = await gsheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: "Recent Tournaments",
+      range: rangeName || "Recent Tournaments",
     });
 
     const rows = response.data.values;

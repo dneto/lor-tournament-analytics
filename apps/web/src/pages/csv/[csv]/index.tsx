@@ -23,13 +23,13 @@ const Home: NextPage = () => {
   const router = useRouter();
   const locale = locales[router.locale || "en-US"];
   const query = router.query;
-  let basename = "";
 
   React.useEffect(() => {
-    if (!tournament && query.csv) {
+    if (!tournament && router.isReady && query.csv) {
+      const range = (query.range as string) || "Latest";
       const tournamentID: string = query.csv as string;
       const filename = query.filename as string;
-      loadTournamentFromID(tournamentID, filename).then(
+      loadTournamentFromID(tournamentID, range, filename).then(
         (tournament: Tournament) => {
           setTournament(tournament);
         }

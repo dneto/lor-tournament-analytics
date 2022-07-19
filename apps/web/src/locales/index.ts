@@ -4,6 +4,7 @@ export interface ILocale {
   locale: string;
   welcome: string;
   latestTournaments: string;
+  tournaments: string;
   upload: string;
   csvMustHave: string;
   nonCodeWillBeDiscarded: string;
@@ -17,6 +18,7 @@ export interface ILocale {
   uploadCSV: string;
   cards: string;
   viewFullScreen: string;
+  checkoutWorldwalker: string;
 }
 
 const locales: Record<string, ILocale> = {

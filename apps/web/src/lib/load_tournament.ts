@@ -3,9 +3,13 @@ import LZString from "lz-string";
 
 export default async function loadTournamentFromID(
   tournamentID: string,
+  range: string,
   filename: string | null
 ): Promise<Tournament> {
-  const resp = await fetch(`/api/csv/${tournamentID}`, { method: "GET" });
+  range = range || "Latest";
+  const resp = await fetch(`/api/csv/${tournamentID}?range=${range}`, {
+    method: "GET",
+  });
   const json = await resp.json();
   const csv = LZString.decompressFromEncodedURIComponent(json.data);
   if (csv == null) {

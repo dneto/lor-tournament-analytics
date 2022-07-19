@@ -2,6 +2,7 @@ export default {
   locale: "pt-br",
   welcome: "Bem-vindo ao",
   latestTournaments: "Últimos torneios",
+  tournaments: "Torneios",
   upload: "Envie um novo",
   csvMustHave: "O arquivo CSV precisa ter <b>códigos de deck</b>",
   nonCodeWillBeDiscarded:
@@ -17,4 +18,5 @@ export default {
   uploadCSV: "Enviar CSV",
   cards: "Cartas",
   viewFullScreen: "Ver tudo",
+  checkoutWorldwalker: "Confira todos os torneios da temporada Andamundo",
 };

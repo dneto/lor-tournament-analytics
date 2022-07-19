@@ -2,6 +2,7 @@ export default {
   locale: "en-us",
   welcome: "Welcome to",
   latestTournaments: "Latest Tournaments",
+  tournaments: "Tournaments",
   upload: "Upload a new one",
   csvMustHave: "The CSV file must have <b>deck codes</b>",
   nonCodeWillBeDiscarded:
@@ -16,4 +17,5 @@ export default {
   uploadCSV: "Upload CSV",
   cards: "Cards",
   viewFullScreen: "See all",
+  checkoutWorldwalker: "Check out all tournaments from Worldwalker season",
 };
