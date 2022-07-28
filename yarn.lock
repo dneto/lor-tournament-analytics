@@ -5808,9 +5808,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:12.2.0":
-  version: 12.2.0
-  resolution: "got@npm:12.2.0"
+"got@npm:12.3.0":
+  version: 12.3.0
+  resolution: "got@npm:12.3.0"
   dependencies:
     "@sindresorhus/is": ^5.2.0
     "@szmarczak/http-timer": ^5.0.1
@@ -5825,7 +5825,7 @@ __metadata:
     lowercase-keys: ^3.0.0
     p-cancelable: ^3.0.0
     responselike: ^2.0.0
-  checksum: 5d34509f57db4355baea5798032a22ab0ec002de55043e160d27d4569cd593b37527cdd47eca16da5e9276627888910449a670902478e4be996bd750e63c3826
+  checksum: 3f2ec7a17d7fdd259a668888eb5ee6e6b7794ec466f1a7d3170697306e4838350515495c60879a3b4d6b228d2a42749fd43941bd876748671b9c04e37a7e34b5
   languageName: node
   linkType: hard
 
@@ -7134,7 +7134,7 @@ __metadata:
     "@types/react-syntax-highlighter": 15.5.4
     cross-env: 7.0.3
     googleapis: 105.0.0
-    got: 12.2.0
+    got: 12.3.0
     html-react-parser: 3.0.1
     next: 12.2.3
     react: 18.2.0
