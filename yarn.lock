@@ -2082,9 +2082,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-data-grid@npm:5.14.0":
-  version: 5.14.0
-  resolution: "@mui/x-data-grid@npm:5.14.0"
+"@mui/x-data-grid@npm:5.15.0":
+  version: 5.15.0
+  resolution: "@mui/x-data-grid@npm:5.15.0"
   dependencies:
     "@babel/runtime": ^7.18.6
     "@mui/utils": ^5.4.1
@@ -2096,7 +2096,7 @@ __metadata:
     "@mui/system": ^5.4.1
     react: ^17.0.2 || ^18.0.0
     react-dom: ^17.0.2 || ^18.0.0
-  checksum: 13c1ba3225bb675efbf54bf9b5c581899b0cd1073a52e13c34f9b5a7b9825db3b120062e09e5596bdace9a89764ab1d7a2577bfff2374d76cea95d7e93343366
+  checksum: 52faf9f1f49471f3972d7ae5d2179e2960b2a1c0ebb9a2e735eaf3e201bd7cb7fa78aa864110aacfae69f7604df2153a348b64f882c78acb3b3852f58c9a7986
   languageName: node
   linkType: hard
 
@@ -7097,7 +7097,7 @@ __metadata:
     "@mui/icons-material": 5.8.4
     "@mui/material": 5.9.2
     "@mui/system": 5.9.2
-    "@mui/x-data-grid": 5.14.0
+    "@mui/x-data-grid": 5.15.0
     "@types/luxon": 3.0.0
     "@types/lz-string": 1.3.34
     "@types/node": 18.0.4
