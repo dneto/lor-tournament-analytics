@@ -19,6 +19,7 @@ export interface ILocale {
   cards: string;
   viewFullScreen: string;
   checkoutWorldwalker: string;
+  dateFormat: string;
 }
 
 const locales: Record<string, ILocale> = {

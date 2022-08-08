@@ -18,4 +18,5 @@ export default {
   cards: "Cards",
   viewFullScreen: "See all",
   checkoutWorldwalker: "Check out all tournaments from Worldwalker season",
+  dateFormat: "MMM-dd",
 };

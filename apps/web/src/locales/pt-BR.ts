@@ -19,4 +19,5 @@ export default {
   cards: "Cartas",
   viewFullScreen: "Ver tudo",
   checkoutWorldwalker: "Confira todos os torneios da temporada Andamundo",
+  dateFormat: "dd MMM",
 };

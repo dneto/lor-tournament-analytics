@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Toolbar>
-        <Link href={"/"}>
+        <Link href="/">
           <Typography variant="h4" sx={{ flexGrow: 1, cursor: "pointer" }}>
             LoR Analytics
           </Typography>

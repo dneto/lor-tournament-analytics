@@ -54,7 +54,7 @@ const Home: NextPage<Props> = (props: Props) => {
   const localizedCalendar = (n: number): string => {
     return DateTime.fromMillis(n)
       .setLocale(props.localeLang)
-      .toRelativeCalendar()!;
+      .toFormat(props.locale.dateFormat)!;
   };
   function onFileSelect(fileFrom: File) {
     reader = new FileReader();
@@ -73,9 +73,13 @@ const Home: NextPage<Props> = (props: Props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Alert severity="info">
-          <Link href={"/worldwalker"}>{props.locale.checkoutWorldwalker}</Link>
-        </Alert>
+        {props.locale.checkoutWorldwalker && (
+          <Alert severity="info">
+            <Link href={"/worldwalker"}>
+              {props.locale.checkoutWorldwalker}
+            </Link>
+          </Alert>
+        )}
       </Grid>
       <Grid item xs={12}>
         <Paper sx={{ padding: "15px 0px" }}>
