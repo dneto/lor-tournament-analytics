@@ -6008,27 +6008,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-dom-parser@npm:3.0.1":
-  version: 3.0.1
-  resolution: "html-dom-parser@npm:3.0.1"
+"html-dom-parser@npm:3.1.2":
+  version: 3.1.2
+  resolution: "html-dom-parser@npm:3.1.2"
   dependencies:
     domhandler: 5.0.3
     htmlparser2: 8.0.1
-  checksum: 20711628ccf34d4d55c56ccc2b0fa5384680b340d527db1d897f9242cbea3b70aac4cd0cb831ebcc980149a53d8b39fc3ec0c7d2090ce1dc9da73deeb2897d2f
+  checksum: 939a5cae0e604741bc787d6caf7f06e5fc7ca3629772b4c4080fdba815ba31c6ff49d067667d474aee3674620eb657749b54643e2f2429289b0205abfdb49edd
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:3.0.1":
-  version: 3.0.1
-  resolution: "html-react-parser@npm:3.0.1"
+"html-react-parser@npm:3.0.4":
+  version: 3.0.4
+  resolution: "html-react-parser@npm:3.0.4"
   dependencies:
     domhandler: 5.0.3
-    html-dom-parser: 3.0.1
+    html-dom-parser: 3.1.2
     react-property: 2.0.0
     style-to-js: 1.1.1
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: b3a3e22f855b465b11d33ac6d7b0395c496bb30e92b60011a8f5801ed373cccd81eee58992929024a38f3087532db65c074c492a351ca87a2b27f0d88638f238
+  checksum: cfd3e8da305b95c6b67196d1806a793b439c0c36f91994b90fb83c2ba8e57b7f8489899a0ca502443ee41c7206ab64aedb1c7e218afd3d9b5bde5f8bd3ed6ff4
   languageName: node
   linkType: hard
 
@@ -7136,7 +7136,7 @@ __metadata:
     cross-env: 7.0.3
     googleapis: 107.0.0
     got: 12.3.1
-    html-react-parser: 3.0.1
+    html-react-parser: 3.0.4
     next: 12.2.5
     react: 18.2.0
     react-dom: 18.2.0
