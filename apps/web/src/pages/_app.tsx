@@ -1,7 +1,14 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ThemeProvider, Typography, Box, Container } from "@mui/material";
-import { CssBaseline } from "@material-ui/core";
+import {
+  ThemeProvider,
+  Typography,
+  Box,
+  Container,
+  PaletteMode,
+  useMediaQuery,
+} from "@mui/material";
+import { createTheme, CssBaseline } from "@material-ui/core";
 import NextNProgress from "nextjs-progressbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -10,9 +17,15 @@ import useAckee from "use-ackee";
 import Header from "@/components/Header";
 config.autoAddCss = false;
 
-import { theme } from "@/styles/theme";
+import { darkTheme, lightTheme } from "@/styles/theme";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = React.useMemo(
+    () => createTheme(prefersDarkMode ? darkTheme : lightTheme),
+    [prefersDarkMode]
+  );
   const router = useRouter();
   if (process.env.ACKEE_SERVER && process.env.ACKEE_DOMAIN_ID) {
     useAckee(
@@ -32,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         sx={{
           p: 2,
           "& .MuiTextField-root": { m: 1, width: "25ch" },
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <Header />

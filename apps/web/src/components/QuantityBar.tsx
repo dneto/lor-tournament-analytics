@@ -1,4 +1,6 @@
-import { Typography } from "@mui/material";
+import { withTheme } from "@emotion/react";
+import { Theme } from "@material-ui/core";
+import { Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import * as React from "react";
 
@@ -6,9 +8,10 @@ type QuantityBarProps = {
   value: number;
   max: number;
   textValue: number;
+  theme: Theme;
 };
 
-export default class QuantityBar extends React.Component<QuantityBarProps> {
+class quantityBar extends React.Component<QuantityBarProps> {
   render() {
     return (
       <Box component="span">
@@ -18,7 +21,7 @@ export default class QuantityBar extends React.Component<QuantityBarProps> {
             display: "inline-block",
             position: "relative",
             width: `${(this.props.value / this.props.max) * 100}%`,
-            color: "rgba(0,0,0,0.87)",
+            color: this.props.theme.palette.text.primary,
           }}
         >
           <Box
@@ -51,3 +54,5 @@ export default class QuantityBar extends React.Component<QuantityBarProps> {
     );
   }
 }
+
+export default withTheme(quantityBar);

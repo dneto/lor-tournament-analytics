@@ -3,20 +3,35 @@ import { faGithub, faDiscord } from "@fortawesome/free-brands-svg-icons";
 import { Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Link from "next/link";
+import { useTheme } from "@mui/material/styles";
 
 const Header: React.FC = () => {
+  const theme = useTheme();
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{ flexGrow: 1, backgroundColor: theme.palette.background.default }}
+    >
       <Toolbar>
         <Link href="/">
-          <Typography variant="h4" sx={{ flexGrow: 1, cursor: "pointer" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              color: theme.palette.text.primary,
+              flexGrow: 1,
+              cursor: "pointer",
+            }}
+          >
             LoR Analytics
           </Typography>
         </Link>
         <a rel="noreferrer" href="https://discord.gg/kPc4HZgK" target="_blank">
           <FontAwesomeIcon
             icon={faDiscord}
-            style={{ color: "black", margin: "5px", fontSize: "24px" }}
+            style={{
+              color: theme.palette.text.primary,
+              margin: "5px",
+              fontSize: "24px",
+            }}
           />
         </a>
         <a
@@ -26,7 +41,11 @@ const Header: React.FC = () => {
         >
           <FontAwesomeIcon
             icon={faGithub}
-            style={{ color: "black", margin: "5px", fontSize: "24px" }}
+            style={{
+              color: theme.palette.text.primary,
+              margin: "5px",
+              fontSize: "24px",
+            }}
           />
         </a>
       </Toolbar>

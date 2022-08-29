@@ -10,6 +10,7 @@ import * as React from "react";
 import path from "path";
 import { NextRouter, withRouter } from "next/router";
 import { ILocale } from "@/locales";
+import { Theme, withTheme } from "@material-ui/core";
 interface ToolbarProps {
   pageLink?: string;
   showBackButton?: boolean;
@@ -19,9 +20,10 @@ interface ToolbarProps {
   imgRef: React.RefObject<any>;
   router: NextRouter;
   locale: ILocale;
+  theme: Theme;
 }
 
-const PagedTableHeader = withRouter(
+const pagedTableHeader = withRouter(
   class extends React.Component<ToolbarProps> {
     blobURL: string;
     constructor(props: ToolbarProps) {
@@ -50,7 +52,9 @@ const PagedTableHeader = withRouter(
                     this.props.router.back();
                   }}
                 >
-                  <BackIcon sx={{ color: "black" }} />
+                  <BackIcon
+                    sx={{ color: this.props.theme.palette.text.primary }}
+                  />
                 </IconButton>
               </Tooltip>
             )}
@@ -78,7 +82,7 @@ const PagedTableHeader = withRouter(
                   );
                 }}
               >
-                <PhotoIcon sx={{ color: "black" }} fontSize="small" />
+                <PhotoIcon fontSize="small" />
               </IconButton>
             </Tooltip>
             <Tooltip title="Download as CSV">
@@ -89,7 +93,7 @@ const PagedTableHeader = withRouter(
                 download={this.props.csvFilename}
               >
                 <IconButton>
-                  <GridOnIcon sx={{ color: "black" }} fontSize="small" />
+                  <GridOnIcon fontSize="small" />
                 </IconButton>
               </a>
             </Tooltip>
@@ -101,7 +105,7 @@ const PagedTableHeader = withRouter(
                     this.props.router.push(`${this.props.pageLink}`);
                   }}
                 >
-                  <ZoomOutIcon sx={{ color: "black" }} fontSize="small" />
+                  <ZoomOutIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
             ) : (
@@ -113,5 +117,7 @@ const PagedTableHeader = withRouter(
     }
   }
 );
+
+const PagedTableHeader = withTheme(pagedTableHeader);
 
 export { PagedTableHeader };

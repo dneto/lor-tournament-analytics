@@ -10,6 +10,7 @@ import {
   Paper,
   TableBody,
   Alert,
+  useTheme,
 } from "@mui/material";
 import FileUploader from "@/components/FileUploader";
 import { makeStyles } from "@mui/styles";
@@ -24,22 +25,7 @@ import htmlParse from "html-react-parser";
 import ShardPill from "@/components/ShardPill";
 import { DateTime } from "luxon";
 
-import { theme } from "@/styles/theme";
 import Link from "next/link";
-const useStyles = makeStyles({
-  tr: {
-    "&:hover": {
-      background: theme.palette.primary.main,
-      color: "#fff",
-    },
-    cursor: "pointer",
-  },
-  td: {
-    color: "inherit",
-    border: "0",
-    padding: "12px 8px",
-  },
-});
 
 type Props = {
   tournaments: Tournament[];
@@ -48,7 +34,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = (props: Props) => {
-  const classes = useStyles();
+  const theme = useTheme();
   let reader: FileReader;
   const router = useRouter();
   const localizedCalendar = (n: number): string => {
@@ -74,11 +60,12 @@ const Home: NextPage<Props> = (props: Props) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         {props.locale.checkoutWorldwalker && (
-          <Alert severity="info">
-            <Link href={"/worldwalker"}>
-              {props.locale.checkoutWorldwalker}
-            </Link>
-          </Alert>
+          <Link
+            href={"/worldwalker"}
+            style={{ color: theme.palette.text.primary, cursor: "pointer" }}
+          >
+            <Alert severity="info">{props.locale.checkoutWorldwalker}</Alert>
+          </Link>
         )}
       </Grid>
       <Grid item xs={12}>
@@ -91,10 +78,22 @@ const Home: NextPage<Props> = (props: Props) => {
               <Table key={t.title}>
                 <TableBody>
                   <TableRow
-                    className={classes.tr}
                     onClick={() => router.push(t.url)}
+                    sx={{
+                      "&:hover": {
+                        background: theme.palette.primary.main,
+                        color: "#fff",
+                      },
+                      cursor: "pointer",
+                    }}
                   >
-                    <TableCell className={classes.td}>
+                    <TableCell
+                      sx={{
+                        color: "inherit",
+                        border: "0",
+                        padding: "12px 8px",
+                      }}
+                    >
                       <Typography component="span">{t.title} </Typography>
                       {t.region ? (
                         <ShardPill shard={t.region} color="black" />
@@ -102,7 +101,14 @@ const Home: NextPage<Props> = (props: Props) => {
                         <></>
                       )}
                     </TableCell>
-                    <TableCell className={classes.td} align="right">
+                    <TableCell
+                      sx={{
+                        color: "inherit",
+                        border: "0",
+                        padding: "12px 8px",
+                      }}
+                      align="right"
+                    >
                       <Typography>{localizedCalendar(t.timestamp)}</Typography>
                     </TableCell>
                   </TableRow>

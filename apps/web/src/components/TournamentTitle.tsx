@@ -1,10 +1,13 @@
+import { withTheme } from "@emotion/react";
 import { Tournament } from "@lor-analytics/data-extractor/tournament";
+import { Theme } from "@material-ui/core";
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
 import TournamentLogo from "./TournamentLogo";
 
 type TournamentTitleProps = {
   tournament: Tournament;
+  theme: Theme;
 };
 
 class TournamentTitle extends React.Component<TournamentTitleProps> {
@@ -15,7 +18,10 @@ class TournamentTitle extends React.Component<TournamentTitleProps> {
           <Box display={"flex"}>
             <TournamentLogo tournament={this.props.tournament} />
             <Box paddingTop={0} padding={1}>
-              <Typography variant="h6">
+              <Typography
+                variant="h6"
+                sx={{ color: this.props.theme.palette.text.primary }}
+              >
                 {this.props.tournament.title}
               </Typography>
             </Box>
@@ -28,4 +34,4 @@ class TournamentTitle extends React.Component<TournamentTitleProps> {
   }
 }
 
-export default TournamentTitle;
+export default withTheme(TournamentTitle);
