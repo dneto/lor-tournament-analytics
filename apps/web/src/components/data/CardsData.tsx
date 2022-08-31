@@ -62,7 +62,7 @@ export default class CardsData extends React.Component<DataProps, DataState> {
       return [r.key, String(r.qtd)];
     });
     return (
-      <Paper component={Box}>
+      <Paper component={Box} elevation={0}>
         <PagedTableHeader
           title={this.props.locale.cards}
           pageLink={
@@ -104,11 +104,15 @@ export default class CardsData extends React.Component<DataProps, DataState> {
                         />
                       }
                     >
-                      <Typography variant="h6">{r.card.name}</Typography>
+                      <Typography sx={{ fontWeight: 600 }}>
+                        {r.card.name}
+                      </Typography>
                     </Tooltip>
                   </Grid>
                   <Grid item xs={2} sx={{ marginBottom: "5px" }}>
-                    <Typography variant="h6">{r.qtd}</Typography>
+                    <Typography sx={{ fontWeight: 600, textAlign: "right" }}>
+                      {r.qtd}
+                    </Typography>
                   </Grid>
                 </>
               );

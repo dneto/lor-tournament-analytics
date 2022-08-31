@@ -64,7 +64,7 @@ export default class RegionsData extends React.Component<DataProps, DataState> {
       return [r.key, String(r.qtd)];
     });
     return (
-      <Paper component={Box}>
+      <Paper component={Box} elevation={0}>
         <PagedTableHeader
           title={this.props.locale.regions}
           pageLink={

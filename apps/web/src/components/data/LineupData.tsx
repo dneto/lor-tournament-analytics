@@ -71,7 +71,7 @@ export default class LineupData extends React.Component<DataProps, DataState> {
       return [r.key, String(r.qtd)];
     });
     return (
-      <Paper component={Box}>
+      <Paper component={Box} elevation={0}>
         <PagedTableHeader
           title={this.props.locale.lineups}
           pageLink={
@@ -107,10 +107,9 @@ export default class LineupData extends React.Component<DataProps, DataState> {
                         <Box
                           component="div"
                           sx={{
-                            height: "42px",
+                            height: "24px",
                             marginRight: "30px",
                             display: "inline-block",
-                            borderBottom: "5px solid rgba(0,0,0,0.08)",
                           }}
                         >
                           {deck.champions.map((c) => (

@@ -62,11 +62,7 @@ const Home: NextPage<Props> = (props: Props) => {
                       }}
                     >
                       <Typography component="span">{t.title} </Typography>
-                      {t.region ? (
-                        <ShardPill shard={t.region} color="black" />
-                      ) : (
-                        <></>
-                      )}
+                      {t.region ? <ShardPill shard={t.region} /> : <></>}
                     </TableCell>
                     <TableCell
                       align="right"

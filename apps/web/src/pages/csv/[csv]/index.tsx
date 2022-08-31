@@ -2,7 +2,7 @@ import * as React from "react";
 
 import type { NextPage } from "next";
 import { Grid, Skeleton } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, minHeight } from "@mui/system";
 import { Tournament } from "@lor-analytics/data-extractor";
 
 import _ from "lodash";
@@ -16,6 +16,8 @@ import RegionsData from "@/components/data/RegionsData";
 import RegionData from "@/components/data/RegionData";
 import LineupData from "@/components/data/LineupData";
 import CardsData from "@/components/data/CardsData";
+import { CardBGCard } from "@/components/CardBGCard";
+import { cardFromCode } from "@lor-analytics/deck-utils/card";
 
 const Home: NextPage = () => {
   const [tournament, setTournament] = React.useState<Tournament>();
@@ -43,7 +45,9 @@ const Home: NextPage = () => {
         <Box>
           <Grid container>
             <Grid item xs={12} md={12}>
-              <TournamentTitle tournament={tournament} />
+              <Box zIndex={15} padding="5px" alignSelf="end">
+                <TournamentTitle tournament={tournament} />
+              </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box paddingTop={0} padding={1}>
@@ -99,7 +103,7 @@ const Home: NextPage = () => {
                   locale={locale}
                   pageID={`${query.csv}`}
                   tournament={tournament}
-                  rowsPerPage={5}
+                  rowsPerPage={9}
                   paginated
                   showFullScreenButton
                 />

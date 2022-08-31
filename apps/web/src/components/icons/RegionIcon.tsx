@@ -14,8 +14,8 @@ class RegionIcon extends React.Component<ChampionIconProps> {
         style={Object.assign(
           {
             position: "relative",
-            width: 32,
-            height: 32,
+            width: 24,
+            height: 24,
             float: "left",
           },
           this.props.style

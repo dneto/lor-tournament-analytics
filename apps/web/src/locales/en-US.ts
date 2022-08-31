@@ -18,5 +18,9 @@ export default {
   cards: "Cards",
   viewFullScreen: "See all",
   checkoutWorldwalker: "Check out all tournaments from Worldwalker season",
-  dateFormat: "MMM-dd",
+  setWorldwalker: "Worldwalker",
+  setForcesFromBeyond: "Forces from Beyond",
+  setAwakening: "Darkin Saga: Awakening",
+  season: "season",
+  dateFormat: "MMM-dd-yyyy",
 };

@@ -6,6 +6,7 @@ export type Tournament = {
   url: string;
   region: string | null;
   logoURL: string | null;
+  card: string | null;
 };
 
 export async function getTournaments(
@@ -27,19 +28,22 @@ export async function getTournaments(
     const rows = response.data.values;
 
     if (rows?.length) {
-      return rows.map((row) => {
-        const date: DateTime = DateTime.fromFormat(
-          row[0],
-          "dd/MM/yyyy hh:mm:ss"
-        );
-        return {
-          timestamp: date.toMillis(),
-          title: row[1],
-          url: row[2],
-          region: row[3] || null,
-          logoURL: row[4] || null,
-        };
-      });
+      return rows
+        .filter((row) => row.length > 0)
+        .map((row) => {
+          const date: DateTime = DateTime.fromFormat(
+            row[0],
+            "dd/MM/yyyy hh:mm:ss"
+          );
+          return {
+            timestamp: date.toMillis(),
+            title: row[1],
+            url: row[2],
+            region: row[3] || null,
+            logoURL: row[4] || null,
+            card: row[5] || null,
+          };
+        });
     }
   } catch (e) {
     console.error(e);

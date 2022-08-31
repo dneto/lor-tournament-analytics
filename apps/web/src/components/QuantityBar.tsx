@@ -35,7 +35,7 @@ class quantityBar extends React.Component<QuantityBarProps> {
                 position: "relative",
                 backgroundColor: "currentcolor",
                 borderRadius: "12px",
-                height: "8px",
+                height: "5px",
                 marginRight: "10px",
               }}
             ></Box>
@@ -46,7 +46,9 @@ class quantityBar extends React.Component<QuantityBarProps> {
                 position: "relative",
               }}
             >
-              <Typography variant="h6">{this.props.textValue}</Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                {this.props.textValue}
+              </Typography>
             </Box>
           </Box>
         </Box>

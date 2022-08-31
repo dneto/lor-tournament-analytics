@@ -5,63 +5,78 @@ import {
   Typography,
   Box,
   Container,
-  PaletteMode,
+  createTheme,
+  CssBaseline,
+  IconButton,
   useMediaQuery,
+  Grid,
 } from "@mui/material";
-import { createTheme, CssBaseline } from "@material-ui/core";
 import NextNProgress from "nextjs-progressbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useRouter } from "next/router";
 import useAckee from "use-ackee";
 import Header from "@/components/Header";
-config.autoAddCss = false;
+import * as React from "react";
 
 import { darkTheme, lightTheme } from "@/styles/theme";
-import React from "react";
+import { useLocalStorage } from "usehooks-ts";
+
+config.autoAddCss = false;
+
+export const ThemeContext = React.createContext({ toggleTheme: () => {} });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const theme = React.useMemo(
-    () => createTheme(prefersDarkMode ? darkTheme : lightTheme),
-    [prefersDarkMode]
+  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const isDarkOS = useMediaQuery("(prefers-color-scheme: dark)");
+  const [colorMode, setColorMode] = useLocalStorage<"light" | "dark">(
+    "themeMode",
+    isDarkOS ? "dark" : "light"
   );
   const router = useRouter();
-  if (process.env.ACKEE_SERVER && process.env.ACKEE_DOMAIN_ID) {
-    useAckee(
-      router.asPath,
-      {
-        server: process.env.ACKEE_SERVER,
-        domainId: process.env.ACKEE_DOMAIN_ID,
-      },
-      {}
-    );
-  }
+
+  const themeMode = {
+    toggleTheme: () => {
+      setColorMode(colorMode === "light" ? "dark" : "light");
+      setMode(mode === "light" ? "dark" : "light");
+      console.log(colorMode);
+      console.log(mode);
+    },
+  };
+
+  React.useEffect(() => {
+    setMode(colorMode);
+  });
+
+  const theme = createTheme(mode === "light" ? lightTheme : darkTheme);
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container
-        maxWidth="lg"
-        sx={{
-          p: 2,
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-          backgroundColor: theme.palette.background.default,
-        }}
-      >
-        <Header />
-        <NextNProgress color="#000" />
-        <Component {...pageProps} />
-        <Box>
-          <Typography sx={{ marginTop: "10px", fontSize: "0.7rem" }}>
-            {`LoR Analytics isn't endorsed by Riot Games and doesn't reflect the
+    <ThemeContext.Provider value={themeMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container
+          maxWidth="xl"
+          sx={{
+            p: 2,
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
+            backgroundColor: theme.palette.background.default,
+          }}
+        >
+          <Header />
+          <NextNProgress color={theme.palette.text.primary} />
+          <Component {...pageProps} />
+          <Box>
+            <Typography sx={{ marginTop: "10px", fontSize: "0.7rem" }}>
+              {`LoR Analytics isn't endorsed by Riot Games and doesn't reflect the
             views or opinions of Riot Games or anyone officially involved in
             producing or managing Riot Games properties. Riot Games, and all
             associated properties are trademarks or registered trademarks of
             Riot Games, Inc.`}
-          </Typography>
-        </Box>
-      </Container>
-    </ThemeProvider>
+            </Typography>
+          </Box>
+        </Container>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 

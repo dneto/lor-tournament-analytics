@@ -19,6 +19,10 @@ export interface ILocale {
   cards: string;
   viewFullScreen: string;
   checkoutWorldwalker: string;
+  setWorldwalker: string;
+  setForcesFromBeyond: string;
+  setAwakening: string;
+  season: string;
   dateFormat: string;
 }
 

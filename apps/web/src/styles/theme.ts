@@ -1,31 +1,35 @@
-import { ThemeOptions } from "@material-ui/core";
 import { TypographyOptions } from "@material-ui/core/styles/createTypography";
+import { ThemeOptions } from "@mui/material";
 import { orange, pink } from "@mui/material/colors";
 
 const typographyOptions: TypographyOptions = {
   fontFamily: ['"Open Sans"', "sans-serif"].join(","),
   htmlFontSize: 15,
   h1: {
-    fontFamily: `"Montserrat" ,sans-serif`,
+    fontFamily: `"Oswald" ,sans-serif`,
     textTransform: "uppercase",
+    fontWeight: 600,
   },
   h5: {
-    fontFamily: `"Montserrat" ,sans-serif`,
+    fontFamily: `"Oswald" ,sans-serif`,
     textTransform: "uppercase",
+    fontWeight: 600,
   },
   h6: {
-    fontFamily: `"Montserrat" ,sans-serif`,
+    fontFamily: `"Oswald" ,sans-serif`,
     textTransform: "uppercase",
+    fontWeight: 700,
   },
   h4: {
-    fontFamily: `"Montserrat" ,sans-serif`,
+    fontFamily: `"Oswald" ,sans-serif`,
     textTransform: "uppercase",
+    fontWeight: 600,
   },
 };
 
 export const lightTheme: ThemeOptions = {
   palette: {
-    type: "light",
+    mode: "light",
     primary: pink,
   },
   typography: { ...typographyOptions },
@@ -33,7 +37,7 @@ export const lightTheme: ThemeOptions = {
 
 export const darkTheme: ThemeOptions = {
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: orange,
     background: {
       default: "#121212",

@@ -19,5 +19,9 @@ export default {
   cards: "Cartas",
   viewFullScreen: "Ver tudo",
   checkoutWorldwalker: "Confira todos os torneios da temporada Andamundo",
-  dateFormat: "dd MMM",
+  setWorldwalker: "Andamundo",
+  setForcesFromBeyond: "Forças do Além",
+  setAwakening: "Saga Darkin: Despertar",
+  season: "temporada",
+  dateFormat: "dd MMM yyyy",
 };

@@ -6,7 +6,7 @@ type BarProps = {
   value: number;
   max: number;
   textValue: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export default class GridBar extends React.Component<BarProps> {

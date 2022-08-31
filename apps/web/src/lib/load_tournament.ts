@@ -22,6 +22,7 @@ export default async function loadTournamentFromID(
   );
   tournament.title = json.title;
   tournament.logoURL = json.logoURL;
+  tournament.cardImage = json.card;
   return tournament;
 }
 

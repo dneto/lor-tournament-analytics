@@ -59,14 +59,14 @@ function cardFromCode(code: string): Card {
   throw new Error("Could not parse card code");
 }
 
-function cardFromCodeLocale(code: string, locale:string): Card {
-  let cardDatabase = cards
+function cardFromCodeLocale(code: string, locale: string): Card {
+  let cardDatabase = cards;
   switch (locale) {
     case "en-us":
-      cardDatabase = cards
+      cardDatabase = cards;
       break;
     case "pt-br":
-      cardDatabase = cardsPTBR
+      cardDatabase = cardsPTBR;
       break;
   }
   const cardFromDatabase = cardDatabase.find((card) => {

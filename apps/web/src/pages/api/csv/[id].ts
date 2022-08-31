@@ -21,6 +21,7 @@ const api = (req: NextApiRequest, res: NextApiResponse) => {
               title: tournament?.title || "",
               timestamp: tournament?.timestamp,
               logoURL: tournament?.logoURL,
+              card: tournament?.card,
               data: result,
             });
           })

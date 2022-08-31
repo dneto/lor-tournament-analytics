@@ -7,6 +7,7 @@ export class Tournament {
   readonly lineups: Lineup[];
   title: string = "";
   logoURL: string = "";
+  cardImage: string = "";
 
   constructor(lineups: Lineup[]) {
     this.lineups = lineups;

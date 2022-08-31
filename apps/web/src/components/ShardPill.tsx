@@ -1,9 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { Component } from "react";
-
+import LanguageIcon from "@mui/icons-material/LanguageSharp";
 type Props = {
   shard: string;
-  color: string;
 };
 
 export default class ShardPill extends Component<Props> {
@@ -11,15 +10,20 @@ export default class ShardPill extends Component<Props> {
     return (
       <Box
         sx={{
-          borderRadius: "10%",
-          backgroundColor: this.props.color,
-          padding: "0px 4px",
-          color: "white",
-          textAlign: "center",
-          display: "inline-block",
+          textAlign: "left",
+          alignContent: "center",
+          alignSelf: "center",
+          display: "flex",
         }}
       >
-        <Typography fontWeight={700}>{this.props.shard}</Typography>
+        <LanguageIcon sx={{ fontSize: "1.2rem", alignSelf: "center" }} />
+        <Typography
+          fontWeight={700}
+          fontSize="0.9rem"
+          sx={{ alignSelf: "center", paddingLeft: "2px" }}
+        >
+          {this.props.shard}
+        </Typography>
       </Box>
     );
   }

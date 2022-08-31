@@ -8,6 +8,7 @@ import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
 import ChampionIcon from "../icons/ChampionIcon";
 import { cardFromCodeLocale } from "@lor-analytics/deck-utils/card";
+import { CardBGCard } from "../CardBGCard";
 
 export default class ChampionsData extends React.Component<
   DataProps,
@@ -59,7 +60,7 @@ export default class ChampionsData extends React.Component<
       return [r.key, String(r.qtd)];
     });
     return (
-      <Paper component={Box}>
+      <Paper component={Box} elevation={0}>
         <PagedTableHeader
           title={this.props.locale.champions}
           pageLink={
