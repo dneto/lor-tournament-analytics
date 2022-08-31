@@ -3,7 +3,7 @@ set -e
 
 base_url="https://dd.b.pvp.net/latest/"
 LOCALE="en_us"
-sets="set1 set2 set3 set4 set5 set6"
+sets="set1 set2 set3 set4 set5 set6 set6cde"
 
 while getopts ":l:" arg; do
   case "${arg}" in
