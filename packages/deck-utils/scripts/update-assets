@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-base_url="https://dd.b.pvp.net/latest/"
+base_url="https://dd.b.pvp.net/3_17_0/"
 LOCALE="en_us"
 sets="set1 set2 set3 set4 set5 set6 set6cde"
+ALL_LOCALES="de_de en_us es_es es_mx fr_fr it_it ja_jp ko_kr pl_pl pt_br ru_ru th_th tr_tr vi_vn zh_tw"
 
 while getopts ":l:" arg; do
   case "${arg}" in
@@ -20,21 +21,20 @@ mkdir -p $tmpdir
 echo "" > $tmpdir/lor-assets-urls.txt
 
 for set in $sets; do
-  echo "url = \"$base_url$set-$LOCALE.zip\"" >> $tmpdir/lor-assets-urls.txt
-  echo "output = \"$tmpdir/$set-$LOCALE.zip\"" >> $tmpdir/lor-assets-urls.txt
+  echo "url = \"$base_url$set/$LOCALE/data/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
+echo "output = \"$tmpdir/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
 done
 
+# Workaround to have Awakening data
+set="set6cde"
+base_url="https://dd.b.pvp.net/3_16_0/"
+echo "url = \"$base_url$set/$LOCALE/data/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
+echo "output = \"$tmpdir/$set-$LOCALE-awakening.json\"" >> $tmpdir/lor-assets-urls.txt
 
-curl -Z --parallel-max 6 --config $tmpdir/lor-assets-urls.txt
-
-for set in $sets; do
-  unzip -q -o $tmpdir/$set-$LOCALE.zip -d $tmpdir
-done 
-
-mkdir -p $tmpdir/sets
-find $tmpdir -name "set*.json" -exec mv -t $tmpdir/sets {} +
+curl -Z --parallel-max 7 --config $tmpdir/lor-assets-urls.txt
 
 mkdir -p src/assets/$LOCALE
-jq -s 'add' $tmpdir/sets/*.json > src/assets/$LOCALE/cards.json
+
+jq -s 'add' $tmpdir/*.json > src/assets/$LOCALE/cards.json
 
 rm -r $tmpdir

@@ -21,7 +21,9 @@
       ],
       "@lor-analytics/data-extractor": [
         "../../../packages/data-extractor/src/index"
-      ]
+      ],
+      "@lor-analytics/db/*": ["../../../packages/db/src/*"],
+      "@lor-analytics/db": ["../../../packages/db/src/index"],
     }
   },
   "exclude": ["**/node_modules", "**/.*/"],

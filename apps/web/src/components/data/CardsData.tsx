@@ -13,9 +13,17 @@ import { PagedTableHeader } from "../PagedTable";
 import { cardFromCodeLocale } from "@lor-analytics/deck-utils/card";
 import Image from "next/image";
 
-export default class CardsData extends React.Component<DataProps, DataState> {
+type dataprops = DataProps & {
+  data: {
+    cardCode: string;
+    qty: number;
+    percent: number;
+  }[];
+};
+
+export default class CardsData extends React.Component<dataprops, DataState> {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -28,29 +36,11 @@ export default class CardsData extends React.Component<DataProps, DataState> {
   }
 
   render(): React.ReactNode {
-    const dataGroup = this.props.tournament.lineups
-      .map((lineup) => lineup.map((deck) => deck.cardEntries))
-      .reduce((prev: Record<string, number>, curr) => {
-        curr.forEach((ces) =>
-          ces.forEach((ce) => {
-            prev[ce.card.cardCode] =
-              prev[ce.card.cardCode] + ce.count || ce.count;
-          })
-        );
-        return prev;
-      }, {});
-
-    const count = Object.entries(dataGroup).map((e) => {
-      const [card, count] = e;
-
-      return {
-        key: card,
-        card: cardFromCodeLocale(card, this.props.locale.locale),
-        qtd: count,
-      };
-    });
-
-    const rows = _.sortBy(count, (c) => c.qtd).reverse();
+    const count = this.props.data.map((e) => ({
+      ...e,
+      card: cardFromCodeLocale(e.cardCode, this.props.locale.locale),
+    }));
+    const rows = _.sortBy(count, (c) => c.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -59,7 +49,7 @@ export default class CardsData extends React.Component<DataProps, DataState> {
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.cardCode, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -67,11 +57,11 @@ export default class CardsData extends React.Component<DataProps, DataState> {
           title={this.props.locale.cards}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/cards`
+              ? `/tournament/${this.props.pageID}/cards`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -111,7 +101,7 @@ export default class CardsData extends React.Component<DataProps, DataState> {
                   </Grid>
                   <Grid item xs={2} sx={{ marginBottom: "5px" }}>
                     <Typography sx={{ fontWeight: 600, textAlign: "right" }}>
-                      {r.qtd}
+                      {r.qty}
                     </Typography>
                   </Grid>
                 </>

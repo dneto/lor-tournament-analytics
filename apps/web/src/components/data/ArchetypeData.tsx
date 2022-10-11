@@ -1,19 +1,20 @@
 import * as React from "react";
 import { DataProps, DataState } from "./TournamentDataProps";
 import _ from "lodash";
-import { Lineup } from "@lor-analytics/data-extractor/tournament";
-import { Deck } from "@lor-analytics/deck-utils/deck";
 import GridBar from "../bars/GridBar";
 import ArchetypeIcon from "../icons/ArchetypeIcon";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
-
+import { IArchetypeCount } from "../../../../../packages/db/src/models/tournament";
+type dataprops = DataProps & {
+  data: IArchetypeCount[];
+};
 export default class ArchetypesData extends React.Component<
-  DataProps,
+  dataprops,
   DataState
 > {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -26,32 +27,13 @@ export default class ArchetypesData extends React.Component<
   }
 
   render(): React.ReactNode {
-    const data: Deck[] = this.props.tournament.lineups
-      .map((lineup: Lineup) => lineup.map((deck) => deck))
-      .flat();
-    const count = Object.entries(
-      _.groupBy(data, (d: Deck) => {
-        const key = `${d.champions
-          .map((c) => c.name)
-          .sort()
-          .join(",")},${d.regions
-          .map((r) => r.shortName)
-          .sort()
-          .join(",")}`;
-        return key;
-      })
-    ).map((e) => {
-      const [key, group] = e;
-      return {
-        key: key,
-        deck: group[0],
-        qtd: group.length,
-        percent: (group.length / data.length) * 100,
-      };
-    });
+    const count = this.props.data.map((e: IArchetypeCount) => ({
+      key: `${e.championsCode.join(";")};${e.regions.join(";")}`,
+      ...e,
+    }));
     const maxPercent = Math.max(...count.map((c) => c.percent));
 
-    const rows = _.sortBy(count, (r) => r.qtd).reverse();
+    const rows = _.sortBy(count, (r) => r.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -60,7 +42,7 @@ export default class ArchetypesData extends React.Component<
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.key, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -68,11 +50,11 @@ export default class ArchetypesData extends React.Component<
           title={this.props.locale.archetype}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/archetypes`
+              ? `/tournament/${this.props.pageID}/archetypes`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -91,9 +73,14 @@ export default class ArchetypesData extends React.Component<
                   key={r.key}
                   value={r.percent}
                   max={maxPercent}
-                  textValue={r.qtd}
+                  textValue={r.qty}
                 >
-                  <ArchetypeIcon deck={r.deck} />
+                  <ArchetypeIcon
+                    archetype={{
+                      championsCode: r.championsCode,
+                      regions: r.regions,
+                    }}
+                  />
                 </GridBar>
               );
             })}

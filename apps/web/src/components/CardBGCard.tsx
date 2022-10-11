@@ -1,6 +1,8 @@
 import { Card } from "@lor-analytics/deck-utils/card";
+import { Scale } from "@mui/icons-material";
 import { Paper } from "@mui/material";
-import Image from "next/image";
+import { CSSProperties } from "@mui/styles";
+import Image from "next/future/image";
 import { ReactNode, Component } from "react";
 
 type CardBGCardProps = {
@@ -12,6 +14,15 @@ type CardBGCardProps = {
 
 export class CardBGCard extends Component<CardBGCardProps> {
   render(): ReactNode {
+    let css: CSSProperties = {
+      objectPosition: "top center",
+    };
+    if (this.props.card?.type === "Spell") {
+      css = {
+        transform: "scale(1.15)",
+        objectPosition: "50% 50%",
+      };
+    }
     return (
       <Paper
         elevation={3}
@@ -23,6 +34,7 @@ export class CardBGCard extends Component<CardBGCardProps> {
           cursor: "pointer",
           color: "rgb(255, 255, 255)",
           borderRadius: "5px",
+          overflow: "hidden",
         }}
       >
         {this.props.children}
@@ -30,15 +42,18 @@ export class CardBGCard extends Component<CardBGCardProps> {
           <>
             <Image
               src={this.props.card.assets[0].fullAbsolutePath}
-              layout="fill"
-              objectFit="cover"
-              objectPosition={this.props.objectPosition || "top center"}
+              alt=""
               style={{
                 zIndex: 1,
                 position: "absolute",
                 top: 0,
                 borderRadius: "5px",
+                objectFit: "cover",
+                ...css,
               }}
+              priority={true}
+              sizes="(max-width: 360px) 100vw"
+              fill
             />
             <div
               style={{

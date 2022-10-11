@@ -1,21 +1,26 @@
 import * as React from "react";
 import { DataProps, DataState } from "./TournamentDataProps";
 import _ from "lodash";
-import { Lineup } from "@lor-analytics/data-extractor/tournament";
-import { Deck } from "@lor-analytics/deck-utils/deck";
 import GridBar from "../bars/GridBar";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
 import ChampionIcon from "../icons/ChampionIcon";
 import { cardFromCodeLocale } from "@lor-analytics/deck-utils/card";
-import { CardBGCard } from "../CardBGCard";
+
+type dataprops = DataProps & {
+  data: {
+    championCode: string;
+    qty: number;
+    percent: number;
+  }[];
+};
 
 export default class ChampionsData extends React.Component<
-  DataProps,
+  dataprops,
   DataState
 > {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -28,27 +33,13 @@ export default class ChampionsData extends React.Component<
   }
 
   render(): React.ReactNode {
-    const data = this.props.tournament.lineups
-      .map((l: Lineup) => l.map((d: Deck) => d.champions))
-      .flat(2);
-
-    const count = Object.entries(
-      _.groupBy(data, (d) => {
-        return d.name;
-      })
-    ).map((e) => {
-      const [key, group] = e;
-      return {
-        key: key,
-        champion: group[0],
-        qtd: group.length,
-        percent: (group.length / data.length) * 100,
-      };
-    });
-
+    const count = this.props.data.map((d) => ({
+      ...d,
+      key: d.championCode,
+    }));
     const maxPercent = Math.max(...count.map((c) => c.percent));
 
-    const rows = _.sortBy(count, (r) => r.qtd).reverse();
+    const rows = _.sortBy(count, (r) => r.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -57,7 +48,7 @@ export default class ChampionsData extends React.Component<
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.key, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -65,11 +56,11 @@ export default class ChampionsData extends React.Component<
           title={this.props.locale.champions}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/champions`
+              ? `/tournament/${this.props.pageID}/champions`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -88,11 +79,11 @@ export default class ChampionsData extends React.Component<
                   key={r.key}
                   value={r.percent}
                   max={maxPercent}
-                  textValue={r.qtd}
+                  textValue={r.qty}
                 >
                   <ChampionIcon
                     championCard={cardFromCodeLocale(
-                      r.champion.cardCode,
+                      r.championCode,
                       this.props.locale.locale
                     )}
                   />

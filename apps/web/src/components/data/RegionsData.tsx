@@ -1,12 +1,10 @@
 import * as React from "react";
 import { DataProps, DataState } from "./TournamentDataProps";
 import _ from "lodash";
-import { Lineup } from "@lor-analytics/data-extractor/tournament";
-import { Deck } from "@lor-analytics/deck-utils/deck";
 import GridBar from "../bars/GridBar";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
-import { Region } from "@lor-analytics/deck-utils/region";
+import { Region, regionFromShortName } from "@lor-analytics/deck-utils/region";
 import RegionIcon from "../icons/RegionIcon";
 
 const imgStyle: React.CSSProperties = {
@@ -14,9 +12,16 @@ const imgStyle: React.CSSProperties = {
   marginRight: "2px",
 };
 
-export default class RegionsData extends React.Component<DataProps, DataState> {
+type dataprops = DataProps & {
+  data: {
+    regions: string[];
+    qty: number;
+    percent: number;
+  }[];
+};
+export default class RegionsData extends React.Component<dataprops, DataState> {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -29,30 +34,13 @@ export default class RegionsData extends React.Component<DataProps, DataState> {
   }
 
   render(): React.ReactNode {
-    const data: Region[][] = this.props.tournament.lineups
-      .map((l: Lineup) => l.map((d: Deck) => d.regions))
-      .flat(1);
-
-    const dataGroup = _.groupBy(data, (regions: Region[]) => {
-      return regions
-        .map((region: Region) => region.shortName)
-        .sort()
-        .join("/");
-    });
-
-    const count = Object.entries(dataGroup).map((e) => {
-      const [key, group] = e;
-
-      return {
-        key: key,
-        regions: group[0],
-        qtd: group.length,
-        percent: (group.length / data.length) * 100,
-      };
-    });
+    const count = this.props.data.map((e) => ({
+      ...e,
+      key: e.regions.join("/"),
+    }));
     const maxPercent = Math.max(...count.map((c) => c.percent));
 
-    const rows = _.sortBy(count, (r) => r.qtd).reverse();
+    const rows = _.sortBy(count, (r) => r.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -61,7 +49,7 @@ export default class RegionsData extends React.Component<DataProps, DataState> {
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.key, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -69,11 +57,11 @@ export default class RegionsData extends React.Component<DataProps, DataState> {
           title={this.props.locale.regions}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/regions`
+              ? `/tournament/${this.props.pageID}/regions`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -92,10 +80,13 @@ export default class RegionsData extends React.Component<DataProps, DataState> {
                   key={r.key}
                   value={r.percent}
                   max={maxPercent}
-                  textValue={r.qtd}
+                  textValue={r.qty}
                 >
                   {r.regions.map((region) => (
-                    <RegionIcon region={region} style={{ ...imgStyle }} />
+                    <RegionIcon
+                      region={regionFromShortName(region) as Region}
+                      style={{ ...imgStyle }}
+                    />
                   ))}
                 </GridBar>
               );

@@ -7,15 +7,24 @@ import GridBar from "../bars/GridBar";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
 import RegionIcon from "../icons/RegionIcon";
+import { Region, regionFromShortName } from "@lor-analytics/deck-utils/region";
 
 const imgStyle: React.CSSProperties = {
   marginLeft: "2px",
   marginRight: "2px",
 };
 
-export default class RegionData extends React.Component<DataProps, DataState> {
+type dataprops = DataProps & {
+  data: {
+    region: string;
+    qty: number;
+    percent: number;
+  }[];
+};
+
+export default class RegionData extends React.Component<dataprops, DataState> {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -28,24 +37,10 @@ export default class RegionData extends React.Component<DataProps, DataState> {
   }
 
   render(): React.ReactNode {
-    const data = this.props.tournament.lineups
-      .map((l: Lineup) => l.map((d: Deck) => d.regions))
-      .flat(999);
-    const dataGroup = _.groupBy(data, (r) => r.shortName);
-
-    const count = Object.entries(dataGroup).map((e) => {
-      const [key, group] = e;
-
-      return {
-        key: key,
-        region: group[0],
-        qtd: group.length,
-        percent: (group.length / data.length) * 100,
-      };
-    });
+    const count = this.props.data;
     const maxPercent = Math.max(...count.map((c) => c.percent));
 
-    const rows = _.sortBy(count, (r) => r.qtd).reverse();
+    const rows = _.sortBy(count, (r) => r.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -54,7 +49,7 @@ export default class RegionData extends React.Component<DataProps, DataState> {
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.region, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -62,11 +57,11 @@ export default class RegionData extends React.Component<DataProps, DataState> {
           title={this.props.locale.region}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/region`
+              ? `/tournament/${this.props.pageID}/region`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -82,12 +77,15 @@ export default class RegionData extends React.Component<DataProps, DataState> {
             {pageRows.map((r) => {
               return (
                 <GridBar
-                  key={r.key}
+                  key={r.region}
                   value={r.percent}
                   max={maxPercent}
-                  textValue={r.qtd}
+                  textValue={r.qty}
                 >
-                  <RegionIcon region={r.region} style={{ ...imgStyle }} />
+                  <RegionIcon
+                    region={regionFromShortName(r.region) as Region}
+                    style={{ ...imgStyle }}
+                  />
                 </GridBar>
               );
             })}

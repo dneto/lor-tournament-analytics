@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Deck } from "@lor-analytics/deck-utils";
 import ChampionIcon from "./ChampionIcon";
 import RegionIcon from "./RegionIcon";
 import { Box } from "@mui/material";
-type ChampionIconProps = {
-  deck: Deck;
-  style?: React.CSSProperties;
+import { Archetype } from "@lor-analytics/data-extractor/tournament";
+import { cardFromCode } from "@lor-analytics/deck-utils/card";
+import { Region, regionFromShortName } from "@lor-analytics/deck-utils/region";
+type ArchetypeIconProps = {
+  archetype: Archetype;
 };
 
 const imgStyle: React.CSSProperties = {
@@ -13,19 +14,22 @@ const imgStyle: React.CSSProperties = {
   marginRight: "2px",
 };
 
-class ArchetypeIcon extends React.Component<ChampionIconProps> {
+class ArchetypeIcon extends React.Component<ArchetypeIconProps> {
   render() {
     return (
       <Box>
-        {this.props.deck.champions.map((c) => (
+        {this.props.archetype.championsCode.map((c) => (
           <ChampionIcon
-            key={`${c.cardCode}`}
-            championCard={c}
+            key={`${c}`}
+            championCard={cardFromCode(c)}
             style={{ ...imgStyle }}
           />
         ))}
-        {this.props.deck.regions.map((reg) => (
-          <RegionIcon region={reg} style={{ ...imgStyle }} />
+        {this.props.archetype.regions.map((reg: string) => (
+          <RegionIcon
+            region={regionFromShortName(reg) as Region}
+            style={{ ...imgStyle }}
+          />
         ))}
       </Box>
     );

@@ -1,0 +1,7 @@
+{
+  "name": "db",
+  "packageManager": "yarn@3.2.2",
+  "dependencies": {
+    "neverthrow": "^5.0.0"
+  }
+}

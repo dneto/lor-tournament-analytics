@@ -3,7 +3,6 @@ import * as React from "react";
 import type { NextPage } from "next";
 import { Grid, Skeleton } from "@mui/material";
 import { Box, minHeight } from "@mui/system";
-import { Tournament } from "@lor-analytics/data-extractor";
 
 import _ from "lodash";
 import { useRouter } from "next/router";
@@ -18,9 +17,11 @@ import LineupData from "@/components/data/LineupData";
 import CardsData from "@/components/data/CardsData";
 import { CardBGCard } from "@/components/CardBGCard";
 import { cardFromCode } from "@lor-analytics/deck-utils/card";
+import { Tournament } from "@lor-analytics/db";
+import { ITournament } from "../../../../../../packages/db/src/models/tournament";
 
 const Home: NextPage = () => {
-  const [tournament, setTournament] = React.useState<Tournament>();
+  const [tournament, setTournament] = React.useState<ITournament>();
 
   const router = useRouter();
   const locale = locales[router.locale || "en-US"];
@@ -28,14 +29,10 @@ const Home: NextPage = () => {
 
   React.useEffect(() => {
     if (!tournament && router.isReady && query.csv) {
-      const range = (query.range as string) || "Latest";
       const tournamentID: string = query.csv as string;
-      const filename = query.filename as string;
-      loadTournamentFromID(tournamentID, range, filename).then(
-        (tournament: Tournament) => {
-          setTournament(tournament);
-        }
-      );
+      loadTournamentFromID(tournamentID).then((tournament) => {
+        setTournament(tournament);
+      });
     }
   });
 
@@ -54,7 +51,8 @@ const Home: NextPage = () => {
                 <ArchetypesData
                   locale={locale}
                   pageID={`${query.csv}`}
-                  tournament={tournament}
+                  title={tournament.title}
+                  data={tournament.archetypes}
                   rowsPerPage={5}
                   paginated
                   showFullScreenButton
@@ -66,7 +64,8 @@ const Home: NextPage = () => {
                 <ChampionsData
                   locale={locale}
                   pageID={`${query.csv}`}
-                  tournament={tournament}
+                  title={tournament.title}
+                  data={tournament.champions}
                   rowsPerPage={5}
                   paginated
                   showFullScreenButton
@@ -78,7 +77,8 @@ const Home: NextPage = () => {
                 <RegionsData
                   locale={locale}
                   pageID={`${query.csv}`}
-                  tournament={tournament}
+                  title={tournament.title}
+                  data={tournament.regionSet}
                   rowsPerPage={5}
                   paginated
                   showFullScreenButton
@@ -90,7 +90,8 @@ const Home: NextPage = () => {
                 <RegionData
                   locale={locale}
                   pageID={`${query.csv}`}
-                  tournament={tournament}
+                  title={tournament.title}
+                  data={tournament.regionUnique}
                   rowsPerPage={5}
                   paginated
                   showFullScreenButton
@@ -102,7 +103,8 @@ const Home: NextPage = () => {
                 <CardsData
                   locale={locale}
                   pageID={`${query.csv}`}
-                  tournament={tournament}
+                  title={tournament.title}
+                  data={tournament.cards}
                   rowsPerPage={9}
                   paginated
                   showFullScreenButton
@@ -113,7 +115,8 @@ const Home: NextPage = () => {
               <LineupData
                 locale={locale}
                 pageID={`${query.csv}`}
-                tournament={tournament}
+                title={tournament.title}
+                data={tournament.lineups}
                 rowsPerPage={5}
                 paginated
                 showFullScreenButton

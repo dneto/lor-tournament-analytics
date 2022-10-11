@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DataProps, DataState } from "./TournamentDataProps";
 import _ from "lodash";
-import { Lineup } from "@lor-analytics/data-extractor/tournament";
+import { Archetype, Lineup } from "@lor-analytics/data-extractor/tournament";
 import { Deck } from "@lor-analytics/deck-utils/deck";
 import GridBar from "../bars/GridBar";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
@@ -9,15 +9,24 @@ import { PagedTableHeader } from "../PagedTable";
 import RegionIcon from "../icons/RegionIcon";
 import ChampionIcon from "../icons/ChampionIcon";
 import { cardFromCodeLocale } from "@lor-analytics/deck-utils/card";
+import { Region, regionFromShortName } from "@lor-analytics/deck-utils/region";
 
 const imgStyle: React.CSSProperties = {
   marginLeft: "2px",
   marginRight: "2px",
 };
 
-export default class LineupData extends React.Component<DataProps, DataState> {
+type dataprops = DataProps & {
+  data: {
+    decks: Archetype[];
+    qty: number;
+    percent: number;
+  }[];
+};
+
+export default class LineupData extends React.Component<dataprops, DataState> {
   ref = React.createRef<typeof Paper>();
-  constructor(props: DataProps) {
+  constructor(props: dataprops) {
     super(props);
     this.state = { page: 0 };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -30,36 +39,15 @@ export default class LineupData extends React.Component<DataProps, DataState> {
   }
 
   render(): React.ReactNode {
-    const data: Lineup[] = this.props.tournament.lineups;
-    const dataGroup = _.groupBy(data, (lineup) => {
-      return lineup
-        .map((d: Deck) => {
-          const key = `${d.champions
-            .map((c) => c.name)
-            .sort()
-            .join("/")}[${d.regions
-            .map((r) => r.shortName)
-            .sort()
-            .join("/")}]`;
-          return key;
-        })
-        .sort()
-        .join(";");
-    });
-
-    const count = Object.entries(dataGroup).map((e) => {
-      const [key, group] = e;
-
-      return {
-        key: key,
-        lineup: group[0],
-        qtd: group.length,
-        percent: (group.length / data.length) * 100,
-      };
-    });
+    const count = this.props.data.map((e) => ({
+      ...e,
+      key: e.decks
+        .map((d) => `${d.championsCode.join("/")} [${d.regions.join("/")}]`)
+        .join(";"),
+    }));
     const maxPercent = Math.max(...count.map((c) => c.percent));
 
-    const rows = _.sortBy(count, (r) => r.qtd).reverse();
+    const rows = _.sortBy(count, (r) => r.qty).reverse();
     const pageRows =
       this.props.paginated && this.props.rowsPerPage
         ? rows.slice(
@@ -68,7 +56,7 @@ export default class LineupData extends React.Component<DataProps, DataState> {
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.key, String(r.qtd)];
+      return [r.key, String(r.qty)];
     });
     return (
       <Paper component={Box} elevation={0}>
@@ -76,11 +64,11 @@ export default class LineupData extends React.Component<DataProps, DataState> {
           title={this.props.locale.lineups}
           pageLink={
             this.props.showFullScreenButton
-              ? `/csv/${this.props.pageID}/lineups`
+              ? `/tournament/${this.props.pageID}/lineups`
               : undefined
           }
           csvData={csvData}
-          csvFilename={`${this.props.locale.archetype}_${this.props.tournament.title}.csv`}
+          csvFilename={`${this.props.locale.archetype}_${this.props.title}.csv`}
           imgRef={this.ref}
           showBackButton={this.props.showBackButton}
           locale={this.props.locale}
@@ -99,10 +87,10 @@ export default class LineupData extends React.Component<DataProps, DataState> {
                   key={r.key}
                   value={r.percent}
                   max={maxPercent}
-                  textValue={r.qtd}
+                  textValue={r.qty}
                 >
                   <Box sx={{ width: "100%" }}>
-                    {r.lineup.map((deck: Deck) => (
+                    {r.decks.map((deck: Archetype) => (
                       <>
                         <Box
                           component="div"
@@ -112,17 +100,20 @@ export default class LineupData extends React.Component<DataProps, DataState> {
                             display: "inline-block",
                           }}
                         >
-                          {deck.champions.map((c) => (
+                          {deck.championsCode.map((c) => (
                             <ChampionIcon
                               championCard={cardFromCodeLocale(
-                                c.cardCode,
+                                c,
                                 this.props.locale.locale
                               )}
                               style={{ ...imgStyle }}
                             />
                           ))}
                           {deck.regions.map((r) => (
-                            <RegionIcon region={r} style={{ ...imgStyle }} />
+                            <RegionIcon
+                              region={regionFromShortName(r) as Region}
+                              style={{ ...imgStyle }}
+                            />
                           ))}
                         </Box>
                       </>

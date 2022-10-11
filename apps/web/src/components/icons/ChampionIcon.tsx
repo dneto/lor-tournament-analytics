@@ -13,8 +13,8 @@ class ChampionIcon extends React.Component<ChampionIconProps> {
       <div
         style={{
           position: "relative",
-          width: 24,
-          height: 24,
+          width: 32,
+          height: 32,
           float: "left",
           display: "block",
 

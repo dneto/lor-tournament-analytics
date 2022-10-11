@@ -7,15 +7,11 @@ import {
   Container,
   createTheme,
   CssBaseline,
-  IconButton,
   useMediaQuery,
-  Grid,
 } from "@mui/material";
 import NextNProgress from "nextjs-progressbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { useRouter } from "next/router";
-import useAckee from "use-ackee";
 import Header from "@/components/Header";
 import * as React from "react";
 
@@ -33,14 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     "themeMode",
     isDarkOS ? "dark" : "light"
   );
-  const router = useRouter();
 
   const themeMode = {
     toggleTheme: () => {
       setColorMode(colorMode === "light" ? "dark" : "light");
       setMode(mode === "light" ? "dark" : "light");
-      console.log(colorMode);
-      console.log(mode);
     },
   };
 

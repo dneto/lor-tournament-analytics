@@ -27,7 +27,7 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     disableStaticImages: false,
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 604800,
     domains: ["dd.b.pvp.net"],
   },
   typescript: {
@@ -35,10 +35,28 @@ const nextConfig = {
     tsconfigPath: "./tsconfig.json",
   },
   i18n: {
-    locales: ["en-US", "pt-BR"],
-    defaultLocale: "en-US",
+    locales: [
+      "default",
+      "de-de",
+      "en-us",
+      "es-es",
+      "es-mx",
+      "fr-fr",
+      "it-it",
+      "ja-jp",
+      "ko-kr",
+      "pl-pl",
+      "pt-br",
+      "ru-ru",
+      "th-th",
+      "tr-tr",
+      "vi-vn",
+      "zh-tw",
+    ],
+    defaultLocale: "default",
     localeDetection: true,
   },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;

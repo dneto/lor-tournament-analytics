@@ -20,7 +20,10 @@ export default {
   checkoutWorldwalker: "Check out all tournaments from Worldwalker season",
   setWorldwalker: "Worldwalker",
   setForcesFromBeyond: "Forces from Beyond",
-  setAwakening: "Darkin Saga: Awakening",
+  setAwakening: "The Darkin Saga: Awakening",
+  setDomination: "The Darkin Saga: Domination",
   season: "season",
   dateFormat: "MMM-dd-yyyy",
+  title: "Title",
+  tournamentDate: "Tournament Date",
 };

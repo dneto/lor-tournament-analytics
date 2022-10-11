@@ -1,10 +1,12 @@
 import { Box } from "@mui/material";
 import * as React from "react";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { Tournament } from "@lor-analytics/data-extractor/tournament";
+import { InferSchemaType } from "mongoose";
+import { Tournament } from "@lor-analytics/db";
+import { ITournament } from "../../../../packages/db/src/models/tournament";
 
 type TournamentLogoProps = {
-  tournament: Tournament;
+  tournament: ITournament;
 };
 
 class TournamentLogo extends React.Component<TournamentLogoProps> {
@@ -15,7 +17,7 @@ class TournamentLogo extends React.Component<TournamentLogoProps> {
         padding={1}
         sx={{ justifyContent: "center", alignContent: "center" }}
       >
-        {this.props.tournament?.logoURL ? (
+        {this.props.tournament?.logo_url ? (
           <Box
             sx={{
               display: "flex",
@@ -27,7 +29,7 @@ class TournamentLogo extends React.Component<TournamentLogoProps> {
             height="32px"
           >
             <img
-              src={this.props.tournament.logoURL}
+              src={this.props.tournament.logo_url}
               style={{
                 objectFit: "cover",
                 width: "32px",

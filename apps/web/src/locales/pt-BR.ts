@@ -22,6 +22,9 @@ export default {
   setWorldwalker: "Andamundo",
   setForcesFromBeyond: "Forças do Além",
   setAwakening: "Saga Darkin: Despertar",
+  setDomination: "Saga Darkin: Dominação",
   season: "temporada",
   dateFormat: "dd MMM yyyy",
+  title: "Título",
+  tournamentDate: "Data do torneio",
 };

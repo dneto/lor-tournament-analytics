@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import TranslateIcon from "@mui/icons-material/Translate";
 import GithubIcon from "@mui/icons-material/GitHub";
 import { ThemeContext } from "pages/_app";
 import { useContext } from "react";
@@ -133,7 +134,7 @@ const Header: React.FC = () => {
             {theme.palette.mode === "dark" ? (
               <Brightness7Icon sx={{ fontSize: "24px" }} />
             ) : (
-              <Brightness4Icon sx={{ fontSize: "16px" }} />
+              <Brightness4Icon sx={{ fontSize: "24px" }} />
             )}
           </IconButton>
         </Tooltip>

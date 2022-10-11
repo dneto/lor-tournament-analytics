@@ -37,7 +37,7 @@ const regions: Record<region, Region> = {
   Runeterra: new Region("Runeterra", "RU", 12),
 };
 
-function regionFromShortName(shortName: string) {
+function regionFromShortName(shortName: string): Region | undefined {
   const find = Object.entries(regions).find((r) => {
     return r[1].shortName == shortName;
   });

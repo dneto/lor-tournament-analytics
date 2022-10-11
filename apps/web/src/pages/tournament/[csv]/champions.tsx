@@ -6,23 +6,20 @@ import { useRouter } from "next/router";
 import locales from "@/locales";
 import loadTournamentFromID from "@/lib/load_tournament";
 import TournamentTitle from "@/components/TournamentTitle";
-import RegionData from "@/components/data/RegionData";
+import ChampionsData from "@/components/data/ChampionsData";
+import { ITournament } from "../../../../../../packages/db/src/models/tournament";
 
-const Regions: NextPage = () => {
-  const [tournament, setTournament] = useState<Tournament>();
+const Champions: NextPage = () => {
+  const [tournament, setTournament] = useState<ITournament>();
   const router = useRouter();
   const locale = locales[router.locale || "en-US"];
   const query = router.query;
   useEffect(() => {
     if (!tournament && router.isReady && query.csv) {
-      const range = (query.range as string) || "Latest";
       const tournamentID: string = query.csv as string;
-      const filename = query.filename as string;
-      loadTournamentFromID(tournamentID, range, filename).then(
-        (tournament: Tournament) => {
-          setTournament(tournament);
-        }
-      );
+      loadTournamentFromID(tournamentID).then((tournament: ITournament) => {
+        setTournament(tournament);
+      });
     }
   });
   return (
@@ -30,10 +27,11 @@ const Regions: NextPage = () => {
       {tournament ? (
         <>
           <TournamentTitle tournament={tournament} />
-          <RegionData
+          <ChampionsData
             locale={locale}
             pageID={`${query.csv}`}
-            tournament={tournament}
+            title={tournament.title}
+            data={tournament.champions}
             showBackButton
           />
         </>
@@ -46,4 +44,4 @@ const Regions: NextPage = () => {
   );
 };
 
-export default Regions;
+export default Champions;
