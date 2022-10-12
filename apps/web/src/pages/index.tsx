@@ -55,7 +55,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!tournaments) {
-      fetchHome("Awakening").catch(console.error);
+      fetchHome("Domination").catch(console.error);
     }
   }, []);
 

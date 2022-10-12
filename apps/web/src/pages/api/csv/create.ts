@@ -12,7 +12,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
       const tournament = Tournament.fromCSV(value.csv);
       tournament.title = value.title;
       tournament.region = value.region;
-      tournament.season = "Awakening";
+      tournament.season = "Domination";
       tournament.startDate = DateTime.fromMillis(value.date).toJSDate();
 
       await connectMongo();
