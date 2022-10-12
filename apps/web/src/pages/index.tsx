@@ -27,7 +27,10 @@ const Home: NextPage = () => {
 
   const [season, setSeason] = useState<string>("Awakening");
 
-  const localeLang: string = router.locale || router.defaultLocale || "en-US";
+  let localeLang: string = router.locale || router.defaultLocale || "en-us";
+  if (localeLang === "default") {
+    localeLang = "en-us";
+  }
   const locale: ILocale = locales[localeLang];
 
   const localizedCalendar = (date: Date): string => {

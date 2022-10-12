@@ -22,7 +22,11 @@ import { regionFromShortName } from "@lor-analytics/deck-utils/region";
 const NewTournament: NextPage = () => {
   let reader: FileReader;
   const router = useRouter();
-  const locale = locales[router.locale || router.defaultLocale || "en-US"];
+  let detectedLocale = router.locale || router.defaultLocale || "en-us";
+  if (detectedLocale === "default") {
+    detectedLocale = "en-us";
+  }
+  let locale = locales[detectedLocale];
   const [date, setDate] = useState<DateTime | null>(DateTime.now());
   const [title, setTitle] = useState<string | null>("");
   const [region, setRegion] = useState<string | null>("");
