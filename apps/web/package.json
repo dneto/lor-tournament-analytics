@@ -34,7 +34,7 @@
     "lz-string": "1.4.4",
     "mongoose": "6.6.5",
     "next": "12",
-    "next-transpile-modules": "9.0.0",
+    "next-transpile-modules": "9.1.0",
     "nextjs-progressbar": "0.0.14",
     "react": "latest",
     "react-component-export-image": "1.0.6",
