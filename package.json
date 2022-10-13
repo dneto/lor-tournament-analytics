@@ -23,7 +23,7 @@
     "yarn": ">=1.22.0",
     "npm": "please-use-yarn"
   },
-  "packageManager": "yarn@3.2.3",
+  "packageManager": "yarn@3.2.4",
   "dependencies": {
     "@mui/styles": "5.10.3",
     "@types/react-syntax-highlighter": "15.5.5",
