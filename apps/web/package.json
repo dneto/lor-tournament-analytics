@@ -35,7 +35,7 @@
     "mongoose": "6.6.5",
     "next": "12",
     "next-transpile-modules": "9.1.0",
-    "nextjs-progressbar": "0.0.14",
+    "nextjs-progressbar": "0.0.16",
     "react": "latest",
     "react-component-export-image": "1.0.6",
     "react-dom": "latest",
