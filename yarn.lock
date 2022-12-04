@@ -7278,7 +7278,7 @@ __metadata:
     luxon: 3.0.4
     lz-string: 1.4.4
     mongoose: 6.6.5
-    next: 13
+    next: 13.0.6
     next-transpile-modules: 9.1.0
     nextjs-progressbar: 0.0.14
     react: latest
@@ -7838,7 +7838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:13":
+"next@npm:13.0.6":
   version: 13.0.6
   resolution: "next@npm:13.0.6"
   dependencies:
