@@ -52,9 +52,7 @@ const pagedTableHeader = withRouter(
                     this.props.router.back();
                   }}
                 >
-                  <BackIcon
-                    sx={{ color: this.props.theme.palette.text.primary }}
-                  />
+                  <BackIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
             )}

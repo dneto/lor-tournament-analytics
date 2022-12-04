@@ -14,6 +14,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
       tournament.region = value.region;
       tournament.season = "Domination";
       tournament.startDate = DateTime.fromMillis(value.date).toJSDate();
+      tournament.cardImage = tournament?.cardCount[0]?.cardCode;
 
       await connectMongo();
       const createdTournament: ITournament = await TournamentDB.create({

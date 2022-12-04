@@ -1,8 +1,7 @@
 import { Card } from "@lor-analytics/deck-utils/card";
-import { Scale } from "@mui/icons-material";
 import { Paper } from "@mui/material";
 import { CSSProperties } from "@mui/styles";
-import Image from "next/future/image";
+import Image from "next/image";
 import { ReactNode, Component } from "react";
 
 type CardBGCardProps = {

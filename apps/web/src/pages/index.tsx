@@ -21,13 +21,14 @@ import { cardFromCode } from "@lor-analytics/deck-utils/card";
 import { Add } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { ITournament } from "@lor-analytics/db/models/tournament";
+import Head from "next/head";
 const Home: NextPage = () => {
   const router = useRouter();
   const [tournaments, setTournaments] = useState<ITournament[] | null>();
 
   const [season, setSeason] = useState<string>("Awakening");
 
-  let localeLang: string = router.locale || router.defaultLocale || "en-us";
+  let localeLang: string = router?.locale || router?.defaultLocale || "en-us";
   if (localeLang === "default") {
     localeLang = "en-us";
   }
@@ -60,64 +61,70 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} alignContent="center">
-        <Typography variant="h5" fontWeight="600" mb={"10px"}>
-          {locale.tournaments}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Link href="/tournament/new">
-          <Button>
-            <Add fontSize="small" />
-            {locale.upload}
-          </Button>
-        </Link>
-      </Grid>
+    <>
+      <Head>
+        <title>LOR.DNE.TO</title>
+      </Head>
+      <Grid container spacing={2}>
+        <Grid item xs={12} alignContent="center">
+          <Typography variant="h5" fontWeight="600" mb={"10px"}>
+            {locale.tournaments}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Link href="/tournament/new">
+            <Button>
+              <Add fontSize="small" />
+              {locale.upload}
+            </Button>
+          </Link>
+        </Grid>
 
-      <Grid item xs={12}>
-        <Grid container spacing={1}>
-          <Grid item display="flex">
-            <Typography
-              textTransform="capitalize"
-              sx={{ alignSelf: "center", fontSize: "0.9rem" }}
-              fontWeight="600"
-            >
-              {locale.season}:
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Stack direction="row" spacing={1} sx={{ fontWeight: "500" }}>
-              {[
-                "Domination",
-                "Awakening",
-                "ForcesFromBeyond",
-                "Worldwalker",
-              ].map((s) => {
-                type k = keyof typeof locale;
-                const ks = `set${s}` as k;
-                return (
-                  <Chip
-                    key={s}
-                    size="small"
-                    label={locale[ks]}
-                    color={season == s ? "primary" : "default"}
-                    variant={season == s ? "filled" : "outlined"}
-                    onClick={() => {
-                      fetchHome(s);
-                    }}
-                  />
-                );
-              })}
-            </Stack>
+        <Grid item xs={12}>
+          <Grid container spacing={1}>
+            <Grid item display="flex">
+              <Typography
+                textTransform="capitalize"
+                sx={{ alignSelf: "center", fontSize: "0.9rem" }}
+                fontWeight="600"
+              >
+                {locale.season}:
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Stack direction="row" spacing={1} sx={{ fontWeight: "500" }}>
+                {[
+                  "Domination",
+                  "Awakening",
+                  "ForcesFromBeyond",
+                  "Worldwalker",
+                ].map((s) => {
+                  type k = keyof typeof locale;
+                  const ks = `set${s}` as k;
+                  return (
+                    <Chip
+                      key={s}
+                      size="small"
+                      label={locale[ks]}
+                      color={season == s ? "primary" : "default"}
+                      variant={season == s ? "filled" : "outlined"}
+                      onClick={() => {
+                        fetchHome(s);
+                      }}
+                    />
+                  );
+                })}
+              </Stack>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      {tournaments ? (
-        tournaments.map((entry: ITournament) => (
-          <Grid item lg={3} sm={6} xs={12}>
-            <Link href={`/tournament/${entry.slug}`} passHref>
-              <a style={{ color: "inherit", textDecoration: "inherit" }}>
+        {tournaments ? (
+          tournaments.map((entry: ITournament) => (
+            <Grid item lg={3} sm={6} xs={12}>
+              <Link
+                href={`/tournament/${entry.slug}`}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
                 <CardBGCard
                   card={
                     (entry.background_card_code &&
@@ -127,7 +134,11 @@ const Home: NextPage = () => {
                 >
                   <Grid
                     container
-                    sx={{ zIndex: 15, alignSelf: "flex-end", padding: "1rem" }}
+                    sx={{
+                      zIndex: 15,
+                      alignSelf: "flex-end",
+                      padding: "1rem",
+                    }}
                   >
                     <Grid item xs={12}>
                       <Typography
@@ -178,47 +189,47 @@ const Home: NextPage = () => {
                     </Grid>
                   </Grid>
                 </CardBGCard>
-              </a>
-            </Link>
-          </Grid>
-        ))
-      ) : (
-        <>
-          <Grid item lg={3} sm={6} xs={12}>
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height="168px"
-              sx={{ borderRadius: "5px" }}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height="168px"
-              sx={{ borderRadius: "5px" }}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height="168px"
-              sx={{ borderRadius: "5px" }}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height="168px"
-              sx={{ borderRadius: "5px" }}
-            />
-          </Grid>
-        </>
-      )}
-    </Grid>
+              </Link>
+            </Grid>
+          ))
+        ) : (
+          <>
+            <Grid item lg={3} sm={6} xs={12}>
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="168px"
+                sx={{ borderRadius: "5px" }}
+              />
+            </Grid>
+            <Grid item lg={3} sm={6} xs={12}>
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="168px"
+                sx={{ borderRadius: "5px" }}
+              />
+            </Grid>
+            <Grid item lg={3} sm={6} xs={12}>
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="168px"
+                sx={{ borderRadius: "5px" }}
+              />
+            </Grid>
+            <Grid item lg={3} sm={6} xs={12}>
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="168px"
+                sx={{ borderRadius: "5px" }}
+              />
+            </Grid>
+          </>
+        )}
+      </Grid>
+    </>
   );
 };
 

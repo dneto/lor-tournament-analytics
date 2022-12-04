@@ -91,7 +91,7 @@ const Header: React.FC = () => {
         <Tooltip title="Discord">
           <a
             rel="noreferrer"
-            href="https://discord.gg/kPc4HZgK"
+            href="https://discord.gg/f4SFvkCGdY"
             target="_blank"
             style={{
               textDecoration: "inherit",

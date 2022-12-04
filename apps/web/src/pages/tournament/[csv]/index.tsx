@@ -19,6 +19,7 @@ import { CardBGCard } from "@/components/CardBGCard";
 import { cardFromCode } from "@lor-analytics/deck-utils/card";
 import { Tournament } from "@lor-analytics/db";
 import { ITournament } from "../../../../../../packages/db/src/models/tournament";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   const [tournament, setTournament] = React.useState<ITournament>();
@@ -40,6 +41,9 @@ const Home: NextPage = () => {
     <>
       {tournament ? (
         <Box>
+          <Head>
+            <title>{tournament.title}</title>
+          </Head>
           <Grid container>
             <Grid item xs={12} md={12}>
               <Box zIndex={15} padding="5px" alignSelf="end">

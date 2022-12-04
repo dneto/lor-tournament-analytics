@@ -89,8 +89,9 @@ export default class CardsData extends React.Component<dataprops, DataState> {
                       title={
                         <Image
                           src={r.card.assets[0].gameAbsolutePath}
-                          width="250px"
-                          height="376px"
+                          width="250"
+                          height="376"
+                          alt={r.card.name}
                         />
                       }
                     >
