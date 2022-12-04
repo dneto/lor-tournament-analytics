@@ -7309,7 +7309,7 @@ __metadata:
     rimraf: 3.0.2
     typescript: 4.7.4
     use-ackee: 3.0.1
-    usehooks-ts: 2.6.0
+    usehooks-ts: 2.9.1
     vercel: 28.7.2
   languageName: unknown
   linkType: soft
@@ -10595,12 +10595,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"usehooks-ts@npm:2.6.0":
-  version: 2.6.0
-  resolution: "usehooks-ts@npm:2.6.0"
+"usehooks-ts@npm:2.9.1":
+  version: 2.9.1
+  resolution: "usehooks-ts@npm:2.9.1"
   peerDependencies:
-    react: ">=16.9.0"
-  checksum: bc21886351a99389870a38cff1ce19521c5bed61c091873914f5de11ea32ed19cd1126ba1695e9bdf58045dc99343c6117465f02e91912e0762c76ac1a137756
+    react: ^16.8.0  || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
+  checksum: 36f1e4142ce23bc019b81d2e93aefd7f2c350abcf255598c21627114a69a2f2f116b35dc3a353375f09c6e4c9b704a04f104e3d10e98280545c097feca66c30a
   languageName: node
   linkType: hard
 
