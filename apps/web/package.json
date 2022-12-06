@@ -30,7 +30,7 @@
     "ackee-tracker": "5.1.0",
     "ioredis": "5.2.4",
     "lodash": "4.17.21",
-    "luxon": "3.0.4",
+    "luxon": "3.1.1",
     "lz-string": "1.4.4",
     "mongoose": "6.6.5",
     "next": "13.0.6",
@@ -46,7 +46,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@types/luxon": "3.0.1",
+    "@types/luxon": "3.1.0",
     "@types/node": "18.0.4",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
