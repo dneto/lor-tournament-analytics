@@ -27,7 +27,7 @@
   "dependencies": {
     "@mui/styles": "5.10.16",
     "@types/react-syntax-highlighter": "15.5.5",
-    "googleapis": "107.0.0",
+    "googleapis": "109.0.1",
     "got": "12.5.3",
     "html-react-parser": "3.0.4",
     "react": "18.2.0",
