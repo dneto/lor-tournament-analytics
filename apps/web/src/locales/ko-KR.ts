@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "저편에서 온 힘",
   setAwakening: "다르킨 전설: 각성",
   setDomination: "다르킨 전설: 지배",
+  setWorldEnder: "다르킨 전설: 세계의 종결자",
   season: "시즌",
   dateFormat: "yyyy년MM월dd일",
   title: "토너먼트 타이틀",

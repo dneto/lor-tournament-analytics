@@ -216,17 +216,13 @@ const buildCardCount = (tournament: Tournament): cardCount[] => {
     return a + b[1];
   }, 0);
 
-  const count: cardCount[] = Object.entries(dataGroup).map((e) => {
-    const [card, count] = e;
+  const count: cardCount[] = Object.entries(dataGroup).map(([card, count]) => ({
+    cardCode: card,
+    qty: count,
+    percent: (count / totalCount) * 100,
+  }));
 
-    return {
-      cardCode: card,
-      qty: count,
-      percent: (count / totalCount) * 100,
-    };
-  });
-
-  return count;
+  return count.sort((a, b) => b.qty - a.qty);
 };
 
 const buildLineupCount = (tournament: Tournament): lineupCount[] => {

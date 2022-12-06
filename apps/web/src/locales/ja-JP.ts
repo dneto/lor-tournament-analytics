@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "異世界よりの来訪者",
   setAwakening: "ダーキン戦記：目覚めし者たち",
   setDomination: "ダーキン戦記：闘争と支配",
+  setWorldEnder: "ダーキン戦記：終焉を告げる者",
   season: "シーズン",
   dateFormat: "yyyy年MM月dd日",
   title: "トーナメント名",

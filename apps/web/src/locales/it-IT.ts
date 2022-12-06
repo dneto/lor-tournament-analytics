@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Forze Ultraterrene",
   setAwakening: "La Saga dei Darkin: Risveglio",
   setDomination: "La Saga dei Darkin: Dominazione",
+  setWorldEnder: "La Saga dei Darkin: Sterminatore di Mondi",
   season: "stagione",
   dateFormat: "MMM-dd-yyyy",
   title: "Titolo",

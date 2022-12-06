@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Öteden Gelen Güçler",
   setAwakening: "Darkin Destanı: Uyanış",
   setDomination: "Darkin Destanı: Hâkimiyet",
+  setWorldEnder: "Darkin Destanı: Dünyaların Sonu",
   season: "sezon",
   dateFormat: "d MMM yyyy",
   title: "Turnuva Adı",

@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [tournaments, setTournaments] = useState<ITournament[] | null>();
 
-  const [season, setSeason] = useState<string>("Awakening");
+  const [season, setSeason] = useState<string>("WorldEnder");
 
   let localeLang: string = router?.locale || router?.defaultLocale || "en-us";
   if (localeLang === "default") {
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!tournaments) {
-      fetchHome("Domination").catch(console.error);
+      fetchHome("WorldEnder").catch(console.error);
     }
   }, []);
 
@@ -94,6 +94,7 @@ const Home: NextPage = () => {
             <Grid item>
               <Stack direction="row" spacing={1} sx={{ fontWeight: "500" }}>
                 {[
+                  "WorldEnder",
                   "Domination",
                   "Awakening",
                   "ForcesFromBeyond",

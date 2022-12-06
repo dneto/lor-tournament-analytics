@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Lực Lượng Siêu Nhiên",
   setAwakening: "Trường Ca Darkin: Thức Tỉnh",
   setDomination: "Trường Ca Darkin: Thống Trị",
+  setWorldEnder: "Trường Ca Darkin: Chiến Binh Tận Thế",
   season: "season",
   dateFormat: "d/M/yyyy",
   title: "Title",

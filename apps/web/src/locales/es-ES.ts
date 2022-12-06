@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Fuerzas del Más Allá",
   setAwakening: "La saga de los Oscuros: Despertar",
   setDomination: "La saga de los Oscuros: Dominación",
+  setWorldEnder: "La saga de los Oscuros: Aniquilador de mundos",
   season: "temporada",
   dateFormat: "dd MMM yyyy",
   title: "Título",

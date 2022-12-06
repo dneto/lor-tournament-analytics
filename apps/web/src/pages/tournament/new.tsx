@@ -18,7 +18,6 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { DateTime } from "luxon";
 import { useState } from "react";
-import { regionFromShortName } from "@lor-analytics/deck-utils/region";
 const NewTournament: NextPage = () => {
   let reader: FileReader;
   const router = useRouter();

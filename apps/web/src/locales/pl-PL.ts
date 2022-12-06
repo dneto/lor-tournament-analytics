@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Siły z Zaświatów",
   setAwakening: "Saga Darkinów: Przebudzenie",
   setDomination: "Saga Darkinów: Dominacja",
+  setWorldEnder: "Saga Darkinów: Zagłada Świata",
   season: "sezon",
   dateFormat: "dd.MMM.yyyy",
   title: "Nazwa turnieju",

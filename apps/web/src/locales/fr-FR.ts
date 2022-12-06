@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Forces de l'au-delà",
   setAwakening: "Saga des Darkin : l'Éveil",
   setDomination: "Saga des Darkin : Domination",
+  setWorldEnder: "Saga des Darkin : Fossoyeur des mondes",
   season: "saison",
   dateFormat: "dd MMM yyyy",
   title: "Tournoi Nom",

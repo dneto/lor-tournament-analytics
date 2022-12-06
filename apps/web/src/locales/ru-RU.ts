@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Внешние силы",
   setAwakening: "Сага о даркинах: Пробуждение",
   setDomination: "Сага о даркинах: Владычество",
+  setWorldEnder: "Сага о даркинах: Губитель миров",
   season: "сезон",
   dateFormat: "dd MMM yyyy",
   title: "Название турнира",

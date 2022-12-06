@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Forces from Beyond",
   setAwakening: "Darkin Saga: Awakening",
   setDomination: "The Darkin Saga: Domination",
+  setWorldEnder: "The Darkin Saga: World Ender",
   season: "ซีซั่น",
   dateFormat: "d/M/yy",
   title: "ชื่อการแข่งขัน",

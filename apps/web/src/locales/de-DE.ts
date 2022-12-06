@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "Mächte aus dem Jenseits",
   setAwakening: "Die Saga der Düsteren: Erwachen",
   setDomination: "Die Saga der Düsteren: Vorherrschaft",
+  setWorldEnder: "Die Saga der Düsteren: Weltenvernichter",
   season: "Saison",
   dateFormat: "d.M.yyyy",
   title: "Turniername",

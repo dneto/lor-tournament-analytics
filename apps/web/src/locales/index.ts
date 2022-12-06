@@ -37,6 +37,7 @@ export interface ILocale {
   setForcesFromBeyond: string;
   setAwakening: string;
   setDomination: string;
+  setWorldEnder: string;
   season: string;
   dateFormat: string;
   title: string;

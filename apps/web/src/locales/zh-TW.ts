@@ -22,6 +22,7 @@ export default {
   setForcesFromBeyond: "彼界之力",
   setAwakening: "冥血傳奇：戰魂再起",
   setDomination: "冥血傳奇：主宰之力",
+  setWorldEnder: "冥血傳奇：終末審判",
   season: "賽季",
   dateFormat: "yy/M/d",
   title: "競賽名稱",
