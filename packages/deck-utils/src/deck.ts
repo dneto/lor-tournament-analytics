@@ -65,6 +65,13 @@ class Deck {
   get champions(): Card[] {
     return this.cards.filter((c: Card) => c.isChampion()).sort();
   }
+
+  get archetype(): Card[] {
+    return this.cardEntries
+      .filter((ce) => ce.card.isChampion() && ce.count > 1)
+      .map((ce) => ce.card)
+      .sort();
+  }
 }
 
 export { Deck };

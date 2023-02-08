@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-base_url="https://dd.b.pvp.net/3_21_0/"
+base_url="https://dd.b.pvp.net/4_1_0/"
 LOCALE="en_us"
 sets="set1 set2 set3 set4 set5 set6 set6cde"
 ALL_LOCALES="de_de en_us es_es es_mx fr_fr it_it ja_jp ko_kr pl_pl pt_br ru_ru th_th tr_tr vi_vn zh_tw"
