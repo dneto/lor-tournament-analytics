@@ -42,7 +42,13 @@ export default class LineupData extends React.Component<dataprops, DataState> {
     const count = this.props.data.map((e) => ({
       ...e,
       key: e.decks
-        .map((d) => `${d.championsCode.join("/")} [${d.regions.join("/")}]`)
+        .map(
+          (d) =>
+            `${d.championsCode
+              .map((c) => cardFromCodeLocale(c, this.props.locale.locale).name)
+              .sort()
+              .join("/")} [${d.regions.join("/")}]`
+        )
         .join(";"),
     }));
     const maxPercent = Math.max(...count.map((c) => c.percent));

@@ -15,6 +15,7 @@ import RegionsData from "@/components/data/RegionsData";
 import RegionData from "@/components/data/RegionData";
 import LineupData from "@/components/data/LineupData";
 import CardsData from "@/components/data/CardsData";
+import DeckPairData from "@/components/data/DeckPairData";
 import { CardBGCard } from "@/components/CardBGCard";
 import { cardFromCode } from "@lor-analytics/deck-utils/card";
 import { Tournament } from "@lor-analytics/db";
@@ -115,6 +116,21 @@ const Home: NextPage = () => {
                 />
               </Box>
             </Grid>
+            {tournament.deckpair && tournament.deckpair.length ? (
+              <Grid item xs={12} md={12}>
+                <DeckPairData
+                  locale={locale}
+                  pageID={`${query.csv}`}
+                  title={tournament.title}
+                  data={tournament.deckpair}
+                  rowsPerPage={5}
+                  paginated
+                  showFullScreenButton
+                />
+              </Grid>
+            ) : (
+              <></>
+            )}
             <Grid item xs={12} md={12}>
               <LineupData
                 locale={locale}

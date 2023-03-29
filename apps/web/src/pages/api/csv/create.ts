@@ -12,7 +12,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
       const tournament = Tournament.fromCSV(value.csv);
       tournament.title = value.title;
       tournament.region = value.region;
-      tournament.season = "WorldEnder";
+      tournament.season = "GloryInNavori";
       tournament.startDate = DateTime.fromMillis(value.date).toJSDate();
       tournament.cardImage = tournament?.cardCount[0]?.cardCode;
 
@@ -40,6 +40,12 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
           qty: lc.qty,
           percent: lc.percent,
         })),
+        deckpair: tournament.pairsCount.map((lc) => ({
+          decks: lc.archetypes,
+          qty: lc.qty,
+          percent: lc.percent,
+        })),
+
         public: false,
       });
       res.status(200).end(createdTournament.slug);

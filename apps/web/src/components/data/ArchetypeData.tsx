@@ -6,6 +6,7 @@ import ArchetypeIcon from "../icons/ArchetypeIcon";
 import { Box, Grid, Paper, TablePagination } from "@mui/material";
 import { PagedTableHeader } from "../PagedTable";
 import { IArchetypeCount } from "../../../../../packages/db/src/models/tournament";
+import { cardFromCodeLocale } from "@lor-analytics/deck-utils/card";
 type dataprops = DataProps & {
   data: IArchetypeCount[];
 };
@@ -28,7 +29,10 @@ export default class ArchetypesData extends React.Component<
 
   render(): React.ReactNode {
     const count = this.props.data.map((e: IArchetypeCount) => ({
-      key: `${e.championsCode.join(";")};${e.regions.join(";")}`,
+      key: `${e.championsCode
+        .map((c) => cardFromCodeLocale(c, this.props.locale.locale).name)
+        .sort()
+        .join(";")};${e.regions.join(";")}`,
       ...e,
     }));
     const maxPercent = Math.max(...count.map((c) => c.percent));

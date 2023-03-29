@@ -49,7 +49,12 @@ export default class CardsData extends React.Component<dataprops, DataState> {
           )
         : rows;
     const csvData = rows.map((r) => {
-      return [r.cardCode, String(r.qty)];
+      return [
+        `${r.cardCode} (${
+          cardFromCodeLocale(r.cardCode, this.props.locale.locale).name
+        })`,
+        String(r.qty),
+      ];
     });
     return (
       <Paper component={Box} elevation={0}>

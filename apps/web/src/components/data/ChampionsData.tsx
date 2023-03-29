@@ -35,7 +35,9 @@ export default class ChampionsData extends React.Component<
   render(): React.ReactNode {
     const count = this.props.data.map((d) => ({
       ...d,
-      key: d.championCode,
+      key: `${d.championCode} (${
+        cardFromCodeLocale(d.championCode, this.props.locale.locale).name
+      })`,
     }));
     const maxPercent = Math.max(...count.map((c) => c.percent));
 

@@ -29,6 +29,7 @@ export interface ILocale {
   regions: string;
   region: string;
   lineups: string;
+  deckpair: string;
   uploadCSV: string;
   cards: string;
   viewFullScreen: string;
@@ -38,6 +39,7 @@ export interface ILocale {
   setAwakening: string;
   setDomination: string;
   setWorldEnder: string;
+  setGloryInNavori: string;
   season: string;
   dateFormat: string;
   title: string;

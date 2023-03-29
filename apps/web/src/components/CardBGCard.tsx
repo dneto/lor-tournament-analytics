@@ -16,7 +16,10 @@ export class CardBGCard extends Component<CardBGCardProps> {
     let css: CSSProperties = {
       objectPosition: "top center",
     };
-    if (this.props.card?.type === "Spell") {
+    if (
+      this.props.card?.type === "Spell" ||
+      this.props.card?.type === "Equipment"
+    ) {
       css = {
         transform: "scale(1.15)",
         objectPosition: "50% 50%",

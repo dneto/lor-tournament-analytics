@@ -87,6 +87,7 @@ export interface ITournament {
   regionUnique: IRegionCount[];
   cards: ICardCounter[];
   lineups: ILineupCounter[];
+  deckpair: ILineupCounter[];
 }
 
 const tournamentSchema = new Schema({
@@ -126,6 +127,7 @@ const tournamentSchema = new Schema({
   regionUnique: [regionSchema],
   cards: [cardsSchema],
   lineups: [lineupSchema],
+  deckpair: [lineupSchema],
   public: {
     type: Boolean,
     index: true,

@@ -2,6 +2,7 @@ import { Deck, Region } from "@lor-analytics/deck-utils";
 import { parse } from "csv-parse/sync";
 import _ from "lodash";
 export type Lineup = [Deck, Deck, Deck];
+export type Pair = [Deck, Deck];
 export type Archetype = {
   regions: string[];
   championsCode: string[];
@@ -60,6 +61,7 @@ export class Tournament {
   cardCount!: cardCount[];
 
   lineupCount!: lineupCount[];
+  pairsCount!: lineupCount[];
 
   constructor(lineups: Lineup[]) {
     this.lineups = lineups;
@@ -91,6 +93,7 @@ export class Tournament {
     tournament.regions = buildRegionCount(tournament);
     tournament.cardCount = buildCardCount(tournament);
     tournament.lineupCount = buildLineupCount(tournament);
+    tournament.pairsCount = buildDeckPairCount(tournament);
 
     return tournament;
   }
@@ -110,7 +113,7 @@ const buildArchetypesCount = (tournament: Tournament): archetypeCount[] => {
     .flat();
   const count: archetypeCount[] = Object.entries(
     _.groupBy(data, (d: Deck) => {
-      const key = `${d.champions
+      const key = `${d.archetype
         .map((c) => c.name)
         .sort()
         .join(",")},${d.regions
@@ -123,7 +126,7 @@ const buildArchetypesCount = (tournament: Tournament): archetypeCount[] => {
     const [_, group] = e;
     return {
       archetype: {
-        championsCode: group[0].champions.map((c) => c.cardCode),
+        championsCode: group[0].archetype.map((c) => c.cardCode),
         regions: group[0].regions.map((r) => r.shortName),
       },
       qty: group.length,
@@ -230,7 +233,7 @@ const buildLineupCount = (tournament: Tournament): lineupCount[] => {
   const dataGroup = _.groupBy(data, (lineup) => {
     return lineup
       .map((d: Deck) => {
-        const key = `${d.champions
+        const key = `${d.archetype
           .map((c) => c.name)
           .sort()
           .join("/")}[${d.regions
@@ -248,9 +251,53 @@ const buildLineupCount = (tournament: Tournament): lineupCount[] => {
 
     return {
       archetypes: group[0].map((d) => ({
-        championsCode: d.champions.map((c) => c.cardCode),
+        championsCode: d.archetype.map((c) => c.cardCode),
         regions: d.regions.map((r) => r.shortName),
       })),
+      qty: group.length,
+      percent: (group.length / data.length) * 100,
+    };
+  });
+
+  return count;
+};
+
+const buildDeckPairCount = (tournament: Tournament) => {
+  const data: Deck[][] = tournament.lineups
+    .map((l) => [
+      [l[0], l[1]],
+      [l[1], l[2]],
+      [l[0], l[2]],
+    ])
+    .flat(1);
+
+  const dataGroup = _.groupBy(data, (decks) => {
+    return decks
+      .filter((d) => d !== undefined)
+      .map((d) => {
+        const key = `${d.archetype
+          .map((c) => c.name)
+          .sort()
+          .join("/")}[${d.regions
+          .map((r) => r.shortName)
+          .sort()
+          .join("/")}]`;
+        return key;
+      })
+      .sort()
+      .join(";");
+  });
+
+  const count: lineupCount[] = Object.entries(dataGroup).map((ds) => {
+    const [_, group] = ds;
+
+    return {
+      archetypes: group[0]
+        .filter((d) => d)
+        .map((d) => ({
+          championsCode: d?.archetype?.map((c) => c.cardCode) || "",
+          regions: d.regions.map((r) => r.shortName),
+        })),
       qty: group.length,
       percent: (group.length / data.length) * 100,
     };
