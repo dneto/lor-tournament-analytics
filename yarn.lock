@@ -7706,7 +7706,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "db@workspace:packages/db"
   dependencies:
-    neverthrow: ^5.0.0
+    neverthrow: ^6.0.0
   languageName: unknown
   linkType: soft
 
@@ -12126,10 +12126,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"neverthrow@npm:^5.0.0":
-  version: 5.1.0
-  resolution: "neverthrow@npm:5.1.0"
-  checksum: 542e21fb6560354a483037bec871b75ec155e8118df001e036f053332cee64191e4b18e3e249db813a63b313ddf0d3440f727fda5dd9292578c042d77a3bfa67
+"neverthrow@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "neverthrow@npm:6.0.0"
+  checksum: 2110457892947b0d5b1f019198fef335cfb42db98b83b3cd9ebcdf0405cf81f2cfc2fef51199daa86d4bb6269dee0ac1d328f3de5dfd6eeca23105a565f78d27
   languageName: node
   linkType: hard
 
