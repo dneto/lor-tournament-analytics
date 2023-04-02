@@ -11313,7 +11313,7 @@ __metadata:
     react-component-export-image: 1.0.6
     react-dom: latest
     react-fontawesome: 1.7.1
-    swr: 1.3.0
+    swr: 2.1.2
     typescript: 4.7.4
     url-slug: 3.0.4
     use-ackee: 3.0.1
@@ -15154,12 +15154,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:1.3.0":
-  version: 1.3.0
-  resolution: "swr@npm:1.3.0"
+"swr@npm:2.1.2":
+  version: 2.1.2
+  resolution: "swr@npm:2.1.2"
+  dependencies:
+    use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.11.0 || ^17.0.0 || ^18.0.0
-  checksum: e7a184f0d560e9c8be85c023cc8e65e56a88a6ed46f9394b301b07f838edca23d2e303685319a4fcd620b81d447a7bcb489c7fa0a752c259f91764903c690cdb
+  checksum: 90010a1a1ba3ecd699f64ef5e3de9a40c291e220803e811c46fabb858d908fd74039f4a2c668cf8fd21dbb3f9d9b3d8300915292ed9933d0e4bdac1193ba8fb8
   languageName: node
   linkType: hard
 
@@ -15180,7 +15182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^6.0.5":
+"tar@npm:^6.0.5, tar@npm:^6.1.11, tar@npm:^6.1.2":
   version: 6.1.13
   resolution: "tar@npm:6.1.13"
   dependencies:
@@ -15191,20 +15193,6 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: 8a278bed123aa9f53549b256a36b719e317c8b96fe86a63406f3c62887f78267cea9b22dc6f7007009738509800d4a4dccc444abd71d762287c90f35b002eb1c
-  languageName: node
-  linkType: hard
-
-"tar@npm:^6.1.11, tar@npm:^6.1.2":
-  version: 6.1.12
-  resolution: "tar@npm:6.1.12"
-  dependencies:
-    chownr: ^2.0.0
-    fs-minipass: ^2.0.0
-    minipass: ^3.0.0
-    minizlib: ^2.1.1
-    mkdirp: ^1.0.3
-    yallist: ^4.0.0
-  checksum: 49d72e4420944e7ede2782d6b0826a6ede6cdab23c7de63470917e7a78166bc4d5b1a96279d3d79a85f1ba5a17cd37c0acbb3cbff19a07447691445b8b051c55
   languageName: node
   linkType: hard
 
@@ -15905,6 +15893,15 @@ __metadata:
   peerDependencies:
     react: ^17.0.0
   checksum: cfce5b45db4cfcdce5f13e52e7dba5993fc0ac592b90dd1e5a47a3ebba5bd32fd07ba1e0d9f249bc8a26f81738799321fdc13fa9c960d97832614ce43fc69778
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
