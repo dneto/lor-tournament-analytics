@@ -4369,9 +4369,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-data-grid@npm:5.17.14":
-  version: 5.17.14
-  resolution: "@mui/x-data-grid@npm:5.17.14"
+"@mui/x-data-grid@npm:5.17.26":
+  version: 5.17.26
+  resolution: "@mui/x-data-grid@npm:5.17.26"
   dependencies:
     "@babel/runtime": ^7.18.9
     "@mui/utils": ^5.10.3
@@ -4383,7 +4383,7 @@ __metadata:
     "@mui/system": ^5.4.1
     react: ^17.0.2 || ^18.0.0
     react-dom: ^17.0.2 || ^18.0.0
-  checksum: 5bdc841debf6f288a49f960cb31cc98ff433fd321f4ac9c617f25b048c918c9fa7a5b90ceeda073377712273db7ff39c0518f3a64cd9cfe53abb6f7a1146d7a1
+  checksum: 521d9c76c7275836dda0b7ace197553142a33de702cb172cfdfbaf505379faa7566da5340eb9bdf7980909e8034b1fe0eae2b7aca6a499667ecb76f4442dc9e7
   languageName: node
   linkType: hard
 
@@ -11289,7 +11289,7 @@ __metadata:
     "@mui/icons-material": 5.11.16
     "@mui/material": 5.11.16
     "@mui/system": 5.11.16
-    "@mui/x-data-grid": 5.17.14
+    "@mui/x-data-grid": 5.17.26
     "@mui/x-date-pickers": 5.0.20
     "@types/luxon": 3.1.0
     "@types/lz-string": 1.3.34
@@ -11396,6 +11396,13 @@ __metadata:
   version: 7.14.1
   resolution: "lru-cache@npm:7.14.1"
   checksum: d72c6713c6a6d86836a7a6523b3f1ac6764768cca47ec99341c3e76db06aacd4764620e5e2cda719a36848785a52a70e531822dc2b33fb071fa709683746c104
+  languageName: node
+  linkType: hard
+
+"luxon@npm:3.1.1":
+  version: 3.1.1
+  resolution: "luxon@npm:3.1.1"
+  checksum: 388fb35d3c51a19d8b305a3338e7e74634b08562e7d2f9ed5c05a7f4bc9ee1c1ab6a2546b6d9c4c104516b24043757d65f5f3fe3d78b206fbf55a9586ab62230
   languageName: node
   linkType: hard
 
