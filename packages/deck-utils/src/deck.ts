@@ -37,7 +37,11 @@ class Deck {
       const runeterraChampionsCount = this.champions.filter((champion) =>
         champion.isFromRegion("Runeterra")
       ).length;
-      if (runeterraChampionsCount < this.champions.length) {
+
+      if (
+        runeterraChampionsCount < this.champions.length ||
+        this.champions.length == 0
+      ) {
         this._regions = (
           Object.entries(
             this.cards
