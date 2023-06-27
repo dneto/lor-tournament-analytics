@@ -12,7 +12,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
       const tournament = Tournament.fromCSV(value.csv);
       tournament.title = value.title;
       tournament.region = value.region;
-      tournament.season = "GloryInNavori";
+      tournament.season = "HeartOfTheHuntress";
       tournament.startDate = DateTime.fromMillis(value.date).toJSDate();
       tournament.cardImage = tournament?.cardCount[0]?.cardCode;
 
