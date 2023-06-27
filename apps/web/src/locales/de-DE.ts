@@ -25,6 +25,7 @@ export default {
   setDomination: "Die Saga der Düsteren: Vorherrschaft",
   setWorldEnder: "Die Saga der Düsteren: Weltenvernichter",
   setGloryInNavori: "Ruhm in Navori",
+  setHeartOfTheHuntress: "Herz der Jägerin",
   season: "Saison",
   dateFormat: "d.M.yyyy",
   title: "Turniername",

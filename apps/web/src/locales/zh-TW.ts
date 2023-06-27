@@ -25,6 +25,7 @@ export default {
   setDomination: "冥血傳奇：主宰之力",
   setWorldEnder: "冥血傳奇：終末審判",
   setGloryInNavori: "那歐榮耀",
+  setHeartOfTheHuntress: "女獵手之心",
   season: "賽季",
   dateFormat: "yy/M/d",
   title: "競賽名稱",

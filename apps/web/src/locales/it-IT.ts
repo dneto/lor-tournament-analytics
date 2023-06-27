@@ -25,6 +25,7 @@ export default {
   setDomination: "La Saga dei Darkin: Dominazione",
   setWorldEnder: "La Saga dei Darkin: Sterminatore di Mondi",
   setGloryInNavori: "Gloria Navori",
+  setHeartOfTheHuntress: "Cuore della Cacciatrice",
   season: "stagione",
   dateFormat: "MMM-dd-yyyy",
   title: "Titolo",

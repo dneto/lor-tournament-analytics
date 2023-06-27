@@ -25,6 +25,7 @@ export default {
   setDomination: "The Darkin Saga: Domination",
   setWorldEnder: "The Darkin Saga: World Ender",
   setGloryInNavori: "Glory in Navori",
+  setHeartOfTheHuntress: "Heart of the Huntress",
   season: "season",
   dateFormat: "MMM-dd-yyyy",
   title: "Title",

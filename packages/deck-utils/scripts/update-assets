@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-base_url="https://dd.b.pvp.net/4_3_0/"
+base_url="https://dd.b.pvp.net/4_6_0/"
 LOCALE="en_us"
-sets="set1 set2 set3 set4 set5 set6 set6cde set7"
+sets="set1 set2 set3 set4 set5 set6 set6cde set7 set7b"
 ALL_LOCALES="de_de en_us es_es es_mx fr_fr it_it ja_jp ko_kr pl_pl pt_br ru_ru th_th tr_tr vi_vn zh_tw"
 
 while getopts ":l:" arg; do
@@ -22,10 +22,10 @@ echo "" > $tmpdir/lor-assets-urls.txt
 
 for set in $sets; do
   echo "url = \"$base_url$set/$LOCALE/data/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
-echo "output = \"$tmpdir/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
+  echo "output = \"$tmpdir/$set-$LOCALE.json\"" >> $tmpdir/lor-assets-urls.txt
 done
 
-curl -Z --parallel-max 7 --config $tmpdir/lor-assets-urls.txt
+curl -Z --parallel-max 8 --config $tmpdir/lor-assets-urls.txt
 
 mkdir -p src/assets/$LOCALE
 

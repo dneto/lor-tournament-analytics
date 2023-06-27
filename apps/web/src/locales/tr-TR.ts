@@ -25,6 +25,7 @@ export default {
   setDomination: "Darkin Destanı: Hâkimiyet",
   setWorldEnder: "Darkin Destanı: Dünyaların Sonu",
   setGloryInNavori: "Navori'nin Görkemi",
+  setHeartOfTheHuntress: "Avcının Yüreği",
   season: "sezon",
   dateFormat: "d MMM yyyy",
   title: "Turnuva Adı",

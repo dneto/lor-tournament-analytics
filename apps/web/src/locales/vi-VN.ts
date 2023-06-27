@@ -25,6 +25,7 @@ export default {
   setDomination: "Trường Ca Darkin: Thống Trị",
   setWorldEnder: "Trường Ca Darkin: Chiến Binh Tận Thế",
   setGloryInNavori: "Navori Vinh Quang",
+  setHeartOfTheHuntress: "Trái Tim Thợ Săn",
   season: "season",
   dateFormat: "d/M/yyyy",
   title: "Title",

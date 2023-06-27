@@ -25,6 +25,7 @@ export default {
   setDomination: "Сага о даркинах: Владычество",
   setWorldEnder: "Сага о даркинах: Губитель миров",
   setGloryInNavori: "Слава в Навори",
+  setHeartOfTheHuntress: "Сердце Охотницы",
   season: "сезон",
   dateFormat: "dd MMM yyyy",
   title: "Название турнира",

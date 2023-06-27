@@ -25,6 +25,7 @@ export default {
   setDomination: "ダーキン戦記：闘争と支配",
   setWorldEnder: "ダーキン戦記：終焉を告げる者",
   setGloryInNavori: "ナヴォリの栄光",
+  setHeartOfTheHuntress: "狩人の心",
   season: "シーズン",
   dateFormat: "yyyy年MM月dd日",
   title: "トーナメント名",

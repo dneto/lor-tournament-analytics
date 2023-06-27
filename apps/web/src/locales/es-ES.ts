@@ -25,6 +25,7 @@ export default {
   setDomination: "La saga de los Oscuros: Dominación",
   setWorldEnder: "La saga de los Oscuros: Aniquilador de mundos",
   setGloryInNavori: "Gloria en Navori",
+  setHeartOfTheHuntress: "Corazón de la cazadora",
   season: "temporada",
   dateFormat: "dd MMM yyyy",
   title: "Título",

@@ -25,6 +25,7 @@ export default {
   setDomination: "Saga des Darkin : Domination",
   setWorldEnder: "Saga des Darkin : Fossoyeur des mondes",
   setGloryInNavori: "Gloire à Navori",
+  setHeartOfTheHuntress: "Cœur de la chasseresse",
   season: "saison",
   dateFormat: "dd MMM yyyy",
   title: "Tournoi Nom",
