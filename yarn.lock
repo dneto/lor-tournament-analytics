@@ -6766,12 +6766,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "bson@npm:4.7.0"
+"bson@npm:^4.7.2":
+  version: 4.7.2
+  resolution: "bson@npm:4.7.2"
   dependencies:
     buffer: ^5.6.0
-  checksum: 83e7b64afdad5a505073a7e6206e7b345f59e7888fbcb1948fba72b6101a1baf58b7499314f8e24b650567665f7973eda048aabbb1ddcfbadfba7d6c6b0f5e83
+  checksum: f357d12c5679c8eb029a62e410ad40fb862b7b91f0fc12a3399fb3668e14aecaa63205ffeeee48735a01d393171743607dcd527eb8c058b6f2bd294079ee4125
   languageName: node
   linkType: hard
 
@@ -11041,10 +11041,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kareem@npm:2.5.0":
-  version: 2.5.0
-  resolution: "kareem@npm:2.5.0"
-  checksum: 292e80b32fb44e1801c5eb25b150e4b42e6ddf8a9c38ac67f99d4e7164dc7d9e874ea9b6ffaa42d6c3e76c8dd28ae5723643f3b5c8cb5c481af07118ce1475e3
+"kareem@npm:2.5.1":
+  version: 2.5.1
+  resolution: "kareem@npm:2.5.1"
+  checksum: b019a960a7b9e44b6ef224ef85e7583d4e969619f53319e571677fbed7e57e01ee8774589726b29741e42790996567d878003c18e674296742dc343bfbf3efb9
   languageName: node
   linkType: hard
 
@@ -11305,7 +11305,7 @@ __metadata:
     lodash: 4.17.21
     luxon: 3.2.1
     lz-string: 1.4.4
-    mongoose: 6.8.0
+    mongoose: 6.11.3
     next: 13.0.6
     next-transpile-modules: 10.0.0
     nextjs-progressbar: 0.0.16
@@ -11396,6 +11396,13 @@ __metadata:
   version: 7.14.1
   resolution: "lru-cache@npm:7.14.1"
   checksum: d72c6713c6a6d86836a7a6523b3f1ac6764768cca47ec99341c3e76db06aacd4764620e5e2cda719a36848785a52a70e531822dc2b33fb071fa709683746c104
+  languageName: node
+  linkType: hard
+
+"luxon@npm:3.1.1":
+  version: 3.1.1
+  resolution: "luxon@npm:3.1.1"
+  checksum: 388fb35d3c51a19d8b305a3338e7e74634b08562e7d2f9ed5c05a7f4bc9ee1c1ab6a2546b6d9c4c104516b24043757d65f5f3fe3d78b206fbf55a9586ab62230
   languageName: node
   linkType: hard
 
@@ -11974,12 +11981,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:4.12.1":
-  version: 4.12.1
-  resolution: "mongodb@npm:4.12.1"
+"mongodb@npm:4.16.0":
+  version: 4.16.0
+  resolution: "mongodb@npm:4.16.0"
   dependencies:
     "@aws-sdk/credential-providers": ^3.186.0
-    bson: ^4.7.0
+    bson: ^4.7.2
     mongodb-connection-string-url: ^2.5.4
     saslprep: ^1.0.3
     socks: ^2.7.1
@@ -11988,22 +11995,22 @@ __metadata:
       optional: true
     saslprep:
       optional: true
-  checksum: 84590484b2c93bce849ec1e334b064e983444ed73942061c91e09556348c80db9d4a40544b927cd795bdfbfc51d1b713a7df5ced4ecf13cd00fab5e3c3e32ada
+  checksum: f0b1347739cc362b82b3aabc7e7d4d74bc7a344ed1bbafd6f92681bcab440f6cc618ffa0438d41d2789cb34818f3b09d4c78f517b42160ebae55bf2c96f13953
   languageName: node
   linkType: hard
 
-"mongoose@npm:6.8.0":
-  version: 6.8.0
-  resolution: "mongoose@npm:6.8.0"
+"mongoose@npm:6.11.3":
+  version: 6.11.3
+  resolution: "mongoose@npm:6.11.3"
   dependencies:
-    bson: ^4.7.0
-    kareem: 2.5.0
-    mongodb: 4.12.1
+    bson: ^4.7.2
+    kareem: 2.5.1
+    mongodb: 4.16.0
     mpath: 0.9.0
     mquery: 4.0.3
     ms: 2.1.3
     sift: 16.0.1
-  checksum: 565fbf795cfe9b753fc4cf7787c2d3804cefb3a203705b25d41f7c67d628f96dfc644560a69d97ec0546a279339a703de72d011f5ac82b1369ba73972d5b581f
+  checksum: f524eff62ce66a1f610bce23b4b5f9d272950ac2c341ca84fb396d62a2a90bdb5e744c1d26f40846a0ea306428b7f39412faaffb273c32daa47a947e141901f0
   languageName: node
   linkType: hard
 
