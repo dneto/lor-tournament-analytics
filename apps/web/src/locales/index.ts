@@ -40,7 +40,7 @@ export interface ILocale {
   setDomination: string;
   setWorldEnder: string;
   setGloryInNavori: string;
-  setHeartOfTheHunterss: string;
+  setHeartOfTheHuntress: string;
   season: string;
   dateFormat: string;
   title: string;

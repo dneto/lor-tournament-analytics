@@ -38,26 +38,22 @@ class Deck {
         champion.isFromRegion("Runeterra")
       ).length;
 
-      if (
-        runeterraChampionsCount < this.champions.length ||
-        this.champions.length == 0
-      ) {
-        this._regions = (
-          Object.entries(
-            this.cards
-              .map((c) => c.regionRefs)
-              .flat()
-              .reduce((acc: any, curr: string) => {
-                acc[curr] = acc[curr] + 1 || 1;
-                return acc;
-              }, {})
-          ) as [region, number][]
-        )
-          .map((r) => [regions[r[0]], r[1]] as [Region, number])
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, MAX_REGIONS - runeterraChampionsCount)
-          .map((r) => r[0]);
-      }
+      this._regions = (
+        Object.entries(
+          this.cards
+            .map((c) => c.regionRefs)
+            .flat()
+            .reduce((acc: any, curr: string) => {
+              acc[curr] = acc[curr] + 1 || 1;
+              return acc;
+            }, {})
+        ) as [region, number][]
+      )
+        .map((r) => [regions[r[0]], r[1]] as [Region, number])
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, MAX_REGIONS - runeterraChampionsCount)
+        .map((r) => r[0]);
+
       if (runeterraChampionsCount > 0) {
         this._regions.push(regions["Runeterra"]);
       }
@@ -72,7 +68,10 @@ class Deck {
 
   get archetype(): Card[] {
     return this.cardEntries
-      .filter((ce) => ce.card.isChampion() && ce.count > 1)
+      .filter(
+        (ce) =>
+          ce.card.isChampion() && (this.champions.length == 1 || ce.count > 1)
+      )
       .map((ce) => ce.card)
       .sort();
   }
