@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "다르킨 전설: 세계의 종결자",
   setGloryInNavori: "나보리의 영광",
   setHeartOfTheHuntress: "야성의 심장",
+  setFatesVoyageOnward: "운명의 여정: 전진",
   season: "시즌",
   dateFormat: "yyyy년MM월dd일",
   title: "토너먼트 타이틀",

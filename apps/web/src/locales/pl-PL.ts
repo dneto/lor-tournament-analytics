@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Saga Darkinów: Zagłada Świata",
   setGloryInNavori: "Chwała w Navori",
   setHeartOfTheHuntress: "Serce Łowczyni",
+  setFatesVoyageOnward: "Podróż Przeznaczenia: Naprzód",
   season: "sezon",
   dateFormat: "dd.MMM.yyyy",
   title: "Nazwa turnieju",

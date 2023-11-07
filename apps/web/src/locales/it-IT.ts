@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "La Saga dei Darkin: Sterminatore di Mondi",
   setGloryInNavori: "Gloria Navori",
   setHeartOfTheHuntress: "Cuore della Cacciatrice",
+  setFatesVoyageOnward: "Viaggio del destino: Avanti tutta",
   season: "stagione",
   dateFormat: "MMM-dd-yyyy",
   title: "Titolo",

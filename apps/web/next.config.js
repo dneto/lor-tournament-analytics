@@ -9,15 +9,10 @@ const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
 const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
-  swcMinify: true,
   compiler: {
     styledComponents: true,
   },
   experimental: {
-    reactRoot: true,
-    runtime: "undefined",
-    serverComponents: false,
-    outputStandalone: false,
     outputFileTracingRoot: undefined,
     esmExternals: true,
     externalDir: true,
@@ -54,7 +49,7 @@ const nextConfig = {
       "zh-tw",
     ],
     defaultLocale: "default",
-    localeDetection: true,
+    localeDetection: false,
   },
   trailingSlash: true,
 };

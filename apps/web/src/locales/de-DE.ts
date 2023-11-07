@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Die Saga der Düsteren: Weltenvernichter",
   setGloryInNavori: "Ruhm in Navori",
   setHeartOfTheHuntress: "Herz der Jägerin",
+  setFatesVoyageOnward: "Reise des Schicksals: Aufbruch",
   season: "Saison",
   dateFormat: "d.M.yyyy",
   title: "Turniername",

@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Saga des Darkin : Fossoyeur des mondes",
   setGloryInNavori: "Gloire à Navori",
   setHeartOfTheHuntress: "Cœur de la chasseresse",
+  setFatesVoyageOnward: "Voyage du destin : En avant toute !",
   season: "saison",
   dateFormat: "dd MMM yyyy",
   title: "Tournoi Nom",

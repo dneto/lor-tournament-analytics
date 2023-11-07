@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "La saga de los Oscuros: Aniquilador de mundos",
   setGloryInNavori: "Gloria en Navori",
   setHeartOfTheHuntress: "Corazón de la cazadora",
+  setFatesVoyageOnward: "Viaje predestinado: En marcha",
   season: "temporada",
   dateFormat: "dd MMM yyyy",
   title: "Título",

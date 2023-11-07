@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Trường Ca Darkin: Chiến Binh Tận Thế",
   setGloryInNavori: "Navori Vinh Quang",
   setHeartOfTheHuntress: "Trái Tim Thợ Săn",
+  setFatesVoyageOnward: "Chuyến Du Hành Định Mệnh",
   season: "season",
   dateFormat: "d/M/yyyy",
   title: "Title",

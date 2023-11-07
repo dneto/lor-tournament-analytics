@@ -1,4 +1,3 @@
-import { TwelveMp } from "@mui/icons-material";
 import deDE from "./de-DE";
 import enUS from "./en-US";
 import esES from "./es-ES";
@@ -41,6 +40,7 @@ export interface ILocale {
   setWorldEnder: string;
   setGloryInNavori: string;
   setHeartOfTheHuntress: string;
+  setFatesVoyageOnward: string;
   season: string;
   dateFormat: string;
   title: string;

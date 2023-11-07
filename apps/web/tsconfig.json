@@ -2,7 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
@@ -10,23 +14,48 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/locales": ["./locales/index"],
-      "@/styles/*": ["./styles/*"],
-      "@lor-analytics/deck-utils/*": ["../../../packages/deck-utils/src/*"],
-      "@lor-analytics/deck-utils": ["../../../packages/deck-utils/src/index"],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/lib/*": [
+        "./lib/*"
+      ],
+      "@/locales": [
+        "./locales/index"
+      ],
+      "@/styles/*": [
+        "./styles/*"
+      ],
+      "@lor-analytics/deck-utils/*": [
+        "../../../packages/deck-utils/src/*"
+      ],
+      "@lor-analytics/deck-utils": [
+        "../../../packages/deck-utils/src/index"
+      ],
       "@lor-analytics/data-extractor/*": [
         "../../../packages/data-extractor/src/*"
       ],
       "@lor-analytics/data-extractor": [
         "../../../packages/data-extractor/src/index"
       ],
-      "@lor-analytics/db/*": ["../../../packages/db/src/*"],
-      "@lor-analytics/db": ["../../../packages/db/src/index"],
-    }
+      "@lor-analytics/db/*": [
+        "../../../packages/db/src/*"
+      ],
+      "@lor-analytics/db": [
+        "../../../packages/db/src/index"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
-  "exclude": ["**/node_modules", "**/.*/"],
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -36,6 +65,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.jsx",
-    "**/*.json"
+    "**/*.json",
+    ".next/types/**/*.ts"
   ]
 }

@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Сага о даркинах: Губитель миров",
   setGloryInNavori: "Слава в Навори",
   setHeartOfTheHuntress: "Сердце Охотницы",
+  setFatesVoyageOnward: "Судьбоносное путешествие: Только вперед",
   season: "сезон",
   dateFormat: "dd MMM yyyy",
   title: "Название турнира",

@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "Darkin Destanı: Dünyaların Sonu",
   setGloryInNavori: "Navori'nin Görkemi",
   setHeartOfTheHuntress: "Avcının Yüreği",
+  setFatesVoyageOnward: "Yazgının Seyri: Akın",
   season: "sezon",
   dateFormat: "d MMM yyyy",
   title: "Turnuva Adı",

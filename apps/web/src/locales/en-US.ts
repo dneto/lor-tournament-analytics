@@ -26,6 +26,7 @@ export default {
   setWorldEnder: "The Darkin Saga: World Ender",
   setGloryInNavori: "Glory in Navori",
   setHeartOfTheHuntress: "Heart of the Huntress",
+  setFatesVoyageOnward: "Fate’s Voyage: Onward",
   season: "season",
   dateFormat: "MMM-dd-yyyy",
   title: "Title",

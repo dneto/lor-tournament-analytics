@@ -3,8 +3,6 @@ import { Theme } from "@material-ui/core";
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
 import TournamentLogo from "./TournamentLogo";
-import { Tournament } from "@lor-analytics/db";
-import { InferSchemaType } from "mongoose";
 import { ITournament } from "../../../../packages/db/src/models/tournament";
 
 type TournamentTitleProps = {
