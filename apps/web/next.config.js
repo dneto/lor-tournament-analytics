@@ -49,7 +49,6 @@ const nextConfig = {
       "zh-tw",
     ],
     defaultLocale: "default",
-    localeDetection: false,
   },
   trailingSlash: true,
 };
