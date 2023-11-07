@@ -92,7 +92,6 @@ const NewTournament: NextPage = () => {
                     onChange={(newValue) => {
                       setDate(newValue);
                     }}
-                    renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
               </Box>
@@ -110,7 +109,7 @@ const NewTournament: NextPage = () => {
               </Typography>
             </Box>
             <Box>
-              <SyntaxHighlighter style={materialLight} language="csv">
+              <TextField disabled multiline>
                 {[
                   [
                     "player#tag",
@@ -138,7 +137,7 @@ const NewTournament: NextPage = () => {
                   ].join(","),
                   "...",
                 ].join("\n")}
-              </SyntaxHighlighter>
+              </TextField>
             </Box>
           </Grid>
           <Grid item textAlign="right">
