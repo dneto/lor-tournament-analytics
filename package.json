@@ -26,7 +26,7 @@
   },
   "packageManager": "yarn@3.3.0",
   "dependencies": {
-    "@types/react-syntax-highlighter": "15.5.9",
+    "@types/react-syntax-highlighter": "15.5.11",
     "fs": "^0.0.1-security",
     "googleapis": "128.0.0",
     "got": "13.0.0",
