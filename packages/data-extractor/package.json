@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/chai": "4.3.9",
     "@types/mocha": "10.0.3",
-    "@types/node": "20.8.10",
+    "@types/node": "20.19.43",
     "chai": "4.3.10",
     "cross-env": "7.0.3",
     "eslint": "8.53.0",
