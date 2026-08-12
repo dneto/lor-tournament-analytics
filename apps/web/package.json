@@ -43,7 +43,7 @@
     "react-component-export-image": "1.0.6",
     "react-dom": "latest",
     "react-fontawesome": "1.7.1",
-    "swr": "2.2.4",
+    "swr": "2.5.1",
     "url-slug": "4.0.1",
     "use-ackee": "3.0.1",
     "uuid": "9.0.1"
