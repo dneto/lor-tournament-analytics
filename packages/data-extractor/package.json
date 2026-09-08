@@ -19,7 +19,7 @@
   "dependencies": {
     "@lor-analytics/deck-utils": "workspace:^",
     "@types/lodash": "^4.14.200",
-    "csv-parse": "^5.5.2",
+    "csv-parse": "^7.0.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
